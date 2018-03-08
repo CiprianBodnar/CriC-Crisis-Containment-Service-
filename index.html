@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="logo fl">Logo</div>
+		<div class="nav-container fr">
+			<ul class="nav">
+				<li class="nav-item-selected"><a href="#">Home</a></li>
+				<li><a href="#">Item2</a></li>
+				<li><a href="#">Item3</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		$("ul.nav li").on("click", function(){
+			$('ul.nav li.nav-item-selected').removeClass('nav-item-selected');
+			$(this).addClass('nav-item-selected');
+		});
+	</script>
+</body>
+</html>

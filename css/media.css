@@ -1,0 +1,19 @@
+@media (min-width: 960px){
+	.nav-menu ul{
+		display: block;
+		opacity: 100;
+		position: relative;
+		width: auto;
+		height: auto;
+		margin: 0 ;
+	}
+	.nav-menu ul li{
+		height: 140px;
+		padding: 0 20px;
+		line-height: 140px;
+		float: left;
+	}
+	.nav-menu .nav-trigger{
+		display: none;
+	}
+}

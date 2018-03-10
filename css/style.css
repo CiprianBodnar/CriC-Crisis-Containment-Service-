@@ -1,0 +1,104 @@
+@import url(fontawesome-all.min.css);
+@import url(reset.css);
+
+.container{
+	width: 80%;
+	max-width: 1280px;
+	margin: 0 auto;
+}
+section#header{
+	height: 140px;
+	background: #f4511e;
+}
+
+.logo{
+	height: 140px;
+	line-height: 140px;
+}
+
+.logo img{
+	vertical-align: middle;
+}
+.nav-menu ul{
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	/*display: none;*/
+	overflow: hidden;
+	height: 0px;
+	opacity: 0;
+	position: absolute;
+	margin-left: -140px;
+	width: 200px;
+	margin-top: 140px;
+	background: #f4511e;
+}
+.nav-menu ul.visible{
+	display: block;
+	height: auto;
+	opacity: 100 ;
+}
+.nav-menu ul li{
+	padding-left: 10px;
+	height: 30px;
+	line-height: 30px;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+}
+.nav-menu ul li a{
+	font-family: Calibri;
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+}
+.nav-menu ul li i{
+	margin-right: 5px;
+}
+.nav-menu ul li.selected, .nav-menu ul li.selected:hover {
+	background: #5c2716;
+}
+.nav-menu ul li:hover{
+	background: #c8481f;
+}
+
+.nav-menu .nav-trigger{
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+	line-height: 60px;
+	text-align: center;
+	margin: 40px 0;
+	-webkit-box-shadow: 0 0 0 1px  rgba(255, 255, 255, 1);
+	border-radius: 5px;
+	font-size: 20px;
+
+	box-shadow: 0 0 0 1px  rgba(255, 255, 255, 1);
+	color: #fff;
+}
+.nav-menu .nav-trigger.triggered{
+	color: #f4511e;
+	background: #fff;
+}
+
+section#footer{
+	background: #5c2716;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	font-size: 14px;
+	font-family: Calibri;
+}
+
+
+section#content{
+	background: #fe6f42 url('../img/background.png') no-repeat top center;
+	background-size: cover;
+}
+section#content .gradient-bg{
+	background: url('../img/gradient.png') top left repeat-x;
+
+}

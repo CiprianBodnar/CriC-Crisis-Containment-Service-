@@ -16,4 +16,41 @@
 	.nav-menu .nav-trigger{
 		display: none;
 	}
+
+	
+	.col6{
+		width: 50%;
+	}
+
+}
+
+@media (min-width: 740px){
+	.col4{
+		width: 33%;
+
+	}
+	.col8{
+		width: 67%;
+	}
+
+	.box-small{
+		width: 450px;
+	}
+	.button{
+		margin:0 33px;
+	}
+}
+
+@media(min-width: 480px){
+	.container{
+		width:80%;
+		padding-left: 0;
+		padding-right: 0;
+
+	}
+	#map{
+		margin-left: 0;
+		margin-right: 0;
+		
+	}
 }

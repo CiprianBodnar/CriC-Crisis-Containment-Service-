@@ -5,6 +5,8 @@
 	width: 80%;
 	max-width: 1280px;
 	margin: 0 auto;
+	width: 100%;
+	padding: 0 20px;
 }
 section#header{
 	height: 140px;
@@ -28,6 +30,7 @@ section#header{
 	height: 0px;
 	opacity: 0;
 	position: absolute;
+	z-index: 1;
 	margin-left: -140px;
 	width: 200px;
 	margin-top: 140px;
@@ -100,5 +103,5 @@ section#content{
 }
 section#content .gradient-bg{
 	background: url('../img/gradient.png') top left repeat-x;
-
+	padding-top: 80px;
 }

@@ -6,16 +6,21 @@
 }
 
 .box-small {
-	width: 450px;
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
+.button-wrapper{
+	margin: 10px 0;
+	position: relative;
 }
 
 .button {
-	background: #5c2716;
+	background: #1b1817;
     border: none;
     color: white;
     text-align: center;
     font-size: 24px;
-    margin: 0 33px;
     padding: 0;
     cursor: pointer;
     border-radius: 100%;
@@ -23,8 +28,7 @@
     height: 80px;
     -webkit-transition: All 0.2s ease;
     	-o-transition: All 0.2s ease;
-    	transition: All 0.2s ease;	
-    position: relative;
+    	transition: All 0.2s ease;
 	outline: none;
 }
 
@@ -36,32 +40,22 @@
 	margin-bottom: 80px;
 }
 
-.dropdown {
-	position: relative;
-	display: inline-grid;
-}
-
 .dropdown-content {
     position: absolute;
-    opacity: 0;
+    opacity: 100;
     background-color: #1b1817;
     padding: 8px 16px;
     border-radius: 5px;
-    top: 115px;
+    left: 100px;
+    top: 24px;
     font-size: 16px;
-    width: 140px;
-    left: -30px;
+    /*width: calc(100% - 100px);*/
     -webkit-transition: All 0.2s ease;
     -o-transition: All 0.2s ease;
     transition: All 0.2s ease;
 }
-
-.button:hover .dropdown-content {
-	top: 105px;
-	opacity: 100;
-}
-
 .arrow-icon {
+	display: none;
 	position: absolute;
 	width: 22px;
 	height: 14px;

@@ -26,6 +26,11 @@
 		width: 450px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+	.box-medium{
+		width: 550px;
+		margin-left: auto;
+		margin-right: auto;
 	}	
 	.align-left{
     	

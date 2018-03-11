@@ -45,6 +45,7 @@
     display: block;
     height: 20px;
     line-height: 20px;
+
 }
 
 .col6{
@@ -67,6 +68,9 @@
     color: #f4511E;
     font-family: Calibri;
     font-size: 16px;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
     
 }
 
@@ -92,6 +96,9 @@
     color: #f4511E;
     font-family: Calibri;
     font-size: 16px;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
     
 }
 

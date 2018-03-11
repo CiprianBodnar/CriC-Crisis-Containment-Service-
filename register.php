@@ -47,7 +47,7 @@
                                         <div class="par">
                                             Verificare adresa de e-mail
                                         </div>
-                                        <input type="text" name="Email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                        <input type="text" name="Verificare Email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                     </div>
 
 

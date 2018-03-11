@@ -1,0 +1,9 @@
+var contaier = document.getElementsByClassName("gradient-bg")[0];
+
+var windowH = window.innerHeight;
+
+var bodyH = document.getElementsByTagName("body")[0].innerHeight;
+
+if(windowH-bodyH>0){
+    contaier.setAttribute("style","padding-top:"+(windowH-bodyH));
+}

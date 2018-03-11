@@ -1,0 +1,95 @@
+
+.orange{
+    background: #f4511e;
+    padding-bottom: 30px;
+}
+
+.subtitle{
+    color: white;
+    font-size: 22px;
+    font-family: Calibri;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.information{
+    
+    color: white;
+    font-size: 16px;
+    font-family: 'Calibri Light';
+}
+
+.information a{
+    color: white;
+    font-family: 'Calibri Light';
+    
+}
+.box-small{
+    width: 100%;
+    padding: 30px;
+    
+}
+.login-form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.login-form input[type=text] {
+    width: calc(100% - 10px);
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 0px;
+    border: 1px solid #fff;
+    color: #f4511E;
+    font-family: Calibri;
+    font-size: 16px;
+    
+}
+
+.login-form input[type=password] {
+
+    padding: 0 20px;
+    height: 40px;
+    width: 60%;
+    line-height: 40px;
+    margin: 5px 0px;
+    border: 1px solid #fff;
+    color: #f4511E;
+    font-family: Calibri;
+    font-size: 16px;
+    float: left;
+   
+    
+}
+.row21{
+    padding-bottom: 5px;
+}
+
+.no-padding{
+    padding: 0 !important;
+}
+
+#conecteaza{
+    border: none;
+    background: #5c2716;
+    width: calc(40% - 10px);
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    margin: 5px 0 5px 0;
+    float: left;
+    font-size: 16px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    transition: All .2s ease;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    
+    
+}   
+
+.login-form #conecteaza:hover{
+    background: #1B1817;
+}

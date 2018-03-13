@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
-<body>
+<body id="contact-page">
 	
     <?php include "header.php" ?>
 	

@@ -10,17 +10,18 @@
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="css/media.css">
 </head>
-<body>
+<body id="home-page">
 
 	<?php include "header.php" ?>
 	
 	<section id="content">
 		<div class="gradient-bg" >
-			<div class="container">
-				<div class="box-small">
+			<div class="container" >
+				<div class="box-small" id="enlarge">
 					<div class="button-container">
 					 	<div class="button-wrapper">
 					 		<button class="button">
+
 							 	<i class="fas fa-search"></i>
 						 		<div class="dropdown-content">
 						 			<span class="arrow-icon">
@@ -71,5 +72,6 @@
 	<?php include "footer.php" ?>
 
 	<script type="text/javascript" src="js/miscs.js"></script>
+	<script type="text/javascript" src="js/fill-page.js"></script>
 </body>
 </html>

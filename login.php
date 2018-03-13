@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
-<body id="login">
+<body id="login-page">
 	
     <?php include "header.php" ?>
 	
@@ -40,15 +40,13 @@
                     <div class="row3">
 
                         <p class="information">
-                            Nu ai încă un cont de utilizator? <a href="#">Înregistreaza-te!</a>
+                            Nu ai încă un cont de utilizator? <a href="register.php">Înregistreaza-te!</a>
                         </p>
                         <p class="information">
-                            Ai uitat parola? <a href="#">Resetează.</a>
+                            Ai uitat parola? <a href="password.php">Resetează.</a>
                         </p>
                     </div>
                     </div>
-                    
-
                 </div>
             </div>
         </div>

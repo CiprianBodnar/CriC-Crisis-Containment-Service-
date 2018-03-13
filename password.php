@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/register.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
-<body>
+<body id="login-page">
 	<?php include "header.php" ?>
 	
 	<section id="content">

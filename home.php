@@ -17,7 +17,7 @@
 	<section id="content">
 		<div class="gradient-bg" >
 			<div class="container" >
-				<div class="box-small" id="enlarge">
+				<div class="box-small">
 					<div class="button-container">
 					 	<div class="button-wrapper">
 					 		<button class="button">
@@ -53,7 +53,7 @@
 					 	</div>
 					 	<div class="clear"></div>
 					</div>
-					<div class="box">
+					<div class="box"  id="enlarge" style=" box-sizing: initial;">
 						<h3>
 							Lorem ipsum dolor sit amet
 						</h3>

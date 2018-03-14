@@ -8,4 +8,3 @@ function enlarge(){
     }
 }
 enlarge();
-window.addEventListener('resize', enlarge);

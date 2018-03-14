@@ -5,6 +5,12 @@
 		padding-right: 0;
 
 	}
+
+	.tabs{
+		left: 10%;
+		width: 80%;
+	}
+
 	#map{
 		margin-left: 0;
 		margin-right: 0;
@@ -27,6 +33,7 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+
 	.box-medium{
 		width: 550px;
 		margin-left: auto;

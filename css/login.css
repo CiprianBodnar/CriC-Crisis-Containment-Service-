@@ -40,18 +40,29 @@
     line-height: 40px;
     margin: 5px 0px;
     border: 1px solid #fff;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
+    outline: none;
     color: #f4511E;
     font-family: Calibri;
     font-size: 16px;
     
 }
 
+.login-form input:focus{
+    color: #fff;
+    background: #f4511e;
+}
 .login-form input[type=password] {
-
     padding: 0 20px;
     height: 40px;
     width: 60%;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
     line-height: 40px;
+    outline: none;
     margin: 5px 0px;
     border: 1px solid #fff;
     color: #f4511E;

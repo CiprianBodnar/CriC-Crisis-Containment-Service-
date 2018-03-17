@@ -16,7 +16,7 @@
 	
 	<section id="content">
 		<div class="gradient-bg">
-                <div class="container orange">
+                <div class="container orange" id="enlarge">
                     <div class="row">
                         <div class="col4">
                             <h3 class="subtitle">
@@ -95,5 +95,6 @@
 	<?php include "footer.php" ?>
     
 	<script type="text/javascript" src="js/miscs.js"></script>
+    <script type="text/javascript" src="js/fill-page.js"></script>
 </body>
 </html>

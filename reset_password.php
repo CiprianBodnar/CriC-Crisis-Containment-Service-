@@ -32,12 +32,12 @@
                                 <div class="par">
                                     Verificare parola noua
                                 </div>
-                                <input type="password" class="pwd" name="Verificare parola noua" value="Parola noua"onfocus="if(this.value=='Verificare parola noua') this.value='';" onblur="if(this.value=='') this.value='Verificare parola noua';">
-                                </div>
+                                <input type="password" class="pwd" name="Verificare parola noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
+                            </div>
 
-                                <button type="submit" id="submit-button">
-                                    Trimitere
-                                </button>
+                            <button type="submit" id="submit-button">
+                                Trimitere
+                            </button>
                                    
                         </form>
                     </div>

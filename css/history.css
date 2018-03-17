@@ -1,0 +1,173 @@
+input#address-keyword{
+	height: 36px;
+	width: 100%;
+	background: #c8481f;
+	color: #fff;
+	font-family: 'Calibri Light';
+	border: none;
+	outline: none;
+	font-size: 16px;
+	line-height: 36px;
+}
+
+
+.input-trigger{
+	left: -36px;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	height: 36px;
+	width: 36px;
+	background: #c8481f;
+	color: #fff;
+	line-height: 36px;
+	text-align: center;
+	font-size: 18px;
+	position: absolute;
+	top: 0;
+	cursor: pointer;
+}
+.input-trigger.visible{
+	left: 0;
+}
+.wrapper{
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 136px;
+	opacity: .8;
+	z-index: 1;
+	background: url('../img/searchBarGradient.png') repeat-y;
+	background-position-x: 36px; 
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+}
+.wrapper .container{
+	position: relative;
+	left: -100%;
+	opacity: 0;
+}
+.wrapper.input-visible{
+	opacity: 1;
+	width: 100%;
+	background: #c8481f;
+}
+.wrapper.input-visible .container{
+	left: 0;
+	opacity: 100;
+}
+
+header{
+	height: 60px;
+}
+
+.nav-menu ul{
+	margin-top: 60px;
+	margin-left: -172px;
+}
+
+.logo{
+	height: 60px;
+	line-height: 60px;
+}
+.logo img{
+	height: 40px;
+}
+
+.nav-menu .nav-trigger{
+	width: 28px;
+	height: 28px;
+	line-height: 28px;
+	margin: 16px 0;
+	font-size: 12px;
+}
+.nav-menu ul li a{
+	font-size: 14px;
+}
+
+@media (min-width: 960px){
+	.nav-menu ul li{
+		height: 60px !important;
+		line-height: 60px !important;
+	}
+
+}
+
+
+#map-container{
+	position: absolute;
+	height: calc(100% - 80px);
+	top: 60px;
+	left: 0;
+	width: 100%;
+}
+footer{
+	position: absolute;
+	bottom: 0;
+	height: 20px;
+	font-size: 12px;
+	background: #f4511e;
+	width: 100%;
+
+}
+.bottom-nav-menu ul li{
+	cursor: pointer;
+	float: left;
+	padding: 0 10px;
+	height: 20px;
+	line-height: 20px;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+.bottom-nav-menu ul li.tab-selected{
+	background: #5c2716 !important;
+}
+
+.bottom-nav-menu ul li:hover{
+	background: #c8481f;
+}
+
+.tabs{
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	width: 100%;
+}
+.tab-content{
+	background: #f4511e;
+	padding: 20px;
+	color: #fff;
+	font-family: 'Calibri Light', sans-serif;
+}
+.tab-content p.tab-title{
+	font-size: 18px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+.tab-content p.tab-info{
+	font-size: 14px;
+
+	text-align: justify;
+}
+.tabs .tab{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+}
+.tabs .tab.tab-visible{
+	height: auto;
+	overflow: initial;
+	opacity: 100;
+}

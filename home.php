@@ -20,36 +20,35 @@
 				<div class="box-small">
 					<div class="button-container">
 					 	<div class="button-wrapper">
-					 		<button class="button">
-
+					 		<div class="button" id="search-trigger">
 							 	<i class="fas fa-search"></i>
 						 		<div class="dropdown-content">
 						 			<span class="arrow-icon">
 						 			</span>
-		    						<p>Caut pe cineva</p>
+		    						<p>Caută pe cineva</p>
 		  						</div>
-						 	</button>
+						 	</div>
 					 	</div>
 							
 					 	<div class="button-wrapper">
-					 		<button class="button">
+					 		<div class="button">
 						 		<i class="fas fa-info"></i>
 						 		<div class="dropdown-content">
 									<span class="arrow-icon">
 						 			</span>
-		    						<p>Detin informatii despre o persoana</p>
+		    						<p>Oferă informații</p>
 						 		</div>
-						 	</button>
+						 	</div>
 					 	</div>
 					 	<div class="button-wrapper">
-					 		<button class="button">
+					 		<div class="button">
 						 		<i class="fas fa-exclamation-triangle"></i>
 						 		<div class="dropdown-content">
 									<span class="arrow-icon">
 						 			</span>
-		    						<p>Sunt in pericol</p>
+		    						<p>Sunt în pericol</p>
 						 		</div>
-						 	</button>
+						 	</div>
 					 	</div>
 					 	<div class="clear"></div>
 					</div>
@@ -61,7 +60,7 @@
 						</p>
 
 						<button id="index-button">
-							Lorem ipsum
+							Contact
 						</button>
 					</div>
 				</div>
@@ -71,7 +70,39 @@
 
 	<?php include "footer.php" ?>
 
+	<div class="cover"></div>
+	<div class="modal" id="search">
+		 <div class="container">
+			<div class="box-small white">
+				<form action="#">
+					<div class="row modal-title">
+						<h3>
+							Caută pe cineva
+						</h3>
+						<div class="modal-close">
+							<i class="fas fa-times"></i>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="row">
+						<div class="col12">
+							<p>
+								Introduceți numele
+							</p>
+							<input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+							<button type="submit" id="submit-button">
+	                            <i class="fas fa-search"></i>
+	                        </button>
+	                        <div class="clear"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/miscs.js"></script>
 	<script type="text/javascript" src="js/fill-page.js"></script>
+	<script src="js/modals.js"></script>
 </body>
 </html>

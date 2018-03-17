@@ -43,7 +43,7 @@
                             Nu ai încă un cont de utilizator? <a href="register.php">Înregistreaza-te!</a>
                         </p>
                         <p class="information">
-                            Ai uitat parola? <a href="password.php">Resetează.</a>
+                            Ai uitat parola? <a href="send_code.php">Resetează.</a>
                         </p>
                     </div>
                     </div>

@@ -105,6 +105,7 @@
 	background: #f4511e;
 	color: #fff;
 }
+
 .cover {
 	z-index: 2;
 	position: absolute;
@@ -168,7 +169,7 @@
 	padding: 0px 20px;
 }
 
-input[type=text] {
+ input[type=text] {
     width: calc(100% - 40px);
     padding: 0 20px;
     height: 40px;
@@ -220,4 +221,97 @@ input:focus {
 
 #submit-button:hover {
 	background: #1B1817;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    height: 100px;
+    line-height: 1;
+    margin: 5px 0px;
+    border: 1px solid #f4511E;
+    outline: none;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
+    color: #fff;
+    font-family: Calibri;
+    font-size: 16px;
+    background: #f4511E;
+    float: left;
+}
+
+textarea:focus {
+    color: #f4511E;
+    background: #fff;
+}
+
+#index-send-button {
+	margin-top: 30px;
+	height: 40px;
+	width: 35%;
+	padding: 0 10px;
+	line-height: 40px;
+	color: #fff;
+	border: 1px solid #fff;
+	font-family: Calibri;
+	font-size: 18px;
+	background: #5c2716;  
+	outline: none;
+	cursor: pointer;
+	-webkit-transition: All 0.2s ease;
+    	-o-transition: All 0.2s ease;
+    	transition: All 0.2s ease;	
+    border: none;
+
+}
+
+#index-send-button:hover {
+	background: #1B1817;
+}
+
+.showthis {
+    width: 100%;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 0px;
+    border: 1px solid #f4511E;
+    outline: none;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
+    color: #fff;
+    font-family: Calibri;
+    font-size: 16px;
+    background: #f4511E;
+    float: left;
+}
+
+.showthis:focus {
+    color: #f4511E;
+    background: #fff;
+}
+
+.clearinput {
+    width: 100%;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 0px;
+    border: 1px solid #f4511E;
+    outline: none;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
+    color: #fff;
+    font-family: Calibri;
+    font-size: 16px;
+    background: #f4511E;
+    float: left;
+}
+
+.clearinput:focus {
+    color: #f4511E;
+    background: #fff;
 }

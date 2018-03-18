@@ -171,3 +171,22 @@ footer{
 	overflow: initial;
 	opacity: 100;
 }
+
+#amount{
+	border: 0; 
+	font-family: Calibri;
+	font-size: 20px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	display: block;
+}
+.ui-widget.ui-widget-content{
+	border: none;
+	border-radius: 0;
+	background: #c8481f;
+}
+.ui-state-default, .ui-widget-content .ui-state-default{
+	background: #5c2716 !important;
+	outline: none;
+	border: none;
+}

@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title data-href="index">Hartă &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/history.css">
     <link rel="stylesheet" href="css/media.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
@@ -39,15 +39,14 @@
                 </p>
             </div>
         </div>
-        <div class="tab" id="tab-layers">
+        <div class="tab tab-visible" id="tab-layers">
             <div class="tab-content align-left">
-           		<p> Selectia evenimentelor</p>
-  					<input type="text" id="amount" readonly style="border:0; color:#ffffff; background-color:#f4511e;  font-weight:bold;">
- 
+           		<p> Interval de căutare</p>
+                <span  id="amount" > </span>
 				<div id="slider-range"></div>
             </div>
         </div>
-        <div class="tab tab-visible" id="tab-legend">
+        <div class="tab " id="tab-legend">
             <div class="tab-content align-left">
                 <p class="tab-title">Legend</p>
                 <p class="tab-info">
@@ -62,17 +61,18 @@
             <div class="bottom-nav-menu">
                 <ul>
                     <li data-tab="tab-about">Despre</li>
-                    <li data-tab="tab-layers">Timeline</li>
-                    <li class="tab-selected" data-tab="tab-legend">Legendă</li>
+                    <li class="tab-selected" data-tab="tab-layers">Timeline</li>
+                    <li  data-tab="tab-legend">Legendă</li>
                 </ul>
             </div>
             <div class="clear"></div>
         </div>
     </footer>
 
-    <script type="text/javascript" src="js/map-page.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key= AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
+    <script type="text/javascript" src="js/history-map-page.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
 	<script type="text/javascript" src="js/miscs.js"></script>
 	<script type="text/javascript" src="js/slider_custom.js"></script>
+    
 
 </body>

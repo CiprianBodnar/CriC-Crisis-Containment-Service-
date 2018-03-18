@@ -20,7 +20,7 @@
                 <i class="fa fa-search"></i>
             </div>
              <div class="container">
-                 <input id="address-keyword" type="text" name="location-keyword" value="Căutați după o adresă..." onfocus="if (this.value=='Căutați după o adresă...') this.value='';" onblur="if(this.value=='') this.value='Căutați după o adresă...';">
+                 <input id="address-keyword" type="text" name="location-keyword"  onblur="if(this.value=='') this.value='';">
             </div>
         </div>
 
@@ -69,9 +69,10 @@
         </div>
     </footer>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/map-page.js">
-    </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key= AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
+    <script type="text/javascript" src="js/map-page.js"></script>
 	<script type="text/javascript" src="js/miscs.js"></script>
 </body>
 </html>

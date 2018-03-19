@@ -31,7 +31,7 @@
 					 	</div>
 							
 					 	<div class="button-wrapper">
-					 		<div class="button">
+					 		<div class="button" id="share-trigger">
 						 		<i class="fas fa-info"></i>
 						 		<div class="dropdown-content">
 									<span class="arrow-icon">
@@ -41,14 +41,17 @@
 						 	</div>
 					 	</div>
 					 	<div class="button-wrapper">
-					 		<div class="button">
-						 		<i class="fas fa-exclamation-triangle"></i>
-						 		<div class="dropdown-content">
-									<span class="arrow-icon">
-						 			</span>
-		    						<p>Sunt în pericol</p>
-						 		</div>
-						 	</div>
+					 		<a href="map.php">
+						 		<div class="button">
+							 			<i class="fas fa-exclamation-triangle"></i>
+							 		
+							 		<div class="dropdown-content">
+										<span class="arrow-icon">
+							 			</span>
+			    						<p>Sunt în pericol</p>
+							 		</div>
+							 	</div>
+							 </a>
 					 	</div>
 					 	<div class="clear"></div>
 					</div>
@@ -100,6 +103,58 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal" id="share">
+		 <div class="container">
+			<div class="box-small white">
+				<form action="#">
+					<div class="row modal-title">
+						<h3>
+							Oferă informații despre o persoană
+						</h3>
+						<div class="modal-close">
+							<i class="fas fa-times"></i>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="row">
+						<div class="col12">
+							<p>
+								Introduceți numele
+							</p>
+							<input class="clearinput" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+	                        <div class="clear"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col12">
+							<p>
+								Detalii
+							</p>
+							<textarea type="text" name="Mesaj"  value="Mesaj"  onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
+		                    <div class="clear"></div>
+						</div>
+					</div>	
+					<div class="row">
+						<div class="col12">
+							<p>
+								Oferă o locație
+								<input type="checkbox" name="checkbox" id="checkbox">
+							</p>
+								<input class="showthis" id="showthis" name="showthis"  value="Locație" onfocus="if(this.value=='Locație') this.value='';"
+								onblur="if(this.value=='') this.value='Locație';" ></textarea>
+		                    <div class="clear"></div>
+		                    <button id="index-send-button">
+								Trimite
+							</button>
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/miscs.js"></script>
 	<script type="text/javascript" src="js/fill-page.js"></script>

@@ -39,14 +39,25 @@
                 </p>
             </div>
         </div>
-        <div class="tab tab-visible" id="tab-layers">
+        <div class="tab tab-visible" id="tab-timeline">
             <div class="tab-content align-left">
            		<p> Interval de căutare</p>
                 <span  id="amount" > </span>
 				<div id="slider-range"></div>
             </div>
         </div>
-        <div class="tab " id="tab-legend">
+        <div class="tab" id="tab-layers">
+            <div class="tab-content align-left">
+                <p class="tab-title">Layers</p>
+                <p class="tab-info">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati a, harum placeat sit nam! Tempore neque nobis, quam fugit inventore quod doloribus debitis adipisci laborum quis reiciendis, ipsam ea assumenda.
+                </p>
+                <p class="tab-info">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati a, harum placeat sit nam! Tempore neque nobis, quam fugit inventore quod doloribus debitis adipisci laborum quis reiciendis, ipsam ea assumenda.
+                </p>
+            </div>
+        </div>
+        <div class="tab" id="tab-legend">
             <div class="tab-content align-left">
                 <p class="tab-title">Legend</p>
                 <p class="tab-info">
@@ -61,8 +72,9 @@
             <div class="bottom-nav-menu">
                 <ul>
                     <li data-tab="tab-about">Despre</li>
-                    <li class="tab-selected" data-tab="tab-layers">Timeline</li>
-                    <li  data-tab="tab-legend">Legendă</li>
+                    <li class="tab-selected" data-tab="tab-timeline">Timeline</li>
+                    <li data-tab="tab-layers">Straturi</li>
+                    <li data-tab="tab-legend">Legendă</li>
                 </ul>
             </div>
             <div class="clear"></div>

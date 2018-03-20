@@ -38,21 +38,73 @@
         </div>
         <div class="tab" id="tab-layers">
             <div class="tab-content align-left">
-                <p class="tab-title">Layers</p>
-                <p class="tab-info">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati a, harum placeat sit nam! Tempore neque nobis, quam fugit inventore quod doloribus debitis adipisci laborum quis reiciendis, ipsam ea assumenda.
-                </p>
-                <p class="tab-info">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati a, harum placeat sit nam! Tempore neque nobis, quam fugit inventore quod doloribus debitis adipisci laborum quis reiciendis, ipsam ea assumenda.
-                </p>
+                <div class="tab-title">Filtru</div>
+                <div class="tab-content">
+                    <div class="section">
+                        <div class="row">
+                            <input type="checkbox" id="hide-all"> Ascunde tot
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="row">
+                            <input type="checkbox" checked>
+                            Cutremure
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" checked>
+                            Incendii
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" checked>
+                            Inundații
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" checked>
+                            Furtuni de zăpadă
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" checked  >
+                            Persoane aflate în pericol
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="row">
+                            <input type="checkbox" checked>
+                            Raza de acoperire a pericolelor
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="tab tab-visible" id="tab-legend">
             <div class="tab-content align-left">
-                <p class="tab-title">Legend</p>
-                <p class="tab-info">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, debitis labore officiis necessitatibus? Blanditiis porro mollitia quisquam repudiandae vel soluta deserunt iure tempore sapiente quae, velit hic quas consectetur, ipsa, a assumenda praesentium reiciendis natus minus eligendi dicta! Tempora, soluta, aspernatur? In obcaecati officia, fugit perferendis magnam, provident doloribus iure!
-                </p>
+                <div class="tab-title">Legendă</div>
+                <div class="tab-content">
+                    <p class="row">
+                        <span class="icon">
+                            <img src="img/danger-icons/earthquake.png" alt="cutremur">
+                        </span>
+                        <span class="content">Cutremur</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon">
+                            <img src="img/danger-icons/fire.png" alt="incendiu">
+                        </span>
+                        <span class="content">Incendiu</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/flood.png" alt=""></span>
+                        <span class="content">Inundație</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/snow-storm.png" alt=""></span>
+                        <span class="content">Furtună de zăpadă</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/person.png" alt=""></span>
+                        <span class="content">Persoană aflată în pericol</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -61,7 +113,7 @@
             <div class="bottom-nav-menu">
                 <ul>
                     <li data-tab="tab-about">Despre</li>
-                    <li data-tab="tab-layers">Straturi</li>
+                    <li data-tab="tab-layers">Filtru</li>
                     <li class="tab-selected" data-tab="tab-legend">Legendă</li>
                 </ul>
             </div>

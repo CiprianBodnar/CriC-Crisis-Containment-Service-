@@ -141,6 +141,28 @@ footer{
 	left: 0;
 	width: 100%;
 }
+.tab#tab-legend p.row{
+	height: 20px;
+	line-height: 20px;
+	margin: 5px 0;
+}
+.tab#tab-legend span.icon{
+	display: block;
+	float: left;
+	margin-right: 10px;
+	height: 20px;
+	width: 20px;
+}
+.tab#tab-legend span.content{
+	display: block;
+	height: 20px;
+	line-height: 20px;
+}
+.tab#tab-legend span.icon img{
+	align-content: center;
+	height: 20px;
+
+}
 .tab-content{
 	background: #f4511e;
 	padding: 20px;
@@ -199,4 +221,12 @@ footer{
 }
 .pac-matched{
 	font-weight: bold;
+}
+
+.tab#tab-layers .section{
+	padding: 10px 0;
+	border-bottom: 1px solid #c8481f;
+}
+.tab#tab-layers .section:last-child{
+	border: none;
 }

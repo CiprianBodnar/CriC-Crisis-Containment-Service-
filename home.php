@@ -40,8 +40,7 @@
 						 		</div>
 						 	</div>
 					 	</div>
-					 	<div class="button-wrapper">
-					 		<a href="map.php">
+					 	<a href="map.php" class="button-wrapper">
 						 		<div class="button">
 							 			<i class="fas fa-exclamation-triangle"></i>
 							 		
@@ -51,8 +50,8 @@
 			    						<p>Sunt în pericol</p>
 							 		</div>
 							 	</div>
-							 </a>
-					 	</div>
+							 
+					 	</a>
 					 	<div class="clear"></div>
 					</div>
 					<div class="box"  id="enlarge" style=" box-sizing: initial;">
@@ -62,9 +61,9 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta vel quis asperiores deserunt, similique nobis sed molestiae vitae qui dolorum eaque placeat sequi, illo blanditiis temporibus, ullam reprehenderit aliquam dignissimos!
 						</p>
 
-						<button id="index-send-button">
-							Contact
-						</button>
+						<a href="contact.php?" id="index-send-button">
+							Contactează-ne
+						</a>
 					</div>
 				</div>
 			</div>

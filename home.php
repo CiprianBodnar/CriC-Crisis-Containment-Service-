@@ -62,7 +62,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta vel quis asperiores deserunt, similique nobis sed molestiae vitae qui dolorum eaque placeat sequi, illo blanditiis temporibus, ullam reprehenderit aliquam dignissimos!
 						</p>
 
-						<button id="index-button">
+						<button id="index-send-button">
 							Contact
 						</button>
 					</div>

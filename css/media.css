@@ -34,6 +34,10 @@
 		margin-right: auto;
 	}
 
+	.button-container {
+		padding: 0;
+	}
+
 	.box-medium{
 		width: 550px;
 		margin-left: auto;

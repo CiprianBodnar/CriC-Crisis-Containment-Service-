@@ -141,6 +141,29 @@ footer{
 	left: 0;
 	width: 100%;
 }
+
+.tab#tab-legend p.row{
+	height: 20px;
+	line-height: 20px;
+	margin: 5px 0;
+}
+.tab#tab-legend span.icon{
+	display: block;
+	float: left;
+	margin-right: 10px;
+	height: 20px;
+	width: 20px;
+}
+.tab#tab-legend span.content{
+	display: block;
+	height: 20px;
+	line-height: 20px;
+}
+.tab#tab-legend span.icon img{
+	align-content: center;
+	height: 20px;
+
+}
 .tab-content{
 	background: #f4511e;
 	padding: 20px;
@@ -188,5 +211,42 @@ footer{
 .ui-state-default, .ui-widget-content .ui-state-default{
 	background: #5c2716 !important;
 	outline: none;
+	border: none;
+}
+.pac-container{
+	background: #f4511e;
+	font-size: 13px;
+	font-family: 'Calibri Light', sans-serif;
+	background-image: none;
+	border: none;
+}
+.pac-item{
+	color: #fff;
+	border: none;
+	font-size: 13px;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+}
+.pac-item:hover{
+	background: #c8481f;
+}
+
+.pac-icon{
+	display: none;
+}
+.pac-item-query{
+	font-family: 'Calibri Light';
+	color: #fff;
+}
+.pac-matched{
+	font-weight: bold;
+}
+
+.tab#tab-timeline .section{
+	padding: 10px 0;
+	border-bottom: 1px solid #c8481f;
+}
+.tab#tab-timeline .section:last-child{
 	border: none;
 }

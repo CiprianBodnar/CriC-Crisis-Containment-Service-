@@ -9,9 +9,9 @@
 			</div>
 			<ul class="nav" id="nav-menu">
 				<li  id="home-page"><a href="home.php"><i class="fas fa-home"></i>Acasă</a></li>
-				<li id="map-page"><a href="map.php"><i class="fas fa-location-arrow"></i>Hartă</a></li>
-				<li id="contact-page"><a href="contact.php"><i class="fas fa-envelope"></i>Contact</a></li>
+				<li id="map-page"><a href="map.php"><i class="fas fa-location-arrow"></i>Hartă</a></li>	
 				<li id="history-page"><a href="history.php"><i class="fas fa-history"></i>Istoric</a></li>
+				<li id="contact-page"><a href="contact.php"><i class="fas fa-envelope"></i>Contact</a></li>
 				<li id="login-page"><a href="login.php"><i class="fas fa-login"></i><i class="fas fa-sign-in-alt"></i>Conectare</a></li>
 			</ul>
 		</div>

@@ -50,10 +50,7 @@
     
 }
 
-.login-form input:focus{
-    color: #fff;
-    background: #f4511e;
-}
+
 .login-form input[type=password] {
     padding: 0 20px;
     height: 40px;
@@ -71,6 +68,11 @@
     float: left;
    
     
+}
+
+.login-form input:focus{
+    color: #fff;
+    background: #f4511e;
 }
 .row21{
     padding-bottom: 5px;

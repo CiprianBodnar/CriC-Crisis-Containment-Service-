@@ -55,7 +55,7 @@
 
 	<?php include "footer.php" ?>
     
-    <script type="text/javascript" src="js/miscs.js"></script>
-    <script type="text/javascript" src="js/fill-page.js"></script>
+    <script  src="js/miscs.js"></script>
+    <script  src="js/fill-page.js"></script>
 </body>
 </html>

@@ -16,9 +16,9 @@
 	
 	<section id="content">
 		<div class="gradient-bg" >
-			<div class="container" > 
+			<div class="container" >  
 				<div class="box-small"> 
-					<div class="button-container"> 
+					<div class="button-container">  
 					 	<div class="button-wrapper"> 
 					 		<div class="button" id="search-trigger"> 
 							 	<i class="fas fa-search"></i> 
@@ -50,17 +50,16 @@
 						 		</div>
 							 </a>
 					 	</div>
-					 
 					 	<div class="clear"></div>
 					</div>
-					<div class="box"  id="enlarge" style=" box-sizing: initial;">
+					<div class="box"  id="enlarge" style=" box-sizing: initial;"> 
 						<h3>
 							Lorem ipsum dolor sit amet
 						</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta vel quis asperiores deserunt, similique nobis sed molestiae vitae qui dolorum eaque placeat sequi, illo blanditiis temporibus, ullam reprehenderit aliquam dignissimos!
 						</p>
 
-						<a href="contact.php?" id="index-send-button">
+						<a href="contact.php?" id="index-contact-button">  
 							Contactează-ne
 						</a>
 					</div>
@@ -71,16 +70,16 @@
 
 	<?php include "footer.php" ?>
 
-	<div class="cover"></div>
-	<div class="modal" id="search">
-		 <div class="container">
+	<div class="cover"></div>  
+	<div class="modal" id="search">  
+		 <div class="container"> 
 			<div class="box-small white">
 				<form action="#">
-					<div class="row modal-title">
+					<div class="row modal-title"> 
 						<h3>
 							Caută pe cineva
 						</h3>
-						<div class="modal-close">
+						<div class="modal-close"> 
 							<i class="fas fa-times"></i>
 						</div>
 						<div class="clear"></div>
@@ -90,7 +89,7 @@
 							<p>
 								Introduceți numele
 							</p>
-							<input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+							<input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';"> 
 							<button type="submit" id="submit-button">
 	                            <i class="fas fa-search"></i>
 	                        </button>
@@ -129,7 +128,8 @@
 							<p>
 								Detalii
 							</p>
-							<textarea type="text" name="Mesaj"  value="Mesaj"  onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
+
+							<textarea  name="Mesaj"  onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
 		                    <div class="clear"></div>
 						</div>
 					</div>	
@@ -137,14 +137,14 @@
 						<div class="col12">
 							<p>
 								Oferă o locație
-								<input type="checkbox" name="checkbox" id="checkbox">
+								<input type="checkbox" name="checkbox" id="checkbox"> 
 							</p>
-								<input class="showthis" id="showthis" name="showthis"  value="Locație" onfocus="if(this.value=='Locație') this.value='';"
-								onblur="if(this.value=='') this.value='Locație';" ></textarea>
-		                    <div class="clear"></div>
-		                    <button id="index-send-button">
+								<input class="showthis" id="showthis" name="showthis"  value="Locație" onfocus="if(this.value=='Locație') this.value='';" onblur="if(this.value=='') this.value='Locație';" >
+
+		                    <div class="clear"></div> 
+		                    <div id="index-send-button">
 								Trimite
-							</button>
+							</div>
 						</div>
 					</div>	
 				</form>
@@ -153,9 +153,9 @@
 	</div>
 
 	
-	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="js/miscs.js"></script>
-	<script type="text/javascript" src="js/fill-page.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/miscs.js"></script>
+	<script src="js/fill-page.js"></script>
 	<script src="js/modals.js"></script>
 </body>
 </html>

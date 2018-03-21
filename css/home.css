@@ -1,18 +1,17 @@
 
 .box {
 	background: #f4511e;
-	
-	padding: 30px;
+	padding: 30px; 
 }
 
-.box-small {
+.box-small { 
 	margin-left: -20px;
 	margin-right: -20px;
 }
 
-.button-wrapper{
-	margin: 10px 0;
-	position: relative;
+.button-wrapper {
+	margin: 10px 0; 
+	position: relative; 
 }
 
 .button {
@@ -23,16 +22,17 @@
     font-size: 24px;
     padding: 0;
     cursor: pointer;
-    border-radius: 100%;
+    border-radius: 100%; 
     width: 80px;
     height: 80px;
     line-height: 80px;
-    -webkit-transition: All 0.2s ease;
+    -webkit-transition: All 0.2s ease; 
     	-o-transition: All 0.2s ease;
     	transition: All 0.2s ease;
 	outline: none;
 	display: inline-block;
 }
+
 
 .button:hover {
 	background: #1b1817 !important;
@@ -40,16 +40,17 @@
 
 .button-container {
 	margin-bottom: 80px; 
-	padding: 0 20px;
+	padding: 0 20px; 
 }
 
+
 .dropdown-content {
-    position: absolute;
+    position: absolute; 
     opacity: 100;
     background-color: #1b1817;
     line-height: 1;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: 5px; 
     font-family: 'Calibri Light', sans-serif;
     left: 100px;
     top: 24px;
@@ -58,6 +59,7 @@
     -o-transition: All 0.2s ease;
     transition: All 0.2s ease;
 }
+
 .arrow-icon {
 	display: none;
 	position: absolute;
@@ -106,6 +108,7 @@
 	background: #f4511e;
 	color: #fff;
 }
+
 
 .cover {
 	z-index: 2;
@@ -177,7 +180,7 @@
     line-height: 40px;
     margin: 5px 0px;
     border: 1px solid #f4511E;
-    outline: none;
+    outline: none; 
     -webkit-transition: All .2s ease;
     -o-transition: All .2s ease;
     transition: All .2s ease;
@@ -192,6 +195,7 @@ input:focus {
     color: #f4511E;
     background: #fff;
 }
+
 
 .modal .row p {
 	margin-top: 20px;
@@ -315,4 +319,28 @@ textarea:focus {
 .clearinput:focus {
     color: #f4511E;
     background: #fff;
+}
+
+#index-contact-button {
+	margin-top: 30px;
+	height: 40px;
+	padding: 0 20px;
+	line-height: 40px;
+	color: #fff;
+	border: 1px solid #fff;
+	font-family: Calibri;
+	font-size: 18px;
+	background: #5c2716;  
+	outline: none;
+	cursor: pointer;
+	-webkit-transition: All 0.2s ease;
+    	-o-transition: All 0.2s ease;
+    	transition: All 0.2s ease;	
+    border: none;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#index-contact-button:hover {
+	background: #1B1817;
 }

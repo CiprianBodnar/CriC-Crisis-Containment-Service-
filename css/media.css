@@ -14,7 +14,6 @@
 	#map{
 		margin-left: 0;
 		margin-right: 0;
-		
 	}
 }
 
@@ -34,6 +33,7 @@
 		margin-right: auto;
 	}
 
+	
 	.button-container {
 		padding: 0;
 	}
@@ -44,22 +44,28 @@
 		margin-right: auto;
 	}	
 	.align-left{
-    	
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 	}
+
+	
 	.button-wrapper{
 		float: left;
 	}
+	
+
 	.dropdown-content{
 		width: 140px;
     	left: -30px;
     	top: 115px;
     	opacity: 0;
 	}
+
 	.arrow-icon{
 		display: block;
 	}
+
+	
 	.button:hover .dropdown-content {
 		top: 105px;
 		opacity: 100;
@@ -67,7 +73,6 @@
 
 	.button{
 		margin:0 33px;
-
 		background: #5c2716;
 		position: relative;
 	}

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title data-href="index">Hartă &bull; Crisis Containment Service</title>
+	<title data-href="index">Istoric &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
@@ -39,7 +39,7 @@
                 </p>
             </div>
         </div>
-        <div class="tab tab-visible" id="tab-timeline">
+        <div class="tab" id="tab-timeline">
             <div class="tab-content align-left">
            		<p class="tab-title"> Interval de căutare</p>
                 <span  id="amount" > </span>
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab" id="tab-legend">
+        <div class="tab tab-visible" id="tab-legend">
             <div class="tab-content align-left">
                 <div class="tab-title">Legendă</div>
                 <div class="tab-content">
@@ -122,8 +122,8 @@
             <div class="bottom-nav-menu">
                 <ul>
                     <li data-tab="tab-about">Despre</li>
-                    <li class="tab-selected" data-tab="tab-timeline">Timeline</li>
-                    <li data-tab="tab-legend">Legendă</li>
+                    <li data-tab="tab-timeline">Timeline</li>
+                    <li class="tab-selected" data-tab="tab-legend">Legendă</li>
                 </ul>
             </div>
             <div class="clear"></div>

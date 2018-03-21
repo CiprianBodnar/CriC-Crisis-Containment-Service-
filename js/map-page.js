@@ -18,6 +18,10 @@ var markerTypes = [
 	{
 		img: 'img/danger-icons/fire.png',
 		color: '#f41e1e'
+	},
+	{
+		img: 'img/danger-icons/person.png',
+		color: '#ffffff'
 	}
 ];
 
@@ -33,6 +37,9 @@ function getMarkerStyle(dangerType){
 
 		case 'fire':
 			return markerTypes[3];
+
+		case 'person':
+			return markerTypes[4];
 		default:
 			return null;
 	}
@@ -117,14 +124,20 @@ function processData(row) {
 	var dangerType = row[2];
 	var dangerDesc = row[3];
 	var dangerDate = row[4];
-
 	var iconStyle=getMarkerStyle(dangerType);
+	var icon;
+
+	if(dangerType=='person')
+		icon = new google.maps.MarkerImage(iconStyle.img, null, null, new google.maps.Point(10, 10));
+	else
+		icon= new google.maps.MarkerImage(iconStyle.img, null, null, new google.maps.Point(20, 21));
+
 	var marker = new google.maps.Marker({
 	  map: map, 
 	  position: latLng,
 	  animation: google.maps.Animation.DROP,
 	  //this is where the magic happens!
-	  icon: new google.maps.MarkerImage(iconStyle.img, null, null, new google.maps.Point(20, 21))
+	  icon: icon
 	});
 	var circle = new google.maps.Circle({
         strokeColor: iconStyle.color,

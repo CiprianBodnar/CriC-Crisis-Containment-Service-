@@ -16,13 +16,13 @@
 	
 	<section id="content">
 		<div class="gradient-bg" >
-			<div class="container" >
-				<div class="box-small">
-					<div class="button-container">
-					 	<div class="button-wrapper">
-					 		<div class="button" id="search-trigger">
-							 	<i class="fas fa-search"></i>
-						 		<div class="dropdown-content">
+			<div class="container" > 
+				<div class="box-small"> 
+					<div class="button-container"> 
+					 	<div class="button-wrapper"> 
+					 		<div class="button" id="search-trigger"> 
+							 	<i class="fas fa-search"></i> 
+						 		<div class="dropdown-content"> 
 						 			<span class="arrow-icon">
 						 			</span>
 		    						<p>Caută pe cineva</p>
@@ -40,18 +40,17 @@
 						 		</div>
 						 	</div>
 					 	</div>
-					 	<a href="map.php" class="button-wrapper">
-						 		<div class="button">
-							 			<i class="fas fa-exclamation-triangle"></i>
-							 		
-							 		<div class="dropdown-content">
-										<span class="arrow-icon">
-							 			</span>
-			    						<p>Sunt în pericol</p>
-							 		</div>
-							 	</div>
-							 
-					 	</a>
+					 	<div class="button-wrapper">
+					 		<a href="map.php" class="button">
+					 			<i class="fas fa-exclamation-triangle"></i>
+						 		<div class="dropdown-content">
+									<span class="arrow-icon">
+						 			</span>
+		    						<p>Sunt în pericol</p>
+						 		</div>
+							 </a>
+					 	</div>
+					 
 					 	<div class="clear"></div>
 					</div>
 					<div class="box"  id="enlarge" style=" box-sizing: initial;">

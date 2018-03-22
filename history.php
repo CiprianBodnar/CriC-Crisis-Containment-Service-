@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title data-href="index">Hartă &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/history.css">
     <link rel="stylesheet" href="css/media.css">
@@ -132,6 +131,7 @@
         </div>
     </footer>
 
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/history-map-page.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
 	<script src="js/miscs.js"></script>

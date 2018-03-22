@@ -120,11 +120,11 @@
             <div class="clear"></div>
         </div>
     </footer>
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
 
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
-    <script type="text/javascript" src="js/map-page.js"></script>
-	<script type="text/javascript" src="js/miscs.js"></script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
+    <script src="js/map-page.js"></script>
+	<script src="js/miscs.js"></script>
 </body>
 </html>

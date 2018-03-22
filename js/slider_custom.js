@@ -1,4 +1,3 @@
-
 var months = ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var DEFAULT_MIN = 0;
 var DEFAULT_MAX = 120;
@@ -7,28 +6,43 @@ var START_MAX = 120;
 var maxDate = new Date();
 var constDate = [(maxDate.getFullYear()-120/12),(maxDate.getMonth()-120%12)];
 var minDate = new Date(constDate[0],constDate[1]+START_MIN);	
-$( "#slider-range" ).slider({
-		range: true,
-		min: DEFAULT_MIN,
-		max: DEFAULT_MAX,
-		values: [ 75, 120 ],
-		slide: function( event, ui ) {
-			convert(ui);
-			$( "#amount" ).text( (months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear());
-			console.log($( "#amount" ));
-			
-		}
-	
-});
 
-$( "#amount" ).text( (months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear());
-
-
-function convert  (ui) {
-	minDate.setFullYear(constDate[0]+ui.values[0]/12);
-	minDate.setMonth(constDate[1]+ui.values[0]%12);
-	maxDate.setFullYear(constDate[0]+ui.values[1]/12);
-	maxDate.setMonth(constDate[1]+ui.values[1]%12);
+function convert  (min, max) {
+	minDate.setFullYear(constDate[0]+min/12);
+	minDate.setMonth(constDate[1]+min%12);
+ 	maxDate.setFullYear(constDate[0]+max/12);
+ 	maxDate.setMonth(constDate[1]+max%12);
+}
+function getVals(){
+  	// Get slider values
+  	var parent = this.parentNode.parentNode;
+  	var slides = parent.getElementsByTagName("input");
+    var slide1 = parseFloat( slides[0].value );
+    var slide2 = parseFloat( slides[1].value );
+  	// Neither slider will clip the other, so make sure we determine which is larger
+  	if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp;}
+  	var bounds = this.getBoundingClientRect();
+  	var startPos = Math.floor(bounds.width/DEFAULT_MAX*slide1+3);
+  	var width = Math.floor(bounds.width/DEFAULT_MAX*slide2 - startPos);
+  	var pretty = parent.getElementsByClassName('pretty')[0];
+  	pretty.style.left = startPos+'px';
+  	pretty.style.width=width+'px';
+  	var displayElement = parent.getElementsByClassName("amount")[0];
+  	convert(slide1, slide2);
+    displayElement.innerHTML=(months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear();
 }
 
-
+window.onload = function(){
+  // Initialize Sliders
+  var sliderSections = document.getElementsByClassName("slider-range");
+      for( var x = 0; x < sliderSections.length; x++ ){
+        var sliders = sliderSections[x].getElementsByTagName("input");
+        for( var y = 0; y < sliders.length; y++ ){
+          if( sliders[y].type ==="range" ){
+            sliders[y].oninput = getVals;
+            // Manually trigger event first time to display values
+            sliders[y].oninput();
+          }
+        }
+      }
+}

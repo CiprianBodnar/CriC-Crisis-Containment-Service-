@@ -4,14 +4,12 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title data-href="index">Istoric &bull; Crisis Containment Service</title>
+	<title data-href="index">Hartă &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/history.css">
     <link rel="stylesheet" href="css/media.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body id="history-page">
@@ -39,11 +37,15 @@
                 </p>
             </div>
         </div>
-        <div class="tab" id="tab-timeline">
+        <div class="tab tab-visible" id="tab-timeline">
             <div class="tab-content align-left">
            		<p class="tab-title"> Interval de căutare</p>
-                <span  id="amount" > </span>
-				<div id="slider-range"></div>
+                <span  class="amount" > </span>
+				<div class="slider-range">
+                    <input value="75" min="0" max="120" step="1" type="range">
+                    <input value="120" min="0" max="120" step="1" type="range">
+                    <div class="pretty"></div>
+                </div>
             </div>
             <div class="tab-content align-left">
                 <p class="tab-title">Filtru</p>
@@ -84,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab tab-visible" id="tab-legend">
+        <div class="tab" id="tab-legend">
             <div class="tab-content align-left">
                 <div class="tab-title">Legendă</div>
                 <div class="tab-content">
@@ -122,18 +124,18 @@
             <div class="bottom-nav-menu">
                 <ul>
                     <li data-tab="tab-about">Despre</li>
-                    <li data-tab="tab-timeline">Timeline</li>
-                    <li class="tab-selected" data-tab="tab-legend">Legendă</li>
+                    <li class="tab-selected" data-tab="tab-timeline">Timeline</li>
+                    <li data-tab="tab-legend">Legendă</li>
                 </ul>
             </div>
             <div class="clear"></div>
         </div>
     </footer>
 
-    <script type="text/javascript" src="js/history-map-page.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
-	<script type="text/javascript" src="js/miscs.js"></script>
-	<script type="text/javascript" src="js/slider_custom.js"></script>
+    <script src="js/history-map-page.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
+	<script src="js/miscs.js"></script>
+	<script src="js/slider_custom.js"></script>
     
 
 </body>

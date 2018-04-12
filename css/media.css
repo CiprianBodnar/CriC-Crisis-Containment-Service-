@@ -80,24 +80,55 @@
 
 
 @media (min-width: 960px){
-	.nav-menu ul{
+	.hidden-large{
+		display: none;
+	}
+	.visible-large{
+		display: block;
+	}
+	.nav-menu ul.sub-nav{
+		border-top: 10px solid #c8481f;
+		display: none;
+		opacity: 0;
+		-webkit-transition: All .2s ease;
+		-o-transition: All .2s ease;
+		transition: All .2s ease;
+		position: absolute;
+		right: 0;
+		background: #f4511e;
+		z-index: 3;
+		margin: 100px 0 0 -140px;
+		width: 200px;
+	}
+	.nav-menu ul.sub-nav.visible{
+		opacity: 100;
+		display: block;
+	}
+	.nav-menu ul.nav{
 		display: block;
 		opacity: 100;
+		border-top: none;
 		position: relative;
 		width: auto;
 		height: auto;
-		margin: 0 ;
+		margin: 0;
 	}
-	.nav-menu ul li{
+	.nav-menu ul.nav > li, .nav-menu ul.nav li.hasSub > span{
 		height: 140px;
+		cursor: pointer;
 		padding: 0 20px;
 		line-height: 140px;
 		float: left;
 	}
+	.nav-menu ul.nav li.hasSub{
+		height: auto;
+	}
 	.nav-menu .nav-trigger{
 		display: none;
 	}
-
+	.nav-menu ul li.hasSub:hover{
+		background: #c8481f;
+	}
 	
 	.col6{
 		width: 50%;

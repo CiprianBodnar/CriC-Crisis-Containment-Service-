@@ -3,6 +3,16 @@ document.getElementById('nav-trigger').addEventListener("click", function(){
 	document.getElementById('nav-trigger').classList.toggle('triggered');
 });
 
+if(document.getElementsByClassName('hasSub')[0]){
+	var subNav = document.getElementsByClassName('sub-nav')[0];
+	var trigger = document.querySelector('li.hasSub span');
+	trigger.addEventListener('click', function(){
+		this.parentNode.classList.toggle('expanded');
+		subNav.classList.toggle('visible');
+	});
+
+}
+
 if(document.getElementById('current-date')){
 	var today = new Date();
 	var dd = today.getDate();

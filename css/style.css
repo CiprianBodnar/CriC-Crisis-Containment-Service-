@@ -20,27 +20,29 @@ header{
 .logo img{
 	vertical-align: middle;
 }
-.nav-menu ul{
+.nav-menu ul.nav{
+	border-top: 10px solid #c8481f;
 	-webkit-transition: All .2s ease;
 	-o-transition: All .2s ease;
 	transition: All .2s ease;
 	/*display: none;*/
-	overflow: hidden;
+	overflow: visible;
 	height: 0px;
 	opacity: 0;
 	position: absolute;
-	z-index: 1;
-	margin-left: -140px;
+	z-index: 2;
+	margin: 100px 0 0 -140px;
 	width: 200px;
-	margin-top: 140px;
 	background: #f4511e;
 }
-.nav-menu ul.visible{
+
+.nav-menu ul.nav.visible{
 	display: block;
 	height: auto;
-	opacity: 100 ;
+	overflow: visible;
+	opacity: 100;
 }
-.nav-menu ul li{
+.nav-menu ul.nav li{
 	padding-left: 10px;
 	height: 30px;
 	line-height: 30px;
@@ -48,13 +50,51 @@ header{
 	-o-transition: All .2s ease;
 	transition: All .2s ease;
 }
-.nav-menu ul li a{
+.nav-menu ul.nav > li.hasSub{
+	height: auto;
+	padding: 0;
+	background: #f4511e;
+}
+.nav-menu ul.nav li.hasSub > span{
+	color: #fff;
+	font-family: Calibri;
+}
+.nav-menu ul.nav li.hasSub.expanded > span {
+	background: #c8481f;
+}
+.nav-menu ul.nav li  a{
 	font-family: Calibri;
 	display: inline-block;
 	text-decoration: none;
 	color: #fff;
 }
-.nav-menu ul li i{
+.nav-menu ul.nav li#username{
+	font-family: Calibri;
+	background: #f4511e;
+	height: auto;
+	padding: 0;
+	text-align: center;
+	color: #ddd;
+}
+
+.visible-large{
+	display: none;
+}
+
+.nav-menu ul.nav li#username span {
+    font-size: 18px;
+    background: rgba(255, 255, 255, 1.4);
+    font-weight: bold;
+    width: 90%;
+    display: inline-block;
+	height: 25px;
+	line-height: 25px;
+    margin: 5px 0 20px 0;
+    text-align: center;
+    color: #5c2716;
+    border-radius: 10px;
+}
+.nav-menu ul.nav li i{
 	margin-right: 5px;
 }
 .nav-menu ul li.selected, .nav-menu ul li.selected:hover {
@@ -63,7 +103,6 @@ header{
 .nav-menu ul li:hover{
 	background: #c8481f;
 }
-
 .nav-menu .nav-trigger{
 	-webkit-transition: All .2s ease;
 	-o-transition: All .2s ease;
@@ -74,11 +113,11 @@ header{
 	line-height: 60px;
 	text-align: center;
 	margin: 40px 0;
-	-webkit-box-shadow: 0 0 0 1px  rgba(255, 255, 255, 1);
-	border-radius: 5px;
+	/*-webkit-box-shadow: 0 0 0 1px  rgba(255, 255, 255, 1);*/
+	/*border-radius: 5px;*/
 	font-size: 20px;
-
-	box-shadow: 0 0 0 1px  rgba(255, 255, 255, 1);
+	background: #c8481f;
+	/*box-shadow: 0 0 0 1px  rgba(255, 255, 255, 1);*/
 	color: #fff;
 }
 .nav-menu .nav-trigger.triggered{

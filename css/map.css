@@ -62,9 +62,8 @@ header{
 	height: 60px;
 }
 
-.nav-menu ul{
-	margin-top: 60px;
-	margin-left: -172px;
+.nav-menu ul.nav{
+	margin: 60px 0 0 -172px;
 }
 
 .logo{
@@ -87,9 +86,12 @@ header{
 }
 
 @media (min-width: 960px){
-	.nav-menu ul li{
+	.nav-menu ul.nav > li, .nav-menu ul li.hasSub > span{
 		height: 60px !important;
 		line-height: 60px !important;
+	}
+	.nav-menu ul.sub-nav {
+		margin: 60px 0 0 -172px !important;
 	}
 
 }

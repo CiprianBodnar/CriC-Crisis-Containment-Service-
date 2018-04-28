@@ -30,14 +30,9 @@ if(isset($_POST['conectare'])){
         $loggedIn = $_SESSION['loggedIn'];
         if($loggedIn ===TRUE)
             header("Location: home.php");
-        
-        
         }
-
-
 }
-
-
+    $conn->close();
 ?>
 
 
@@ -72,7 +67,7 @@ if(isset($_POST['conectare'])){
                     <div class="row2">
                         <form class="login-form" action="#" method="POST">
                             <div class="row21">
-                                <input type="text" name="email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                <input type="text" name="email" value="<?php  if(isset($_SESSION['email'])) echo $_SESSION['email']; else echo "your.email@yoursite.com"; ?>" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                             </div>
                             <div class="row21">
                                 <input type="password" name="parola" value="parola" onfocus="if(this.value=='parola') this.value='';" onblur="if(this.value=='') this.value='parola';">

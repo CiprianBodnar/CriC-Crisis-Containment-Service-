@@ -23,8 +23,11 @@ $('.cover').on("click", function(){
     $('input[name="checkbox"]').on('click', function(){
         if ($(this).prop('checked')){
             $('input[name="showthis"]').fadeIn();
+            initAutocomplete();
         } else{
             $('input[name="showthis"]').hide();
         }
     });
 });
+
+

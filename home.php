@@ -139,7 +139,7 @@
 								Oferă o locație
 								<input type="checkbox" name="checkbox" id="checkbox"> 
 							</p>
-								<input class="showthis" id="showthis" name="showthis"  value="Locație" onfocus="if(this.value=='Locație') this.value='';" onblur="if(this.value=='') this.value='Locație';" >
+								<input class="showthis" id="show-location" name="showthis"  value="Locație" onfocus="if(this.value=='Locație') this.value='';" onblur="if(this.value=='') this.value='Locație';" >
 
 		                    <div class="clear"></div> 
 		                    <div id="index-send-button">

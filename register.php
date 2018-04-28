@@ -1,11 +1,56 @@
 <?php
 include_once ("dbConnect.php");
+
+$error = "";
+if(isset($_POST['submit'])) {
+    $first_name = $_POST['prenume'];
+    $last_name = $_POST['nume'];
+    $email_adress = $_POST['email'];
+    $verify_email_address = $_POST['verifica_email'];
+    $password = hash("sha256", $_POST['parola']);
+    $verify_password = hash("sha256", $_POST['verifica_parola']);
+    $address = $_POST['formatted-address'];
+
+    $sql = "SELECT * FROM Users WHERE email='".$email_adress."';";
+
+    if($result = $conn->query($sql)) {
+        $row = $result->fetch_row();
+        
+            if(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email_adress)) {
+                if(strlen($_POST['parola']) >= 6) {
+                    if($email_adress === $verify_email_address && $password === $verify_password) {
+                        if($row === NULL) {
+                            $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('".$first_name."', '".$last_name."', '".$email_adress."', '".$password."', '".$address."', sysdate());";
+
+                            if(!$conn->query($sql)){
+                                echo "Eroare" . $conn->error;
+                            }
+                            else {
+                                $_SESSION["name"] = $first_name . " " . $last_name;
+                                $_SESSION["email"] = $email_adress;
+                                $_SESSION["password"] = $password;
+                                header("Location: login.php");
+                            }
+                        }
+                        else 
+                            $error = "Acest user exista!";
+                    }
+                    else 
+                        $error = "Parola sau Email-ul nu corespund!";
+                }
+                else $error = "Parola trebuie să conțină minim 6 caractere!";
+            }
+            else $error = "Completați corect adresa de e-mail";
+    }   
+}
+
 if(isset($_SESSION['loggedIn'])){
     $loggedIn = $_SESSION['loggedIn'];
     if($loggedIn)
         header("Location: home.php");
-    
     }
+
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -32,33 +77,33 @@ if(isset($_SESSION['loggedIn'])){
                             <h3 class="subtitle">
                                 Inregistrarea contului dvs
                             </h3>
-                            <form class="contact-form">
+                            <form class="contact-form" action="#" method="POST">
                                 <div class="row">
                                     <div class="col6 no-padding">
                                         <div class="par">
                                             Nume familie
                                         </div>
-                                        <input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+                                        <input type="text" name="nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
                                     </div>
                                     <div class="col6 no-padding">
                                             <div class="par">
                                                 Prenume 
                                             </div>
-                                            <input type="text" name="Prenume" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
+                                            <input type="text" name="prenume" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
                                     </div>
 
                                     <div class="col6 no-padding">
                                         <div class="par">
                                             Adresa de e-mail
                                         </div>
-                                        <input type="text" name="Email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                        <input type="text" name="email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                     </div>
 
                                     <div class="col6 no-padding">
                                         <div class="par">
                                             Verificare adresa de e-mail
                                         </div>
-                                        <input type="text" name="Verificare Email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                        <input type="text" name="verifica_email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                     </div>
 
 
@@ -66,13 +111,13 @@ if(isset($_SESSION['loggedIn'])){
                                         <div class="par">
                                             Parola
                                         </div>
-                                        <input type="password" class="pwd" name="Parola" value="Parola" onfocus="if(this.value=='Parola') this.value='';" onblur="if(this.value=='') this.value='Parola';">
+                                        <input type="password" class="pwd" name="parola" value="Parola" onfocus="if(this.value=='Parola') this.value='';" onblur="if(this.value=='') this.value='Parola';">
                                     </div>
                                     <div class="col6 no-padding">
                                         <div class="par">
                                             Verificare parola
                                         </div>
-                                        <input type="password" class="pwd" name="Verificare parola" value="Parola" onfocus="if(this.value=='Verificare parola') this.value='';" onblur="if(this.value=='') this.value='Verificare parola';">
+                                        <input type="password" class="pwd" name="verifica_parola" value="Parola" onfocus="if(this.value=='Verificare parola') this.value='';" onblur="if(this.value=='') this.value='Verificare parola';">
                                     </div>
                                     <div class="par">
                                         Adresa
@@ -80,10 +125,15 @@ if(isset($_SESSION['loggedIn'])){
 
                                     <input type="text" name="Adresa" value="Adresa" onfocus="if(this.value=='Adresa') this.value='';" onblur="if(this.value=='') this.value='Adresa';" id = "address-input">
                                     <input type="text" id ="formatted-addr" name ="formatted-address" value="" style="display:none;">
-                                    <button type="submit" id="submit-button">
+                                    <button type="submit" id="submit-button" name="submit">
                                         Trimitere
                                     </button>
                                     <div class="clear"></div>
+                                    <?php
+                                        if($error != "") {
+                                            echo "<div class = 'error'>". $error . "</div>";
+                                        }
+                                    ?>
                                 </div>
                             </form>
                         </div>

@@ -25,7 +25,7 @@ header{
 	-webkit-transition: All .2s ease;
 	-o-transition: All .2s ease;
 	transition: All .2s ease;
-	/*display: none;*/
+	display: none;
 	overflow: visible;
 	height: 0px;
 	opacity: 0;

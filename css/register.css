@@ -164,3 +164,34 @@
     margin-left: -20px;
     margin-right: -20px;
 }
+
+
+.pac-container{
+    background: #f4511e;
+    font-size: 13px;
+    font-family: 'Calibri Light', sans-serif;
+    background-image: none;
+    border: none;
+}
+.pac-item{
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
+}
+.pac-item:hover{
+    background: #c8481f;
+}
+
+.pac-icon{
+    display: none;
+}
+.pac-item-query{
+    font-family: 'Calibri Light';
+    color: #fff;
+}
+.pac-matched{
+    font-weight: bold;
+}

@@ -68,8 +68,8 @@
                                         Adresa
                                     </div>
 
-                                    <input type="text" name="Adresa" value="Adresa" onfocus="if(this.value=='Adresa') this.value='';" onblur="if(this.value=='') this.value='Adresa';">
-
+                                    <input type="text" name="Adresa" value="Adresa" onfocus="if(this.value=='Adresa') this.value='';" onblur="if(this.value=='') this.value='Adresa';" id = "address-input">
+                                    <input type="text" id ="formatted-addr" name ="formatted-address" value="" style="display:none;">
                                     <button type="submit" id="submit-button">
                                         Trimitere
                                     </button>
@@ -87,5 +87,8 @@
 	<?php include "footer.php" ?>
     <script src="js/miscs.js"></script>
     <script src="js/fill-page.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
+
+    <script src="js/register-address.js"></script>
 </body>
 </html>

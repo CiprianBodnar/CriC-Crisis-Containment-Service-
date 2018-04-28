@@ -1,6 +1,6 @@
 <?php 
 	
-	$loggedIn = true;
+	$loggedIn = false;
 	$username = "John Doe"
 
  ?>

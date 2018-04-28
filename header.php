@@ -1,7 +1,11 @@
 <?php 
-	
+	include_once ("dbConnect.php");
 	$loggedIn = false;
-	$username = "John Doe"
+	$username = "";
+	if(isset($_SESSION['loggedIn'])){
+		$loggedIn = $_SESSION['loggedIn'];
+		$username = $_SESSION['name'];
+		}
 
  ?>
 <header id="header">
@@ -32,7 +36,8 @@
 						</span>
 						<ul class="sub-nav">
 							<li><a href="#"><i class="fas fa-cog"></i>Setări</a></li>
-							<li><a href="#"><i class="fas fa-sign-out-alt"></i>Deconectare</a></li>
+							<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i>Deconectare</a></li>
+							
 						</ul>
 					</li>
 				<?php } ?>

@@ -1,3 +1,13 @@
+<?php
+include_once ("dbConnect.php");
+if(isset($_SESSION['loggedIn'])){
+    $loggedIn = $_SESSION['loggedIn'];
+    if($loggedIn)
+        header("Location: home.php");
+    
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

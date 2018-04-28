@@ -1,3 +1,46 @@
+<?php
+include_once('dbConnect.php');
+
+
+
+$error ="";
+if(isset($_POST['conectare'])){
+
+    $email = $_POST['email'];
+    $pass = hash("sha256",$_POST['parola']);
+    $sql = "SELECT * FROM Users WHERE email='".$email."' AND password='".$pass."';";
+    
+    if ($result = $conn ->query($sql)){
+        $row = $result->fetch_row();
+        if($row === NULL)
+            $error = "eroare";
+        else{
+            $firstname = $row[1];
+            $lastname = $row[2];
+            $_SESSION ["name"] = $firstname . " " . $lastname;
+            $_SESSION["loggedIn"] = TRUE;
+            $_SESSION["id_user"] = $row[0];
+        }
+        
+    }else{
+       $error = "Error: " . $conn->error;
+    } 
+
+    if(isset($_SESSION['loggedIn'])){
+        $loggedIn = $_SESSION['loggedIn'];
+        if($loggedIn ===TRUE)
+            header("Location: home.php");
+        
+        
+        }
+
+
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,16 +70,22 @@
                         </p>
                     </div>
                     <div class="row2">
-                        <form class="login-form">
+                        <form class="login-form" action="#" method="POST">
                             <div class="row21">
-                                <input type="text" name="your.email@yoursite.com" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                <input type="text" name="email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                             </div>
                             <div class="row21">
                                 <input type="password" name="parola" value="parola" onfocus="if(this.value=='parola') this.value='';" onblur="if(this.value=='') this.value='parola';">
-                                <button type="submit" id="conecteaza">Conectează-te</button>
+                                <button type="submit" id="conecteaza" name="conectare">Conectează-te</button>
                                 <div class="clear"></div>
                             </div>
                         </form>
+                    </div>
+                    <?php
+                    if($error != ""){
+                        echo "<div class='error'>". $error ."  </div>";
+                    }
+                    ?>
                     <div class="row3">
 
                         <p class="information">

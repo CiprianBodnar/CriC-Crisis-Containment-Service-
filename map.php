@@ -26,6 +26,7 @@
 
          <div id="map-container">
         </div>
+        <div id="map-cover"></div>
     </section>
     <div class="tabs box-small no-padding">
         <div class="tab" id="tab-about">
@@ -76,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab tab-visible" id="tab-legend">
+        <div class="tab" id="tab-legend">
             <div class="tab-content align-left">
                 <div class="tab-title">Legendă</div>
                 <div class="tab-content">
@@ -114,7 +115,7 @@
                 <ul>
                     <li data-tab="tab-about">Despre</li>
                     <li data-tab="tab-layers">Filtru</li>
-                    <li class="tab-selected" data-tab="tab-legend">Legendă</li>
+                    <li data-tab="tab-legend">Legendă</li>
                 </ul>
             </div>
             <div class="clear"></div>
@@ -123,59 +124,57 @@
 
     <div class="cover"></div>  
     <div class="modal" id="add-danger">  
-         <div class="container"> 
-            <div class="box-small white">
-                <form action="#" method="POST" id="add-danger-form">
-                    <div class="row modal-title"> 
-                        <h3>
-                            Semnalează un pericol
-                        </h3>
-                        <div class="modal-close"> 
-                            <i class="fas fa-times"></i>
-                        </div>
+        <div class="box-small white">
+            <form action="#" method="POST" id="add-danger-form">
+                <div class="row modal-title"> 
+                    <h3>
+                        Semnalează un pericol
+                    </h3>
+                    <div class="modal-close"> 
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row">
+                    <?php if ($loggedIn===false) {?>
+                    <!-- user not logged in -->
+                    <p>Trebuie sa fiți autentificat pentru a putea semnala pericole. <a href="login.php">Conectați-vă.</a></p>
+                    <?php } else{ ?>
+                    <!-- user logged in -->
+                    <div class="col12">
+                        <p id="location-from-coord"></p>
+                        <p>
+                            Descrieți pe scurt:
+                        </p>
+                        <textarea name="decription" id="desc"></textarea>
+                        <p>
+                            Selectați tipul de pericol:
+                        </p>
+
+                        <select name="danger-type" id="type">
+                            <option selected disabled hidden>Tipul de pericol</option>
+                            <option value="fire"><i class="fas fa-fire"></i> Incendiu</option>
+                            <option value="flood"><i class="fas fa-tint"></i> Inundație</option>
+                            <option value="earthquake"><i class="fas-fa-globe"></i> Cutremur</option>
+                            <option value="snow"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
+                        </select>
+                        <p>
+                            Raza pericolului (m): 
+                        </p>
+                        <input type="number" name="radius" value="500">
+
+                        <input type="text" value="" id="lat-input" name="lat" style = "display: none;">
+                        <input type="text" value="" id="lng-input" name="lng" style="display: none;">
+
+                        <button type="submit" id="submit-button">
+                            Trimite
+                        </button>
                         <div class="clear"></div>
                     </div>
-                    <div class="row">
-                        <?php if ($loggedIn===false) {?>
-                        <!-- user not logged in -->
-                        <p>Trebuie sa fiți autentificat pentru a putea semnala pericole. <a href="login.php">Conectați-vă.</a></p>
-                        <?php } else{ ?>
-                        <!-- user logged in -->
-                        <div class="col12">
-                            <p id="location-from-coord"></p>
-                            <p>
-                                Descrieți pe scurt:
-                            </p>
-                            <textarea name="decription" id="desc"></textarea>
-                            <p>
-                                Selectați tipul de pericol:
-                            </p>
+                    <?php } ?>
 
-                            <select name="danger-type" id="type">
-                                <option selected disabled hidden>Tipul de pericol</option>
-                                <option value="fire"><i class="fas fa-fire"></i> Incendiu</option>
-                                <option value="flood"><i class="fas fa-tint"></i> Inundație</option>
-                                <option value="earthquake"><i class="fas-fa-globe"></i> Cutremur</option>
-                                <option value="snow"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
-                            </select>
-                            <p>
-                                Raza pericolului (m): 
-                            </p>
-                            <input type="text" name="radius" value="500">
-
-                            <input type="text" value="" id="lat-input" name="lat" style = "display: none;">
-                            <input type="text" value="" id="lng-input" name="lng" style="display: none;">
-
-                            <button type="submit" id="submit-button">
-                                Trimite
-                            </button>
-                            <div class="clear"></div>
-                        </div>
-                        <?php } ?>
-
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 

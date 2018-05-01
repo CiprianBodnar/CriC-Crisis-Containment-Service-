@@ -246,6 +246,7 @@ footer{
 }
 
 .modal {
+	pointer-events: none;
     position: absolute;
     left: 0;
     opacity: 0;
@@ -258,6 +259,10 @@ footer{
     -o-transition: All .2s ease;
     transition: All .2s ease;
     top: 0;
+}
+
+.modal *{
+	pointer-events: auto;
 }
 
 .modal.visible {
@@ -309,7 +314,7 @@ footer{
     background: #5c2716;
     text-align: center;
     display: block;
-    font-size: 18px;
+    padding: 0 10px;
     color: white;
     top: 5px;
     position: relative;
@@ -327,7 +332,7 @@ footer{
     background: #1B1817;
 }
 
-textarea {
+.modal textarea {
     width: 100%;
     padding: 12px 20px;
     height: 100px;
@@ -347,7 +352,7 @@ textarea {
     min-width: 100%;
 }
 
-input[type=text]{
+.modal input[type=text], .modal input[type=number]{
 	width: 100%;
     padding: 12px 20px;
     margin: 5px 0px;
@@ -386,7 +391,15 @@ select option{
 	background: #f4511E !important;
 }
 
-textarea:focus, input:focus{
+.modal textarea:focus, .modal input:focus{
     color: #f4511E;
     background: #fff;
+}
+
+#map-cover{
+	width: 100%;
+	height: calc(100% - 60px);
+	position: absolute;
+	background: rgba(0, 0, 0, .5);
+	display: none;
 }

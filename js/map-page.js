@@ -233,13 +233,16 @@ $('.bottom-nav-menu ul li').on("click", function(){
 
 $('.input-trigger').on("click", function(){
 	$(this).removeClass('visible');
+	$('#map-cover').fadeIn(200);
 	$('.wrapper').addClass('input-visible');
 	document.getElementById('address-keyword').focus();
 });
-$("#address-keyword").on("blur", function(){
+$("#address-keyword").on("blur", function(e){
+	e.preventDefault();
 	$('.input-trigger').addClass('visible');
 	$(this).val('');
 	$('.wrapper').removeClass('input-visible');
+	$('#map-cover').fadeOut(200);
 });
 $('.modal-close').on('click', function(){
 	$('.modal').removeClass('visible');

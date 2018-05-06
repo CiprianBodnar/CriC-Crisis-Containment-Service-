@@ -48,7 +48,6 @@ if(isset($_POST['submit']))
 </head>
 <body id="login-page">
 	<?php include "header.php" ?>
-	<?php include "send_code_header.php" ?>
 	<section id="content">
         <div class="gradient-bg">
             <div class="container no-padding">

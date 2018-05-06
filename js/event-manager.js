@@ -39,6 +39,40 @@ class EventManager{
 			});
 	}
 
+	filter(options){
+		for(let event of this.events){
+			if(options.hideAll){
+				if(event.marker.getMap() != null)
+					event.marker.setMap(null);
+				if(event.circle.getMap() != null)
+					event.circle.setMap(null);
+			}else{
+				this.renderEvent(event, options[event.type], options.radius);
+			}
+
+		}
+	}
+
+	renderEvent(event, type, radius){
+		if(type===false){
+			if(event.marker.getMap()!= null)
+				event.marker.setMap(null);
+			if(event.circle.getMap()!=null)
+				event.circle.setMap(null);
+		}
+		else{
+			if(event.marker.getMap() === null)
+				event.marker.setMap(this.map);
+			if(radius){
+				if(event.circle.getMap() === null)
+					event.circle.setMap(this.map);
+			}
+			else if(event.circle.getMap()!=null){
+				event.circle.setMap(null);
+			}
+		}
+	}
+
 	setCurrentLocation(){
 		if(navigator.geolocation){
 			let mp = this.map;

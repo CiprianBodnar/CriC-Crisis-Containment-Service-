@@ -1,5 +1,7 @@
 var eventManager;
+
 google.load('visualization', '1', {});
+
 function init(){
     var mapContainer = document.getElementById("map-container");
     var mapOptions = {
@@ -13,7 +15,40 @@ function init(){
     }
     var map = new google.maps.Map(mapContainer, mapOptions);
     eventManager = new EventManager(map, null);
+    eventManager.setCurrentLocation();
+
+    for(let option of document.getElementsByClassName('filter-option')){
+    	option.addEventListener('click', updateFilterOptions);
+    }
 }
+
+function updateFilterOptions(){
+	var filterOptions = {};
+	filterOptions.hideAll = document.getElementById('hide-all').checked;
+	filterOptions.fire = document.getElementById('fire').checked;
+	filterOptions.person = document.getElementById('person').checked;
+	filterOptions.earthquake = document.getElementById('earthquake').checked;
+	filterOptions.snow_storm = document.getElementById('snow-storm').checked;
+	filterOptions.flood = document.getElementById('flood').checked;
+	filterOptions.radius = document.getElementById('radius').checked;
+
+	if (filterOptions.hideAll){
+		for(let other of document.getElementsByClassName('filter-option')){
+			if(other != document.getElementById('hide-all')){
+				other.disabled = true;
+			}
+		}
+	}
+	else{
+		for(let other of document.getElementsByClassName('filter-option')){
+			if(other != document.getElementById('hide-all')){
+				other.disabled = false;
+			}
+		}
+	}
+	eventManager.filter(filterOptions);
+}
+
 
 google.maps.event.addDomListener(window, 'load', init);
 

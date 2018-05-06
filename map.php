@@ -39,38 +39,38 @@
         </div>
         <div class="tab" id="tab-layers">
             <div class="tab-content align-left">
-                <div class="tab-title">Filtru</div>
-                <div class="tab-content">
+                <p class="tab-title">Filtru</p>
+                <div class="tab-content" id="filter">
                     <div class="section">
                         <div class="row">
-                            <input type="checkbox" id="hide-all"> Ascunde tot
+                            <input type="checkbox" class="filter-option" id="hide-all"> Ascunde tot
                         </div>
                     </div>
                     <div class="section">
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="earthquake" class="filter-option" type="checkbox" checked>
                             Cutremure
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="fire" class="filter-option" type="checkbox" checked>
                             Incendii
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="flood" class="filter-option" type="checkbox" checked>
                             Inundații
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="snow-storm" class="filter-option" type="checkbox" checked>
                             Furtuni de zăpadă
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked  >
+                            <input id="person" class="filter-option" type="checkbox" checked  >
                             Persoane aflate în pericol
                         </div>
                     </div>
                     <div class="section">
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="radius" class="filter-option" type="checkbox" checked>
                             Raza de acoperire a pericolelor
                         </div>
                     </div>

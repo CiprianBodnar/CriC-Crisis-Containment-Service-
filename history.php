@@ -51,34 +51,34 @@
                 <div class="tab-content" id="filter">
                     <div class="section">
                         <div class="row">
-                            <input type="checkbox" id="hide-all"> Ascunde tot
+                            <input type="checkbox" class="filter-option" id="hide-all"> Ascunde tot
                         </div>
                     </div>
                     <div class="section">
                         <div class="row">
-                            <input id="earthquake" type="checkbox" checked>
+                            <input id="earthquake" class="filter-option" type="checkbox" checked>
                             Cutremure
                         </div>
                         <div class="row">
-                            <input id="fire" type="checkbox" checked>
+                            <input id="fire" class="filter-option" type="checkbox" checked>
                             Incendii
                         </div>
                         <div class="row">
-                            <input id="flood" type="checkbox" checked>
+                            <input id="flood" class="filter-option" type="checkbox" checked>
                             Inundații
                         </div>
                         <div class="row">
-                            <input id="snow-storm" type="checkbox" checked>
+                            <input id="snow-storm" class="filter-option" type="checkbox" checked>
                             Furtuni de zăpadă
                         </div>
                         <div class="row">
-                            <input id="person" type="checkbox" checked  >
+                            <input id="person" class="filter-option" type="checkbox" checked  >
                             Persoane aflate în pericol
                         </div>
                     </div>
                     <div class="section">
                         <div class="row">
-                            <input id="radius" type="checkbox" checked>
+                            <input id="radius" class="filter-option" type="checkbox" checked>
                             Raza de acoperire a pericolelor
                         </div>
                     </div>

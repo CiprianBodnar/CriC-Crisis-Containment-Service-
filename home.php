@@ -1,3 +1,28 @@
+<?php
+ include_once("dbConnect.php");
+ $error = "";
+if(isset($_POST['name_button'])){
+	$name = $_POST['Nume'];
+	$name = htmlspecialchars($name,ENT_QUOTES);
+
+	$sql = "SELECT * FROM Person_Finder  WHERE name='".$name."';";
+	if ($result = $conn ->query($sql)){
+        $row = $result->fetch_row();
+		if($row === NULL){
+		$sql = "SELECT * FROM Users WHERE firstname||' '||lastname='".$name."';";
+		if ($result = $conn ->query($sql)){
+			$row = $result->fetch_row();
+			if($row === NULL)
+			$error = "Aceasta persoana nu exista în baza de date.";
+		}
+		else
+			header("Location: map.php");	
+		}
+	}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +99,7 @@
 	<div class="modal" id="search">  
 		 <div class="container"> 
 			<div class="box-small white">
-				<form action="#">
+				<form action="#" method="POST">
 					<div class="row modal-title"> 
 						<h3>
 							Caută pe cineva
@@ -90,7 +115,7 @@
 								Introduceți numele
 							</p>
 							<input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';"> 
-							<button type="submit" id="submit-button">
+							<button type="submit" id="submit-button" name="name_button">
 	                            <i class="fas fa-search"></i>
 	                        </button>
 	                        <div class="clear"></div>

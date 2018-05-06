@@ -22,6 +22,10 @@ if(isset($_POST['conectare'])){
             $_SESSION ["name"] = $firstname . " " . $lastname;
             $_SESSION["loggedIn"] = TRUE;
             $_SESSION["id_user"] = $row[0];
+            $sql = "UPDATE Users set conn_date=sysdate where email='".$email."';";
+            if(!$conn->query($sql))
+                echo "Eroare" . $conn->error;
+            
         }
         
     }else{

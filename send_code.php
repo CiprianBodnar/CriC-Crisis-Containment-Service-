@@ -1,3 +1,39 @@
+<?php
+function generateRandomString($length = 25) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+if(isset($_POST['submit']))
+{
+    $key = generateRandomString();
+    ini_set("SMTP","ssl://smtp.gmail.com");
+    ini_set("smtp_port","465");
+
+    $to = $_POST['Email'];
+    $subject = "Trimitere cod de resetare parola cont CriC";
+    $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
+    $message .= $key;
+    $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
+    $header = "From: recuperare.parola@cric.fii";
+
+    mail($to, $subject, $message, $header);
+
+    include_once ("dbConnect.php");
+    $sql = "INSERT INTO Reset_Pwd (email, ekey) VALUES ('".$to."','".$key."');";
+    if(!$conn->query($sql) == TRUE){
+        echo "Error: " . $conn->error;
+    }
+
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +58,7 @@
                             <h3 class="subtitle">
                                 Trimiterea codului de recupare a contului pe email
                             </h3>
-                            <form class="contact-form">
+                            <form class="contact-form" action="#" method="POST">
 
                                 <div class="col12 no-padding">
                                     <div class="par">
@@ -30,7 +66,7 @@
                                     </div>
                                     <input type="text" name="Email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                 
-                                <button type="submit" id="submit-button">
+                                <button type="submit" id="submit-button" name="submit">
                                     Trimitere
                                 </button>
                                 </div>

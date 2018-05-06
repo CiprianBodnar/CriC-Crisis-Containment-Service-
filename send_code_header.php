@@ -8,3 +8,4 @@ if(isset($_POST['submit_button']))
 	mail($to, $subject, $message);
 
 }
+?>

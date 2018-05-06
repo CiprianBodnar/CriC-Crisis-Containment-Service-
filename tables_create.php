@@ -39,6 +39,13 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error;
         }
         //..
+        $sql = "DROP TABLE Reset_Pwd;";
+        if ($conn->query($sql) == TRUE){
+            echo "Done drop Reset_Pwd <br>";
+        }else{
+            echo "Error: " . $conn->error;
+        }
+
         $sql = "CREATE TABLE Users (
             id_user INT(6)  AUTO_INCREMENT PRIMARY KEY,
             firstname VARCHAR(30) NOT NULL,
@@ -61,6 +68,16 @@ $dbname = "CricDB";
         )";
         if ($conn->query($sql) == TRUE){
             echo "Done create Action <br>";
+        }else{
+            echo "Error: " . $conn->error;
+        }
+        //..
+        $sql = "CREATE TABLE Reset_Pwd (
+            email VARCHAR(50) NOT NULL,
+            ekey VARCHAR(64) NOT NULL
+        )";
+        if($conn->query($sql) == TRUE){
+            echo "Done create Reset_Pwd <br>";
         }else{
             echo "Error: " . $conn->error;
         }

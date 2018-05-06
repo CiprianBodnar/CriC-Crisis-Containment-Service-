@@ -1,3 +1,10 @@
+<?php  
+include_once("dbConnect.php");
+
+$error = "";
+if()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

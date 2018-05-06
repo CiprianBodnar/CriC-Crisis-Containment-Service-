@@ -1,3 +1,43 @@
+<?php
+include_once ("dbConnect.php");
+
+$key = "";
+if(isset($_GET['key'])){
+    $key = $_GET['key'];
+    echo $key;
+}
+
+$sql = "SELECT * FROM Reset_Pwd WHERE ekey='".$key."'";
+if($conn->query($sql) == FALSE){
+    echo "Error: " . $conn->error;
+}
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$email = $row['email'];
+
+if(isset($_POST['submit'])){
+    $password = hash("sha256", $_POST['parola_noua']);
+    $verify_password = hash("sha256", $_POST['verificare_parola_noua']);
+
+    if(strlen($_POST['parola_noua']) >= 6){
+        if($password == $verify_password){
+            $sql = "UPDATE Users SET password='".$password."' WHERE email='".$email."'";
+            if(!$conn->query($sql)){
+                echo "Eroare: ". $conn->error;
+            }
+
+            $sql = "DELETE FROM Reset_Pwd where email='".$email."'";
+            if(!$conn->query($sql)){
+                echo "Eroare: ". $conn->error;
+            }
+
+            header("Location: login.php");
+        }
+    }
+    $conn->close();    
+}
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,21 +61,21 @@
                         <h3 class="subtitle">
                             Schimbarea parolei dvs
                         </h3>
-                        <form class="contact-form">
+                        <form class="contact-form" action="#" method="POST">
                             <div class="row">
                                 <div class="par">
                                     Parola noua
                                 </div>
-                                <input type="password" class="pwd" name="Parola noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
+                                <input type="password" class="pwd" name="parola_noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
                             </div>
                             <div class="row">
                                 <div class="par">
                                     Verificare parola noua
                                 </div>
-                                <input type="password" class="pwd" name="Verificare parola noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
+                                <input type="password" class="pwd" name="verificare_parola_noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
                             </div>
 
-                            <button type="submit" id="submit-button">
+                            <button type="submit" name="submit" id="submit-button">
                                 Trimitere
                             </button>
                                    

@@ -18,5 +18,6 @@ When you push a commit the code should be valid.
 
 First you need to run the tables_create.php in order to create the database.
 
-To configurate xamp in order to receive mails:
+	1. To configure xampp in order to receive mails:
 https://stackoverflow.com/questions/15965376/how-to-configure-xampp-to-send-mail-from-localhost
+	2. After configuring, reset Apache

@@ -2,6 +2,7 @@
 include_once ("dbConnect.php");
 
 $key = "";
+$error = "";
 if(isset($_GET['key'])){
     $key = $_GET['key'];
 }
@@ -33,6 +34,8 @@ if(isset($_POST['submit'])){
             header("Location: login.php");
         }
     }
+    else 
+        $error = "Parola trebuie sa contine minim 6 caractere!";
     $conn->close();    
 }
  
@@ -77,7 +80,12 @@ if(isset($_POST['submit'])){
                             <button type="submit" name="submit" id="submit-button">
                                 Trimitere
                             </button>
-                                   
+                            <div class = "clear"></div>
+                            <?php
+                                if($error != ""){
+                                    echo "<div class ='error'>".$error."</div>";
+                                }  
+                            ?>   
                         </form>
                     </div>
                 </div>

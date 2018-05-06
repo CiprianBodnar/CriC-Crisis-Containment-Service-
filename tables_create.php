@@ -16,7 +16,7 @@ $dbname = "CricDB";
     if($result = $conn->query("SELECT DATABASE()")){
         $row = $result -> fetch_row();
         if($row[0] === NULL){
-            $sql = "CREATE DATABASE " . $dbname;
+            $sql = "CREATE DATABASE " . $dbname . " CHARACTER SET utf16 collate utf16_unicode_ci ";
             if(!$conn->query($sql)){
                 die("Failed to create DB ");
             }
@@ -38,21 +38,26 @@ $dbname = "CricDB";
         }else{
             echo "Error: " . $conn->error;
         }
-        //..
+        $sql = "DROP TABLE Feedback;";
+        if ($conn->query($sql) == TRUE){
+            echo "Done drop Feedback <br>";
+        }else{
+            echo "Error: " . $conn->error;
+        }
         $sql = "DROP TABLE Reset_Pwd;";
         if ($conn->query($sql) == TRUE){
             echo "Done drop Reset_Pwd <br>";
         }else{
             echo "Error: " . $conn->error;
         }
-
+        //..
         $sql = "CREATE TABLE Users (
             id_user INT(6)  AUTO_INCREMENT PRIMARY KEY,
             firstname VARCHAR(30) NOT NULL,
             lastname VARCHAR(30) NOT NULL,
             email VARCHAR(50) NOT NULL,
             password CHAR(64) NOT NULL,
-            address VARCHAR(50) NOT NULL,
+            address VARCHAR(80) NOT NULL,
             conn_date DATE
         )";
         if ($conn->query($sql) == TRUE){
@@ -63,27 +68,38 @@ $dbname = "CricDB";
         //..
         $sql = "CREATE TABLE Action (
             id_danger INT(6) PRIMARY KEY,
-            id_user INT(6),
-            status INT(2)
+            id_user INT(6)
         )";
         if ($conn->query($sql) == TRUE){
             echo "Done create Action <br>";
         }else{
             echo "Error: " . $conn->error;
         }
-        //..
+
+        $sql = "CREATE TABLE Feedback (
+            id_user INT(6) NOT NULL,
+            id_danger INT(6) NOT NULL,
+            feedback INT(2) NOT NULL
+            )";
+         if ($conn->query($sql) == TRUE){
+            echo "Done create Feedback <br>";
+        }else{
+            echo "Error: " . $conn->error;
+        }
+        /*..*/
         $sql = "CREATE TABLE Reset_Pwd (
             email VARCHAR(50) NOT NULL,
-            ekey VARCHAR(64) NOT NULL
-        )";
-        if($conn->query($sql) == TRUE){
+            ekey VARCHAR(50) NOT NULL
+            )";
+         if ($conn->query($sql) == TRUE){
             echo "Done create Reset_Pwd <br>";
         }else{
             echo "Error: " . $conn->error;
         }
-
+    
+    
         $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('Jhon','Doe','john_doe@myemail.com','D74FF0EE8DA3B9806B18C877DBF29BBDE50B5BD8E4DAD7A3A725000FEB82E8F1','Iasi, Romania',sysdate())";
-        if (!$conn->query($sql) == TRUE){
+        if (!$conn->query($sql) ){
             echo "Error: " . $conn->error;
         }
 

@@ -126,7 +126,7 @@ class EventManager{
 	        radius:  eventRadius,
 	        clickable: false
 	    });
-	   	event = {
+	   	let event = {
 	   		id: id,
 	   		type: eventType,
 	   		marker: marker, 

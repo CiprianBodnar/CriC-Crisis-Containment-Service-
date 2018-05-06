@@ -108,6 +108,7 @@
     font-size: 16px;
 }
 
+
 #submit-button{
     border: none;
     background: #5c2716;
@@ -194,4 +195,23 @@
 }
 .pac-matched{
     font-weight: bold;
+}
+
+.contact-form input[type=text].error {
+    border: 3px solid #5c2716;
+    border-radius: 3px;
+    color: #5c2716;
+}
+
+.error {
+    padding: 20px 0;
+    color: #fff;
+    font-family: Calibri;
+    font-size: 17px;  
+}
+
+.contact-form input[type=password].password-error {
+    border: 3px solid #5c2716;
+    border-radius: 3px;
+    color: #5c2716;
 }

@@ -1,19 +1,21 @@
 <?php
 include_once('dbConnect.php');
 
-
-
 $error ="";
+
 if(isset($_POST['conectare'])){
 
     $email = $_POST['email'];
+    $email = htmlspecialchars($email,ENT_QUOTES);    
     $pass = hash("sha256",$_POST['parola']);
     $sql = "SELECT * FROM Users WHERE email='".$email."' AND password='".$pass."';";
-    
+   
+   
+
     if ($result = $conn ->query($sql)){
         $row = $result->fetch_row();
         if($row === NULL)
-            $error = "eroare";
+            $error = "Email sau parola gresita";
         else{
             $firstname = $row[1];
             $lastname = $row[2];

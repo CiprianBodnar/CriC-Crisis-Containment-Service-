@@ -15,3 +15,8 @@ Below is a list of steps a member of the team has to follow in order to contribu
 ## Observations
 
 When you push a commit the code should be valid.
+
+First you need to run the tables_create.php in order to create the database.
+
+To configurate xamp in order to receive mails:
+https://stackoverflow.com/questions/15965376/how-to-configure-xampp-to-send-mail-from-localhost

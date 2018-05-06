@@ -4,7 +4,6 @@ include_once ("dbConnect.php");
 $key = "";
 if(isset($_GET['key'])){
     $key = $_GET['key'];
-    echo $key;
 }
 
 $sql = "SELECT * FROM Reset_Pwd WHERE ekey='".$key."'";

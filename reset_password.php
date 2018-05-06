@@ -13,7 +13,7 @@ if($conn->query($sql) == FALSE){
 }
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$email = $row['email'];
+$email = htmlspecialchars($row['email'],ENT_QUOTES);
 
 if(isset($_POST['submit'])){
     $password = hash("sha256", $_POST['parola_noua']);
@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
                 echo "Eroare: ". $conn->error;
             }
 
-            $sql = "DELETE FROM Reset_Pwd where email='".$email."'";
+            $sql = "DELETE FROM Reset_Pwd WHERE email='".$email."'";
             if(!$conn->query($sql)){
                 echo "Eroare: ". $conn->error;
             }

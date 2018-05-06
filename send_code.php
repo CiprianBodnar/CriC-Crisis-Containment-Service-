@@ -20,10 +20,12 @@ if(isset($_POST['submit']))
     $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
     $message .= $key;
     $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
-    $header = "From: recuperare.parola@cric.fii";
+    $header = "From: fiicriciasi@gmail.com";
 
     mail($to, $subject, $message, $header);
 
+    $to = htmlspecialchars($to, ENT_QUOTES);
+    $key = htmlspecialchars($key, ENT_QUOTES);
     include_once ("dbConnect.php");
     $sql = "INSERT INTO Reset_Pwd (email, ekey) VALUES ('".$to."','".$key."');";
     if(!$conn->query($sql) == TRUE){

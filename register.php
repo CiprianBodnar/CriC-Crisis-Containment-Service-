@@ -1,7 +1,5 @@
 <?php
-
 include_once ("dbConnect.php");
-
 
 $error = "";
 if(isset($_POST['submit'])) {
@@ -13,11 +11,6 @@ if(isset($_POST['submit'])) {
     $verify_password = hash("sha256", $_POST['verifica_parola']);
     $address = $_POST['formatted-address'];
 
-    //echo $address;
-    $address = str_replace(array("ș","ă","ț","Ș","Ț","Ă","Â","â"),array("s","a","t","s","t","a","a","a"),$address);
-   // $address = normalizer_normalize($address);
-    //echo $address;
-
     $sql = "SELECT * FROM Users WHERE email='".$email_adress."';";
 
     if($result = $conn->query($sql)) {
@@ -28,7 +21,7 @@ if(isset($_POST['submit'])) {
                     if($email_adress === $verify_email_address && $password === $verify_password) {
                         if($row === NULL) {
                             $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('".$first_name."', '".$last_name."', '".$email_adress."', '".$password."', '".$address."', sysdate());";
-                           // echo $sql;
+
                             if(!$conn->query($sql)){
                                 echo "Eroare" . $conn->error;
                             }
@@ -36,7 +29,7 @@ if(isset($_POST['submit'])) {
                                 $_SESSION["name"] = $first_name . " " . $last_name;
                                 $_SESSION["email"] = $email_adress;
                                 $_SESSION["password"] = $password;
-                               
+                                header("Location: login.php");
                             }
                         }
                         else 
@@ -53,7 +46,8 @@ if(isset($_POST['submit'])) {
 
 if(isset($_SESSION['loggedIn'])){
     $loggedIn = $_SESSION['loggedIn'];
-    
+    if($loggedIn)
+        header("Location: home.php");
     }
 
     $conn->close();

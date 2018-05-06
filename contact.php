@@ -1,10 +1,35 @@
-<?php  
-include_once("dbConnect.php");
+<?php
+    $error = "";
+    if(isset($_POST['submit'])){
+        $last_name = $_POST['nume'];
+        $first_name = $_POST['prenume'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $mesaj = $_POST['mesaj'];
 
-$error = "";
-if()
+        if(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email)){
+            if(strlen($subject)>=5){
+                if(strlen($mesaj)){
+                    $to = "fiicriciasi@gmail.com";
+                    $header = "From: fiicriciasi@gmail.com";
+
+                    $message = "Nume: ".$last_name;
+                    $message .= "\nPrenume: ".$first_name;
+                    $message .= "\nE-Mail: ".$email;
+                    $message .= "\n".$mesaj;
+
+                    mail($to, $subject, $message, $header);
+                }
+                else 
+                    $error = "Nu puteti trimite mesaj gol";
+            }
+            else 
+                $error = "Subiectul nu poate avea mai putin de 5 caractere";
+        }
+        else
+            $error = "Introduceti un email valid";
+    }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,43 +67,48 @@ if()
 
                         <p class="information">
                                 
-                           0230 576928 <br>
-                            0712 345 678
+                           0230 576 928 <br>
+                           0712 345 678
                         </p>
                         <span class="icon-container">
                             <i class="fas fa-envelope"></i>
                         </span>
                         <p class="information">
-                            contact@cric.fii
+                            fiicriciasi@gmail.com
                         </p>
                     </div>
                     <div class="col8">
                         <h3 class="subtitle">
                             Trimite un mesaj
                         </h3>
-                        <form class="contact-form">  
+                        <form class="contact-form" action="#" method="POST">  
                             <div class="row">
                                 <div class="col6 no-padding">
-                                    <input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+                                    <input type="text" name="nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
                                 </div>
                                 <div class="col6 no-padding">
-                                    <input type="text" name="Prenume" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
+                                    <input type="text" name="prenume" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col6 no-padding">
-                                    <input type="text" name="your.email@yoursite.com" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                    <input type="text" name="email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                 </div>
                                 <div class="col6 no-padding">
-                                    <input type="text" name="Subiect" value="Subiect" onfocus="if(this.value=='Subiect') this.value='';" onblur="if(this.value=='') this.value='Subiect';">
+                                    <input type="text" name="subject" value="Subiect" onfocus="if(this.value=='Subiect') this.value='';" onblur="if(this.value=='') this.value='Subiect';">
                                 </div>
                             </div>
                             <div class="row">
-                                <textarea name="Mesaj"    onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
-                                <button type="submit" id="submit-button">
+                                <textarea name="mesaj"    onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
+                                <button type="submit" id="submit-button" name = "submit">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                                 <div class="clear"></div>
+                                <?php
+                                      if($error != ""){
+                                        echo "<div class = 'error'>" .$error ."</div>";
+                                      }
+                                ?>
                             </div>
                         </form>
                     </div>

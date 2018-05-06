@@ -29,6 +29,7 @@ function getVals(){
   	pretty.style.width=width+'px';
   	var displayElement = parent.getElementsByClassName("amount")[0];
   	convert(slide1, slide2);
+    eventManager.loadEvents(minDate, maxDate, {animation: false});
     displayElement.innerHTML=(months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear();
 }
 

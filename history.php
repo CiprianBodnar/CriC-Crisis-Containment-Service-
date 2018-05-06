@@ -48,7 +48,7 @@
             </div>
             <div class="tab-content align-left">
                 <p class="tab-title">Filtru</p>
-                <div class="tab-content">
+                <div class="tab-content" id="filter">
                     <div class="section">
                         <div class="row">
                             <input type="checkbox" id="hide-all"> Ascunde tot
@@ -56,29 +56,29 @@
                     </div>
                     <div class="section">
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="earthquake" type="checkbox" checked>
                             Cutremure
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="fire" type="checkbox" checked>
                             Incendii
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="flood" type="checkbox" checked>
                             Inundații
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="snow-storm" type="checkbox" checked>
                             Furtuni de zăpadă
                         </div>
                         <div class="row">
-                            <input type="checkbox" checked  >
+                            <input id="person" type="checkbox" checked  >
                             Persoane aflate în pericol
                         </div>
                     </div>
                     <div class="section">
                         <div class="row">
-                            <input type="checkbox" checked>
+                            <input id="radius" type="checkbox" checked>
                             Raza de acoperire a pericolelor
                         </div>
                     </div>
@@ -132,8 +132,10 @@
     </footer>
 
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback"></script>
+    <script src="js/event-manager.js"></script>
     <script src="js/history-map-page.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback=createMap"></script>
 	<script src="js/miscs.js"></script>
 	<script src="js/slider_custom.js"></script>
     

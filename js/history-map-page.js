@@ -1,4 +1,6 @@
-function createMap(){
+var eventManager;
+google.load('visualization', '1', {});
+function init(){
     var mapContainer = document.getElementById("map-container");
     var mapOptions = {
         center: new google.maps.LatLng(46.1739206 , 25.5752338),
@@ -9,8 +11,12 @@ function createMap(){
               position: google.maps.ControlPosition.BOTTOM_CENTER
           }
     }
-    var map = new google.maps.Map(mapContainer, mapOptions);    
+    var map = new google.maps.Map(mapContainer, mapOptions);
+    eventManager = new EventManager(map, null);
 }
+
+google.maps.event.addDomListener(window, 'load', init);
+
 $('.bottom-nav-menu ul li').on("click", function(){
 	if($(this).is('.tab-selected')){
 		$(this).removeClass('tab-selected');

@@ -167,14 +167,14 @@ footer{
 }
 .tab-content{
 	background: #f4511e;
-	padding: 20px;
+	padding: 5px 20px;
 	color: #fff;
 	font-family: 'Calibri Light', sans-serif;
 }
 .tab-content p.tab-title{
-	font-size: 18px;
-	margin-bottom: 20px;
-	font-weight: bold;
+	/* font-size: 18px; */
+	margin-bottom: 8px;
+	/* font-weight: bold; */
 }
 .tab-content p.tab-info{
 	font-size: 14px;
@@ -285,7 +285,7 @@ span.amount{
 }
 
 .tab#tab-timeline .section{
-	padding: 10px 0;
+	padding: 2px 0;
 	border-bottom: 1px solid #c8481f;
 }
 .tab#tab-timeline .section:last-child{

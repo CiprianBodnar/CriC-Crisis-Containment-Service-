@@ -11,26 +11,31 @@ function generateRandomString($length = 25) {
 
 if(isset($_POST['submit']))
 {
+    $error = "";
     $key = generateRandomString();
     ini_set("SMTP","ssl://smtp.gmail.com");
     ini_set("smtp_port","465");
 
-    $to = $_POST['Email'];
-    $subject = "Trimitere cod de resetare parola cont CriC";
-    $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
-    $message .= $key;
-    $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
-    $header = "From: fiicriciasi@gmail.com";
+    if(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $_POST['email'])){
+        $to = $_POST['email'];
+        $subject = "Trimitere cod de resetare parola cont CriC";
+        $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
+        $message .= $key;
+        $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
+        $header = "From: fiicriciasi@gmail.com";
 
-    mail($to, $subject, $message, $header);
+        mail($to, $subject, $message, $header);
 
-    $to = htmlspecialchars($to, ENT_QUOTES);
-    $key = htmlspecialchars($key, ENT_QUOTES);
-    include_once ("dbConnect.php");
-    $sql = "INSERT INTO Reset_Pwd (email, ekey) VALUES ('".$to."','".$key."');";
-    if(!$conn->query($sql) == TRUE){
-        echo "Error: " . $conn->error;
+        $to = htmlspecialchars($to, ENT_QUOTES);
+        $key = htmlspecialchars($key, ENT_QUOTES);
+        include_once ("dbConnect.php");
+        $sql = "INSERT INTO Reset_Pwd (email, ekey) VALUES ('".$to."','".$key."');";
+        if(!$conn->query($sql) == TRUE){
+            echo "Error: " . $conn->error;
+        }
     }
+    else
+        $error = "Introduceti o adresa de email valida";
 
     $conn->close();
 }
@@ -65,13 +70,18 @@ if(isset($_POST['submit']))
                                     <div class="par">
                                         Adresa de e-mail
                                     </div>
-                                    <input type="text" name="Email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                    <input type="text" name="email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                 
                                 <button type="submit" id="submit-button" name="submit">
                                     Trimitere
                                 </button>
                                 </div>
                                 <div class="clear"></div>
+                                <?php
+                                    if($error != ""){
+                                        echo "<div class = 'error'>".$error.<"/div>";
+                                    } 
+                                ?>
                             </form>
                         </div>
                         <div class="clear"></div>

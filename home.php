@@ -6,19 +6,32 @@ if(isset($_POST['name_button'])){
 	$name = htmlspecialchars($name,ENT_QUOTES);
 
 	$sql = "SELECT * FROM Person_Finder  WHERE name='".$name."';";
+	echo $sql;
 	if ($result = $conn ->query($sql)){
-        $row = $result->fetch_row();
+		$row = $result->fetch_row();
+		
 		if($row === NULL){
-		$sql = "SELECT * FROM Users WHERE firstname||' '||lastname='".$name."';";
-		if ($result = $conn ->query($sql)){
-			$row = $result->fetch_row();
-			if($row === NULL)
-			$error = "Aceasta persoana nu exista în baza de date.";
-		}
+			$sql = "SELECT * FROM Users WHERE firstname||' '||lastname='".$name."';";
+			if ($result = $conn ->query($sql)){
+				$row = $result->fetch_row();
+				if($row === NULL)
+					$error = "Aceasta persoana nu exista în baza de date.";
+			}
 		else
-			header("Location: map.php");	
+			header("Location: map.php");		
 		}
+	else
+		header("Location: map.php");
 	}
+}
+if(isset($_POST['trimite'])){
+	$name = $_POST['Nume2'];
+	$info = $_POST['Mesaj'];
+	$address = null;
+	if(isset($_POST['checkbox']))
+		$address = $_POST['address'];
+
+	
 }
 ?>
 
@@ -129,7 +142,7 @@ if(isset($_POST['name_button'])){
 	<div class="modal" id="share">
 		 <div class="container">
 			<div class="box-small white">
-				<form action="#">
+				<form action="#" method="POST">
 					<div class="row modal-title">
 						<h3>
 							Oferă informații despre o persoană
@@ -144,7 +157,7 @@ if(isset($_POST['name_button'])){
 							<p>
 								Introduceți numele
 							</p>
-							<input class="clearinput" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+							<input class="clearinput" name="Nume2" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
 	                        <div class="clear"></div>
 						</div>
 					</div>
@@ -164,12 +177,12 @@ if(isset($_POST['name_button'])){
 								Oferă o locație
 								<input type="checkbox" name="checkbox" id="checkbox"> 
 							</p>
-								<input class="showthis" id="show-location" name="showthis"  value="Locație" onfocus="if(this.value=='Locație') this.value='';" onblur="if(this.value=='') this.value='Locație';" >
+								<input class="showthis" id="address-input" name="address"  >
 
 		                    <div class="clear"></div> 
-		                    <div id="index-send-button">
+		                    <button id="index-send-button" type="submit" name="trimite">
 								Trimite
-							</div>
+							</button>
 						</div>
 					</div>	
 				</form>
@@ -182,5 +195,7 @@ if(isset($_POST['name_button'])){
 	<script src="js/miscs.js"></script>
 	<script src="js/fill-page.js"></script>
 	<script src="js/modals.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
+	<script src="js/register-address.js"></script>
 </body>
 </html>

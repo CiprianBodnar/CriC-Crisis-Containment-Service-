@@ -1,3 +1,4 @@
+
 $('.modal-close').on('click', function(){
 	$('.modal').removeClass('visible');
 	$('.cover').fadeOut(200);
@@ -19,13 +20,13 @@ $('.cover').on("click", function(){
 })
 
  $(function(){
-    $('input[name="showthis"]').hide();
-    $('input[name="checkbox"]').on('click', function(){
+    $('input#address-input').hide();
+    $('input#checkbox').on('click', function(){
         if ($(this).prop('checked')){
-            $('input[name="showthis"]').fadeIn();
+            $('input#address-input').fadeIn();
             initAutocomplete();
         } else{
-            $('input[name="showthis"]').hide();
+            $('input#address-input').hide();
         }
     });
 });

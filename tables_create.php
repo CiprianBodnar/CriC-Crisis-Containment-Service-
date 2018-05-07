@@ -105,7 +105,8 @@ $dbname = "CricDB";
         /*..*/
         $sql = "CREATE TABLE Person_Finder (
             name VARCHAR(30) NOT NULL,
-            details VARCHAR(150)
+            details VARCHAR(150),
+            location DATE
             )";
          if ($conn->query($sql) == TRUE){
             echo "Done create Person_Finder <br>";

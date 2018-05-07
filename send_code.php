@@ -9,9 +9,9 @@ function generateRandomString($length = 25) {
     return $randomString;
 }
 
+$error = "";
 if(isset($_POST['submit']))
 {
-    $error = "";
     $key = generateRandomString();
     ini_set("SMTP","ssl://smtp.gmail.com");
     ini_set("smtp_port","465");
@@ -79,7 +79,7 @@ if(isset($_POST['submit']))
                                 <div class="clear"></div>
                                 <?php
                                     if($error != ""){
-                                        echo "<div class = 'error'>".$error.<"/div>";
+                                        echo "<div class = 'error'>".$error."<./";
                                     } 
                                 ?>
                             </form>

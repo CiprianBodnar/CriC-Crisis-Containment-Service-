@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/media.css">
+    <!-- captcha verification -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body id="map-page">
 	
@@ -125,7 +127,7 @@
     <div class="cover"></div>  
     <div class="modal" id="add-danger">  
         <div class="box-small white">
-            <form action="#" method="POST" id="add-danger-form">
+            <form method="post" id="add-danger-form">
                 <div class="row modal-title"> 
                     <h3>
                         Semnalează un pericol
@@ -136,43 +138,37 @@
                     <div class="clear"></div>
                 </div>
                 <div class="row">
-                    <?php if ($loggedIn===false) {?>
-                    <!-- user not logged in -->
-                    <p>Trebuie sa fiți autentificat pentru a putea semnala pericole. <a href="login.php">Conectați-vă.</a></p>
-                    <?php } else{ ?>
-                    <!-- user logged in -->
                     <div class="col12">
                         <p id="location-from-coord"></p>
                         <p>
                             Descrieți pe scurt:
                         </p>
-                        <textarea name="decription" id="desc"></textarea>
+                        <textarea name="decription" id="event-desc"></textarea>
                         <p>
                             Selectați tipul de pericol:
                         </p>
 
-                        <select name="danger-type" id="type">
+                        <select name="danger-type" id="event-type">
                             <option selected disabled hidden>Tipul de pericol</option>
                             <option value="fire"><i class="fas fa-fire"></i> Incendiu</option>
                             <option value="flood"><i class="fas fa-tint"></i> Inundație</option>
                             <option value="earthquake"><i class="fas-fa-globe"></i> Cutremur</option>
-                            <option value="snow"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
+                            <option value="snow_storm"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
                         </select>
                         <p>
                             Raza pericolului (m): 
                         </p>
-                        <input type="number" name="radius" value="500">
-
-                        <input type="text" value="" id="lat-input" name="lat" style = "display: none;">
+                        <input type="number" name="event-radius" id="event-radius" value="500">
+                        <input type="text" value="" id="lat-input" name="lat" style="display: none;">
                         <input type="text" value="" id="lng-input" name="lng" style="display: none;">
+                        
+                        <div class="g-recaptcha" data-sitekey="6LfQ2FcUAAAAAPhVJg7Na0RYI6ZDjovVc4aLM31g"></div>
 
                         <button type="submit" id="submit-button">
                             Trimite
                         </button>
                         <div class="clear"></div>
                     </div>
-                    <?php } ?>
-
                 </div>
             </form>
         </div>

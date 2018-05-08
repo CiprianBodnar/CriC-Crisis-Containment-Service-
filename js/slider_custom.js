@@ -3,15 +3,18 @@ var DEFAULT_MIN = 0;
 var DEFAULT_MAX = 120;
 var START_MIN = 75;
 var START_MAX = 120;
-var maxDate = new Date();
+var currentDate = new Date();
+var maxDate = new Date(currentDate.getFullYear(), (currentDate.getMonth()+1)%12, 1);
+maxDate = new Date(maxDate -1 );
 var constDate = [(maxDate.getFullYear()-120/12),(maxDate.getMonth()-120%12)];
 var minDate = new Date(constDate[0],constDate[1]+START_MIN);	
 
 function convert  (min, max) {
 	minDate.setFullYear(constDate[0]+min/12);
 	minDate.setMonth(constDate[1]+min%12);
- 	maxDate.setFullYear(constDate[0]+max/12);
- 	maxDate.setMonth(constDate[1]+max%12);
+
+  let aux = new Date(constDate[0]+max/12, constDate[1]+max%12+1, 1);
+  maxDate = new Date(aux-1);
 }
 function getVals(){
   	// Get slider values

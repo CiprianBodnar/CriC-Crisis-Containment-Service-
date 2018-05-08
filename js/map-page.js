@@ -56,6 +56,7 @@ function initDangerForm(latLng){
 	document.getElementById('lng-input').setAttribute('value', latLng.lng);
 	var addressP = document.getElementById('location-from-coord');
 	eventManager.codeLatLng(latLng, addressP);
+
 }
 
 function init(){
@@ -87,11 +88,52 @@ function init(){
     });
     initAutocomplete(map);
     eventManager = new EventManager(map, geocoder);
-    eventManager.loadEvents(new Date(), new Date());
+    let startDate = new Date();
+    startDate.setDate(1);
+    eventManager.loadEvents(startDate, new Date());
     eventManager.setCurrentLocation();
     for(let option of document.getElementsByClassName('filter-option')){
     	option.addEventListener('click', updateFilterOptions);
     }
+
+    document.getElementById('add-danger-form').addEventListener('submit', function(e){
+    	e.preventDefault();
+    	console.log('intra in submisie');
+    	let captchaResponse = grecaptcha.getResponse();
+    	if(!captchaResponse){
+    		alert("robotu dreq");
+    		return;
+    	}
+
+    	let args = {};
+    	args.desc = document.getElementById('event-desc').value;
+    	args.type = document.getElementById('event-type').value;
+    	args.radius = document.getElementById('event-radius').value;
+    	args.lat = document.getElementById('lat-input').value;
+    	args.lng = document.getElementById('lng-input').value;
+    	args.date = new Date();
+    	eventManager.createEvent(args);
+   
+    	/*
+    	verify captcha (not possible from localhost)
+    	grecaptchaVerify = new XMLHttpRequest();
+    	grecaptchaVerify.open('POST', 'https://www.google.com/recaptcha/api/siteverify', true);
+		grecaptchaVerify.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	grecaptchaVerify.send('secret=6LfQ2FcUAAAAAKWrgX0OQuXGH-9mMXvX4uwski3f&response='+captchaResponse);
+    	grecaptchaVerify.onreadystatechange=function(){
+    		if (this.readyState == 4 && this.status == 200) {
+	    		console.log(grecaptchaVerify);
+		    	let args = {};
+		    	args.desc = document.getElementById('event-desc').value;
+		    	args.type = document.getElementById('event-type').value;
+		    	args.radius = document.getElementById('event-radius').value;
+		    	args.lat = document.getElementById('lat-input').value;
+		    	args.lng = document.getElementById('lng-input').value;
+		    	args.date = new Date();
+		    	eventManager.createEvent(args);
+		    }
+    	}*/
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', init);

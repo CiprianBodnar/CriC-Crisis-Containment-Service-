@@ -153,7 +153,7 @@
                             <option value="fire"><i class="fas fa-fire"></i> Incendiu</option>
                             <option value="flood"><i class="fas fa-tint"></i> Inundație</option>
                             <option value="earthquake"><i class="fas-fa-globe"></i> Cutremur</option>
-                            <option value="snow_storm"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
+                            <option value="snowstorm"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
                         </select>
                         <p>
                             Raza pericolului (m): 

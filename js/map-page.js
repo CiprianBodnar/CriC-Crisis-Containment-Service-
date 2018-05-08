@@ -113,7 +113,9 @@ function init(){
     	args.lng = document.getElementById('lng-input').value;
     	args.date = new Date();
     	eventManager.createEvent(args);
-   
+   		
+   		$('.modal').removeClass('visible');
+		$('.cover').fadeOut(200);
     	/*
     	verify captcha (not possible from localhost)
     	grecaptchaVerify = new XMLHttpRequest();

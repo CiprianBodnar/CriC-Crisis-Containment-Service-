@@ -154,10 +154,9 @@ class EventManager{
 					    event.marker = marker;
 					    event.circle = circle;
 					    google.maps.event.addDomListener(marker, 'click', function(){
-					    	console.log(eventDesc);
+					    	console.log(event.desc);
 					    });
 					   	obj.events.push(event);
-					   	console.log('adaug pe '+event.id);
 					}
 				}
 			}
@@ -247,7 +246,6 @@ class EventManager{
 			if(this.events[i].date < this.timeTable[0] || this.events[i].date > this.timeTable[1]){
 				this.events[i].marker.setMap(null);
 				this.events[i].circle.setMap(null);
-				console.log('sterg pe'+this.events[i].id);
 				this.events.splice(i, 1);
 			}
 		}
@@ -262,63 +260,25 @@ class EventManager{
 			this.promptMessage("Selectati tipul de pericol");
 			return;
 		}
-		//get maximum ID, so we can set maxId+1 to the next event
-		let sql = "select MAXIMUM(id) from "+this.fTable; 
-		let query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + encodeURIComponent(sql));
-		let obj = this;
-		query.send(function(response){
-			let maxId = response.getDataTable().getValue(0, 0)+1;
-			let formattedDate = args.date.getFullYear()+'-0'+(args.date.getMonth()+1)+'-0'+(args.date.getDate()+1);
-			let latLng = args.lat+'\n'+args.lng;
-			let insertSql = "insert into "+obj.fTable+" ('id', 'Location', 'Range', 'DangerType', 'DangerDesc', 'DangerDate') values('"+maxId+"', '"+latLng+"', '"+parseInt(args.radius)+"', '"+args.type+"', '"+args.desc+"', '"+formattedDate+"') ";
-			console.log(insertSql);
-			let req = new XMLHttpRequest();
-
-			req.open('POST', 'https://www.googleapis.com/fusiontables/v2/query', true);
-			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-			req.onreadystatechange = function(){
-
-				console.log('autentificare bla bla');
-			}
-
-			req.send('sql='+insertSql+'&key='+obj.fKey+'&client_id=460651768070-llhj7cvtlvu5c87hti65r5j70158hs4c.apps.googleusercontent.com&client_secret=GO92nD5vm4TLHSIdQSJWR4hB');
-
-			let markerStyle = obj.getMarkerStyle(args.type);
-			let marker = new google.maps.Marker({
-				map: obj.map,
-				position: {lat: parseFloat(args.lat), lng: parseFloat(args.lng)},
-				animation: google.maps.Animation.DROP,
-				icon: markerStyle.icon
-			});
-			google.maps.event.addDomListener(marker, 'click', function(){
-		    	console.log(args.desc);
-		    });
-			let circle = new google.maps.Circle({
-				id: maxId,
-		        strokeColor: markerStyle.color,
-		        strokeOpacity: 0.6,
-		        strokeWeight: 2,
-		        fillColor: markerStyle.color,
-		        fillOpacity: 0.5,
-		        map: obj.map,
-		        center: {lat: parseFloat(args.lat), lng: parseFloat(args.lng)},
-		        radius:  parseInt(args.radius),
-		        clickable: false
-
-			});
-			let event = {
-				id: maxId,
-				type: args.type,
-				marker: marker,
-				circle: circle,
-				radius: parseInt(args.radius),
-				desc: args.desc,
-				date: args.date
-			}
-			console.log('adaugat event');
-		});
 		
+		let latLng = args.lat+' '+args.lng;
+		let req = new XMLHttpRequest();
+
+		req.open('POST', 'add_event.php', true);
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+		let obj = this;
+		req.onreadystatechange = function(){
+			if(this.readyState===4 && this.status===200){
+				let resp = JSON.parse(this.responseText);
+				if(resp.id===-1){
+					obj.promptMessage("Unexpected error. Nu s-a putut realiza o treaba..");
+					return;
+				}
+				obj.loadEvents(obj.timeTable[0], obj.timeTable[1]);
+			}
+		}
+		req.send('location='+latLng+'&range='+args.radius+'&type='+args.type+'&desc='+args.desc);
 	}
 
 	promptMessage(message){

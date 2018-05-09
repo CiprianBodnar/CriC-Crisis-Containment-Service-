@@ -10,14 +10,14 @@
     $first_name = "";
     $email = "";
     $subject = "";
-    $mesaj = "";
+    $message = "";
 
     if(isset($_POST['submit'])){
         $last_name = $_POST['nume'];
         $first_name = $_POST['prenume'];
         $email = $_POST['email'];
         $subject = $_POST['subject'];
-        $mesaj = $_POST['mesaj'];
+        $message= $_POST['mesaj'];
 
         if(!(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email)) || $email === "your.email@yoursite.com"){
             $email_error = "Eroare email!";
@@ -27,7 +27,7 @@
             $subject_error = "Eroare subiect!";
         }
 
-        if(!(strlen($mesaj)) || $mesaj === "Mesaj") {
+        if($message === 'Mesaj' || strlen($message) == 0) {
             $message_error = "Eroare mesaj!";
         }
 
@@ -43,12 +43,12 @@
         if($last_name_error === "" && $first_name_error === "" && $email_error === "" && $subject_error === "" && $message_error === "") {
             $to = "fiicriciasi@gmail.com";
             $header = "From: fiicriciasi@gmail.com";
-            $message = "Nume: ".$last_name;
-            $message .= "\nPrenume: ".$first_name;
-            $message .= "\nE-Mail: ".$email;
-            $message .= "\n".$mesaj;
+            $mail_body = "Nume: ".$last_name;
+            $mail_body .= "\nPrenume: ".$first_name;
+            $mail_body .= "\nE-Mail: ".$email;
+            $mail_body .= "\n".$message;
 
-            mail($to, $subject, $message, $header);
+            mail($to, $subject, $mail_body, $header);
         }
         else {
             $error = "Datele introduse în câmpurile marcate nu sunt valide!";
@@ -127,8 +127,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <textarea name="mesaj" value="<?php if($error) echo $message; else 
-                                        echo 'Mesaj'; ?>" <?php if($email_error) echo "class = 'error'"; ?>   onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
+                                <textarea name="mesaj" <?php if($message_error) echo "class = 'error'"; ?> onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" ><?php if($error) echo $message; else echo 'Mesaj'?></textarea>
                                 <button type="submit" id="submit-button" name = "submit">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>

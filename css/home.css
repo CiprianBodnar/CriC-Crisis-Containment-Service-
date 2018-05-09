@@ -235,6 +235,9 @@ textarea {
     line-height: 1;
     margin: 5px 0px;
     border: 1px solid #f4511E;
+    max-width: calc(100%);
+    min-height: 100px;
+    min-width: calc(100% - 110px);
     outline: none;
     -webkit-transition: All .2s ease;
     -o-transition: All .2s ease;

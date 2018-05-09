@@ -66,9 +66,6 @@ if(isset($_POST['submit'])) {
         $verify_password_error = 'Parola incorecta!';
     }
 
-    print_r($password_error);
-    print_r($verify_password_error);
-
     if($address == '') {
         $address_error = 'Introduceti adresa!';
     }

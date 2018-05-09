@@ -19,8 +19,8 @@ if(isset($_POST['submit'])){
     $password = hash("sha256", $_POST['parola_noua']);
     $verify_password = hash("sha256", $_POST['verificare_parola_noua']);
 
-    if(strlen($_POST['parola_noua']) >= 6){
-        if($password == $verify_password){
+    if(strlen($_POST['parola_noua']) >= 6 ){
+        if($password === $verify_password){
             $sql = "UPDATE Users SET password='".$password."' WHERE email='".$email."'";
             if(!$conn->query($sql)){
                 echo "Eroare: ". $conn->error;
@@ -33,9 +33,11 @@ if(isset($_POST['submit'])){
 
             header("Location: login.php");
         }
+        else
+            $error = "Parolele nu corespund!";
     }
     else 
-        $error = "Parola trebuie sa contine minim 6 caractere!";
+        $error = "Parola trebuie să conțină minim 6 caractere!";
     $conn->close();    
 }
  
@@ -68,13 +70,13 @@ if(isset($_POST['submit'])){
                                 <div class="par">
                                     Parola noua
                                 </div>
-                                <input type="password" class="pwd" name="parola_noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
+                                <input type="password" class="pwd" name="parola_noua">
                             </div>
                             <div class="row">
                                 <div class="par">
                                     Verificare parola noua
                                 </div>
-                                <input type="password" class="pwd" name="verificare_parola_noua" value="Parola noua" onfocus="if(this.value=='Parola noua') this.value='';" onblur="if(this.value=='') this.value='Parola noua';">
+                                <input type="password" class="pwd" name="verificare_parola_noua">
                             </div>
 
                             <button type="submit" name="submit" id="submit-button">

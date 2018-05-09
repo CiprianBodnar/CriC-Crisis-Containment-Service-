@@ -1,4 +1,5 @@
 <?php
+include_once ("dbConnect.php");
 function generateRandomString($length = 25) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -28,14 +29,14 @@ if(isset($_POST['submit']))
 
         $to = htmlspecialchars($to, ENT_QUOTES);
         $key = htmlspecialchars($key, ENT_QUOTES);
-        include_once ("dbConnect.php");
+
         $sql = "INSERT INTO Reset_Pwd (email, ekey) VALUES ('".$to."','".$key."');";
         if(!$conn->query($sql) == TRUE){
             echo "Error: " . $conn->error;
         }
     }
     else
-        $error = "Introduceti o adresa de email valida";
+        $error = "Introduceți o adresă de email validă!";
 
     $conn->close();
 }
@@ -70,7 +71,7 @@ if(isset($_POST['submit']))
                                     <div class="par">
                                         Adresa de e-mail
                                     </div>
-                                    <input type="text" name="email" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                    <input type="text" name="email">
                                 
                                 <button type="submit" id="submit-button" name="submit">
                                     Trimitere
@@ -79,7 +80,7 @@ if(isset($_POST['submit']))
                                 <div class="clear"></div>
                                 <?php
                                     if($error != ""){
-                                        echo "<div class = 'error'>".$error."<./";
+                                        echo "<div class = 'error'>".$error."</div>";
                                     } 
                                 ?>
                             </form>

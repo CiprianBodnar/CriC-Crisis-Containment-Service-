@@ -15,7 +15,7 @@ if(isset($_POST['conectare'])){
     if ($result = $conn ->query($sql)){
         $row = $result->fetch_row();
         if($row === NULL)
-            $error = "Email sau parola gresita";
+            $error = "Email sau parolă greșită!";
         else{
             $firstname = $row[1];
             $lastname = $row[2];
@@ -73,20 +73,23 @@ if(isset($_POST['conectare'])){
                     <div class="row2">
                         <form class="login-form" action="#" method="POST">
                             <div class="row21">
-                                <input type="text" name="email" value="<?php  if(isset($_SESSION['email'])) echo $_SESSION['email']; else echo "your.email@yoursite.com"; ?>" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                <input type="text" name="email" value="<?php  if(isset($_SESSION['email'])) echo $_SESSION['email']; else echo "your.email@yoursite.com"; ?>" 
+                                onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                             </div>
                             <div class="row21">
-                                <input type="password" name="parola" value="parola" onfocus="if(this.value=='parola') this.value='';" onblur="if(this.value=='') this.value='parola';">
+                                <input type="password" name="parola">
                                 <button type="submit" id="conecteaza" name="conectare">Conectează-te</button>
                                 <div class="clear"></div>
                             </div>
+                            <?php
+                                if($error != "") {
+                                    echo "<div class = 'error'>". $error . "</div>";
+                                 }
+                          ?>
                         </form>
                     </div>
-                    <?php
-                    if($error != ""){
-                        echo "<div class='error'>". $error ."  </div>";
-                    }
-                    ?>
+
+                    
                     <div class="row3">
 
                         <p class="information">

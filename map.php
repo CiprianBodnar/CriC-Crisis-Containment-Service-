@@ -175,8 +175,6 @@
     </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
-
-    <script src="http://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
     <script src="js/event-manager.js"></script>
     <script src="js/map-page.js"></script>

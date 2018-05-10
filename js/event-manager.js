@@ -8,17 +8,6 @@ class EventManager{
 		this.timeTable = [];
 	}
 
-	getDateFormat(date){
-		let days = date.getDate();
-		let month = date.getMonth()+1;
-		let year = date.getFullYear();
-		if(days<10)
-			days = '0' + days;
-		if(month<10)
-			month = '0'+ month;
-		return year+'-'+month+'-'+days;
-	}
-
 	codeLatLng(latLng, output) {
 		var latlng = new google.maps.LatLng(latLng.lat, latLng.lng);
 		var address=[];
@@ -106,8 +95,6 @@ class EventManager{
 		this.timeTable = [];
 		this.timeTable.push(lowerBound);
 		this.timeTable.push(upperBound);
-		let beginDate = this.getDateFormat(lowerBound);
-		let endDate = this.getDateFormat(upperBound);
 
 		let request = new XMLHttpRequest();
 		request.open('POST', 'query_events.php', true);
@@ -163,82 +150,6 @@ class EventManager{
 		})(request, this);
 		let postBody = 'begin='+encodeURIComponent(this.encodeJsDate(lowerBound))+'&end='+encodeURIComponent(this.encodeJsDate(upperBound));
 		request.send(postBody);
-
-
-
-		// let sql = "select * from "+this.fTable+" where 'DangerDate' >= '"+beginDate+"' and 'DangerDate' <= '"+endDate+"'"; 
-		// let query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' 
-		// 						+ encodeURIComponent(sql));
-		// //this.queryEvents(query, this);
-		// let obj = this;
-		// query.send(function(response){
-
-		// 	obj.clearEvents();
-		// 	let rows = response.getDataTable().getNumberOfRows();
-		// 	let cols = response.getDataTable().getNumberOfColumns();
-		// 	for (let i = 0; i < rows; i++) {
-		// 		let row = [];
-		// 		for (let j = 0; j < cols; j++) {
-		// 			row.push(response.getDataTable().getValue(i, j));
-		// 		}
-		// 		obj.processData(row, args);
-		// 	}
-		// });
-	}
-
-	processData(row, args){
-		let id = row[0];
-	    for (let other of this.events){
-	    	if (id === other.id){
-	    		return;
-	    	}
-	    }
-		//process ID of danger
-		let latLng = row[1].split(" ");
-		latLng = {lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1])};
-		let eventRadius = row[2];
-		let eventType = row[3];
-		let eventDesc = row[4];
-		let eventDate = row[5];
-		let markerStyle=this.getMarkerStyle(eventType);
-		let icon = markerStyle.icon;
-
-		let animation = google.maps.Animation.DROP;
-
-		if(args && 'animation' in args){
-			animation = args.animation;
-		}
-		let marker = new google.maps.Marker({
-		  map: this.map, 
-		  position: latLng,
-		  animation: animation,
-		  icon: icon
-		});
-		let circle = new google.maps.Circle({
-			id: id,
-	        strokeColor: markerStyle.color,
-	        strokeOpacity: 0.6,
-	        strokeWeight: 2,
-	        fillColor: markerStyle.color,
-	        fillOpacity: 0.5,
-	        map: this.map,
-	        center: latLng,
-	        radius:  eventRadius,
-	        clickable: false
-	    });
-	   	let event = {
-	   		id: id,
-	   		type: eventType,
-	   		marker: marker, 
-	   		circle: circle, 
-	   		radius: eventRadius, 
-	   		date: eventDate,
-	   		desc: eventDesc
-	   	};
-	    google.maps.event.addDomListener(marker, 'click', function(){
-	    	console.log(eventDesc);
-	    });
-	   	this.events.push(event);
 	}
 
 	clearEvents(){

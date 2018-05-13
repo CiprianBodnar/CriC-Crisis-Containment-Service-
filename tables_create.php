@@ -130,9 +130,11 @@ $dbname = "CricDB";
         }
         /*..*/
         $sql = "CREATE TABLE Person_Finder (
+            id INT(3) NOT NULL PRIMARY KEY auto_increment,
             name VARCHAR(30) NOT NULL,
             details VARCHAR(150),
-            location DATE
+            address VARCHAR(80),
+            conn_date DATE
             )";
          if ($conn->query($sql) == TRUE){
             echo "Done create Person_Finder <br>";
@@ -166,10 +168,7 @@ $dbname = "CricDB";
         //     echo "Error: " . $conn->error."<br>";
         // }
 
-         $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('Jhon','Doe','john_doe@myemail.com','D74FF0EE8DA3B9806B18C877DBF29BBDE50B5BD8E4DAD7A3A725000FEB82E8F1','Iasi, Romania',sysdate())";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
+        
         $sql = "INSERT INTO events (id_user, location, event_range, type, description, event_date) values(1, '46.05178614016413 23.53747432532782',50000,'flood', 'Description 1', STR_TO_DATE('1-01-2012', '%d-%m-%Y'))";
         if (!$conn->query($sql) ){
             echo "Error: " . $conn->error."<br>";
@@ -191,10 +190,7 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error."<br>";
         }
 
-        $sql = "INSERT INTO Person_Finder (name, details) VALUES ('Alabama HotPocket','E prajit baiatu');";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
+       
 
     
     $conn->close();

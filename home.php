@@ -1,7 +1,7 @@
 <?php
  include_once("dbConnect.php");
  $error = "";
-if(isset($_POST['name_button'])){
+if(isset($_POST['cauta'])){
 	$name = $_POST['Nume'];
 	$name = htmlspecialchars($name,ENT_QUOTES);
 
@@ -24,14 +24,23 @@ if(isset($_POST['name_button'])){
 		header("Location: map.php");
 	}
 }
-if(isset($_POST['trimite'])){
+if(isset($_POST['ofera'])){
 	$name = $_POST['Nume2'];
 	$info = $_POST['Mesaj'];
 	$address = null;
 	if(isset($_POST['checkbox']))
 		$address = $_POST['address'];
 
-	
+	$name = htmlspecialchars($name,ENT_QUOTES);
+	$info = htmlspecialchars($info , ENT_QUOTES);
+	$address = str_replace(array("ș","ă","ț","Ș","Ț","Ă","Â","â"),array("s","a","t","s","t","a","a","a"),$address);
+	$address = htmlspecialchars($address,ENT_QUOTES);
+
+
+	$sql = "INSERT INTO Person_Finder (name, details, address, conn_date)  VALUES ('".$name."', '".$info."', '".$address."' , sysdate());";  
+	if(!$conn->query($sql)){
+		echo "Eroare" . $conn->error;
+	}
 }
 ?>
 
@@ -128,7 +137,7 @@ if(isset($_POST['trimite'])){
 								Introduceți numele
 							</p>
 							<input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';"> 
-							<button type="submit" id="submit-button" name="name_button">
+							<button type="submit" id="submit-button" name="cauta">
 	                            <i class="fas fa-search"></i>
 	                        </button>
 	                        <div class="clear"></div>
@@ -180,7 +189,7 @@ if(isset($_POST['trimite'])){
 								<input class="showthis" id="address-input" name="address"  >
 
 		                    <div class="clear"></div> 
-		                    <button id="index-send-button" type="submit" name="trimite">
+		                    <button id="index-send-button" type="submit" name="ofera">
 								Trimite
 							</button>
 						</div>

@@ -28,7 +28,7 @@ class EventManager{
 				} 
 			});
 	}
-	
+
 	filter(options){
 		for(let event of this.events){
 			if(options.hideAll){
@@ -80,7 +80,6 @@ class EventManager{
 			});
 		}
 	}
-
 
 	encodeJsDate(date){
 		let days = date.getDate();
@@ -235,14 +234,15 @@ class EventManager{
 			votes:{
 				up: document.getElementById('upvotes'),
 				down: document.getElementById('downvotes')
-			}
+			},
+			comments: document.getElementById('comments-container')
 		}
-		if(!event.hasOwnProperty('feedback')){
-			this.loadEventFeedback(event);
-		}
+
 		modal.cover.style.display='block';
 		modal.body.classList.add('visible');
 		
+		this.loadEventFeedback(event);		
+
 		let eventTitle = this.getEventTitle(event.type);
 		modal.title.innerHTML = eventTitle;
 		let eventRange = this.getFormattedRange(event.range);
@@ -251,7 +251,38 @@ class EventManager{
 		modal.description.innerHTML = event.desc;
 		modal.votes.up.innerHTML = event.feedback.votes.up;
 		modal.votes.down.innerHTML = event.feedback.votes.down;
+		modal.comments.innerHTML = "";
+		if(event.feedback.comments.length === 0)
+			modal.comments.innerHTML = "Nu există comentarii.";
+		for (let comment of event.feedback.comments){
+			console.log(comment);
+			let commentContainer = document.createElement('div');
+			commentContainer.classList.add('row');
+			commentContainer.classList.add('comment');
+			modal.comments.appendChild(commentContainer);
+			
+			var commentBody = 
+			"<div class='col1'>"+
+				"<div class='av-container'>"+comment.user.lastname[0]+comment.user.firstname[0]+"</div>"+
+			"</div>"+
+			"<div class='col11 right-side'>"+
+				"<span class='user-name'>"+comment.user.firstname+' '+comment.user.lastname+"</span>"+
+				"<p class='comment-content'>"+comment.content+"</p>"+
+				"<p class='comment-date'>"+comment.date+"</p>"+
+			"</div><div class='clear'></div>";
+			commentContainer.innerHTML=commentBody;
+			if(comment.removeable===true){
+				let removeButton = document.createElement('button');
+				removeButton.classList.add('remove-comment');
+				removeButton.innerHTML = "<i class='fas fa-times'></i>";
+				commentContainer.appendChild(removeButton);
+				let obj = this;
+				removeButton.addEventListener('click', function(){
+					obj.removeComment(comment);
+				});
+			}
 
+		}
 
 	}
 

@@ -29,7 +29,7 @@
                 <p class="event-content" id="event-range"><!-- Event range goes here --></p>
             </div>
             <div class="col6">
-                <div class="row">
+                <div class="row feedback-votes">
                      <!-- if user is logged in display upvote/downvote buttons -->
                     <?php if($loggedIn === true){ ?>
                     <button class="up-col" id="upvote-event" onclick="upvote()">
@@ -40,20 +40,35 @@
                         <i class="fas fa-arrow-down"></i>
                         <span id="downvotes"><!-- numer of negative votes goes here --></span>
                     </button>
+                    <div class="clear"></div>
                     <?php }
                     else{ ?>
                     <!-- if user is not logged in display only the number of positive/negative votes -->
-                    <span class="up-col" id="upvotes"></span>
-                    <span class="down-col" id="downvotes"></span>
+                    <div class="up-col" id="upvote-event">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="upvotes"><!-- number of positive votes goes here --></span>
+                    </div>
+                    <div class="down-col" id="downvote-event">
+                        <i class="fas fa-arrow-down"></i>
+                        <span id="downvotes"><!-- numer of negative votes goes here --></span>
+                    </div>
+                    <div class="clear"></div>
                     <?php } ?>
                 </div>
-                <div class="row">
-                    <div class="fb-bar">
+                <div class="row fb-bar-container">
+                    <div class="col12 fb-bar">
                         <div class="up-bar"></div>
                         <div class="down-bar"></div>
+                        <div class="clear"></div>
                     </div>
                 </div>
-
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+            <p class="subtitle">Comentarii</p>
+            <div id="comments-container" class="col12">
+                <!-- comments go here -->
             </div>
         </div>
     </div>

@@ -4,19 +4,6 @@
     padding-bottom: 30px;
 }
 
-.col4{
-    width: 33%;
-    float: left;
-    padding: 30px
-    
-
-}
-.col8{
-    width: 67%;
-    float: left;
-    padding: 30px;
-}
-
 .subtitle{
     color: white;
     font-size: 22px;
@@ -48,15 +35,6 @@
 
 }
 
-.col6{
-    float: left;
-    width: 50%;
-}
-
-.col12{
-    width: 100%;
-    padding: 20px;
-}
 .contact-form input[type=text] {
     width: calc(100% - 10px);
     padding: 0 20px;

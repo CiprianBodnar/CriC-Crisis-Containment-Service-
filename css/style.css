@@ -17,6 +17,52 @@ header{
 	line-height: 140px;
 }
 
+.col1{
+	float: left;
+	width: 10%;
+}
+.col11{
+	float: left;
+	width: 90%;
+}
+.col2{
+	float: left;
+	width: 16%;
+}
+.col4{
+    width: 33%;
+    float: left;
+    padding: 30px
+}
+.col10{
+	float: left;
+	width: 84%;
+}
+.col8{
+    width: 67%;
+    float: left;
+    padding: 30px;
+}
+
+.col3{
+	float: left;
+	width: 25%;
+}
+.col9{
+	float: left;
+	width: 75%;
+}
+.col6{
+    float: left;
+    width: 50%;
+}
+
+.col12{
+    width: 100%;
+    padding: 20px;
+}
+
+
 .logo img{
 	vertical-align: middle;
 }

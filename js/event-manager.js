@@ -90,6 +90,36 @@ class EventManager{
 		return "str_to_date('"+days+"-"+month+"-"+year+"', '%d-%m-%Y')";
 	}
 
+
+	setRoute(event){
+		if(navigator.geolocation){
+			let mp = this.map;
+			navigator.geolocation.getCurrentPosition(function(position){
+				var directionsService = new google.maps.DirectionsService();
+				var directionsDisplay = new google.maps.DirectionsRenderer({
+					map : mp,
+					options : {
+						suppressMarkers : true
+					}
+				});
+
+				let start = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				let end = new google.maps.LatLng(event.location.lat, event.location.lng);
+
+				directionsService.route({
+					origin: start,
+					destination: end,
+					travelMode: 'DRIVING',
+				}, function(response, status){
+					if(status === 'OK'){
+						directionsDisplay.setDirections(response);
+					}
+				});
+			});
+		}
+	}
+
+
 	loadEvents(lowerBound, upperBound, args){
 		//lowerBound & upperBound are dates
 		this.timeTable = [];
@@ -142,6 +172,7 @@ class EventManager{
 					    event.circle = circle;
 					    google.maps.event.addDomListener(marker, 'click', function(){
 					    	obj.describeEvent(event);
+					    	obj.setRoute(event);
 					    });
 					   	obj.events.push(event);
 					}

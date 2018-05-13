@@ -59,6 +59,7 @@ function initDangerForm(latLng){
 }
 
 function init(){
+
 	var geocoder = new google.maps.Geocoder();
     var mapContainer = document.getElementById("map-container");
     var mapOptions = {
@@ -135,6 +136,7 @@ function init(){
 		    }
     	}*/
     });
+    
 }
 
 google.maps.event.addDomListener(window, 'load', init);

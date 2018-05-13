@@ -141,7 +141,7 @@ class EventManager{
 					    event.marker = marker;
 					    event.circle = circle;
 					    google.maps.event.addDomListener(marker, 'click', function(){
-					    	console.log(event.desc);
+					    	obj.describeEvent(event);
 					    });
 					   	obj.events.push(event);
 					}
@@ -192,6 +192,50 @@ class EventManager{
 		req.send('location='+latLng+'&range='+args.radius+'&type='+args.type+'&desc='+args.desc);
 	}
 
+	describeEvent(event){ 
+		let modal = {
+			cover: document.getElementsByClassName('cover')[0],
+			body: document.getElementById('view-event'),
+			title: document.getElementById('event-title'),
+			range: document.getElementById('event-range'),
+			description: document.getElementById('event-description'),
+			location: document.getElementById('event-location'),
+			votes:{
+				up: document.getElementById('upvotes'),
+				down: document.getElementById('downvotes')
+			}
+		}
+		if(!event.hasOwnProperty('feedback')){
+			this.loadEventFeedback(event);
+		}
+		modal.cover.style.display='block';
+		modal.body.classList.add('visible');
+		
+		let eventTitle = this.getEventTitle(event.type);
+		modal.title.innerHTML = eventTitle;
+		let eventRange = this.getFormattedRange(event.range);
+		modal.range.innerHTML = eventRange;
+		this.codeLatLng(event.location, modal.location);
+		modal.description.innerHTML = event.desc;
+		modal.votes.up.innerHTML = event.feedback.votes.up;
+		modal.votes.down.innerHTML = event.feedback.votes.down;
+
+
+	}
+
+
+	loadEventFeedback(event){
+		let request = new XMLHttpRequest();
+		request.open("POST", "query_event_feedback.php", false);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+		request.send('event_id='+event.id);
+		if(request.readyState===4 && request.status===200){
+			let feedback = JSON.parse(request.responseText);
+			event.feedback = feedback;
+		}
+	}
+
 	promptMessage(message){
 		//print a message to the screen(pop-up);
 		console.log(message);
@@ -212,5 +256,36 @@ class EventManager{
 			default:
 				return null;
 		}
+	}
+
+	getEventTitle(eventType){
+		switch(eventType){
+			case 'person':
+				return 'Persoana în pericol';
+				break;
+			case 'fire':
+				return 'Incendiu';
+				break;
+			case 'flood':
+				return 'Inundație';
+				break;
+			case 'snowstorm':
+				return 'Furtună de zăpadă';
+				break;
+			case 'earthquake':
+				return 'Cutremur';
+				break;
+			default:
+				return 'Eveniment';
+		}
+	}
+
+
+
+	getFormattedRange(range){
+		if(range<1000)
+			return range+' m';
+		else
+			return parseFloat(range/1000).toFixed(1)+' km';
 	}
 }

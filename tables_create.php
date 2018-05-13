@@ -71,6 +71,13 @@ $dbname = "CricDB";
         }else{
             echo "Error: " . $conn->error."<br>";
         }
+
+        $sql = "DROP TABLE comments;";
+        if ($conn->query($sql) == TRUE){
+            echo "Done drop comments<br>";
+        }else{
+            echo "Error: " . $conn->error."<br>";
+        }
         //..
         $sql = "CREATE TABLE Users (
             id_user INT(6)  AUTO_INCREMENT PRIMARY KEY,
@@ -130,7 +137,7 @@ $dbname = "CricDB";
         }
         /*..*/
         $sql = "CREATE TABLE Person_Finder (
-            id INT(3) NOT NULL PRIMARY KEY auto_increment,
+            id INT(6) NOT NULL PRIMARY KEY auto_increment,
             name VARCHAR(30) NOT NULL,
             details VARCHAR(150),
             address VARCHAR(80),
@@ -138,6 +145,19 @@ $dbname = "CricDB";
             )";
          if ($conn->query($sql) == TRUE){
             echo "Done create Person_Finder <br>";
+        }else{
+            echo "Error: " . $conn->error."<br>";
+        }
+
+        $sql = "CREATE TABLE comments (
+            id INT(6) NOT NULL PRIMARY KEY auto_increment,
+            user_id int(6) not null,
+            event_id int(6) not null,
+            content text not null,
+            post_date DATE not null
+            )";
+         if ($conn->query($sql) == TRUE){
+            echo "Done create comments <br>";
         }else{
             echo "Error: " . $conn->error."<br>";
         }

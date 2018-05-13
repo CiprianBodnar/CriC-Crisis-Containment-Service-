@@ -28,7 +28,7 @@ class EventManager{
 				} 
 			});
 	}
-
+	
 	filter(options){
 		for(let event of this.events){
 			if(options.hideAll){
@@ -80,6 +80,7 @@ class EventManager{
 			});
 		}
 	}
+
 
 	encodeJsDate(date){
 		let days = date.getDate();

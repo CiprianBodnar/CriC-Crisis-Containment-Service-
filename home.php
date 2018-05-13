@@ -4,7 +4,7 @@
 if(isset($_POST['cauta'])){
 	$name = $_POST['Nume'];
 	$name = htmlspecialchars($name,ENT_QUOTES);
-
+	
 	$sql = "SELECT * FROM Person_Finder  WHERE name='".$name."';";
 	echo $sql;
 	if ($result = $conn ->query($sql)){
@@ -35,8 +35,8 @@ if(isset($_POST['ofera'])){
 	$info = htmlspecialchars($info , ENT_QUOTES);
 	$address = str_replace(array("ș","ă","ț","Ș","Ț","Ă","Â","â"),array("s","a","t","s","t","a","a","a"),$address);
 	$address = htmlspecialchars($address,ENT_QUOTES);
-
-
+	
+	
 	$sql = "INSERT INTO Person_Finder (name, details, address, conn_date)  VALUES ('".$name."', '".$info."', '".$address."' , sysdate());";  
 	if(!$conn->query($sql)){
 		echo "Eroare" . $conn->error;
@@ -88,14 +88,14 @@ if(isset($_POST['ofera'])){
 						 	</div>
 					 	</div>
 					 	<div class="button-wrapper">
-					 		<a href="map.php" class="button">
+					 		<div  class="button" id="in-danger"> 
 					 			<i class="fas fa-exclamation-triangle"></i>
 						 		<div class="dropdown-content">
 									<span class="arrow-icon">
 						 			</span>
 		    						<p>Sunt în pericol</p>
 						 		</div>
-							 </a>
+							 </div>
 					 	</div>
 					 	<div class="clear"></div>
 					</div>
@@ -206,5 +206,7 @@ if(isset($_POST['ofera'])){
 	<script src="js/modals.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
 	<script src="js/register-address.js"></script>
+	<script src="js/event-manager.js"></script>
+	<script src="js/in-danger.js"></script>
 </body>
 </html>

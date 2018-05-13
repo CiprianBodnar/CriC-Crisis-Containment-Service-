@@ -7,10 +7,12 @@ include_once ("dbConnect.php");
     $verify_email_address_error = "";
     $password_error = "";
     $verify_password_error = "";
+    $verify_password_error_same_email = "";
     $address_error = "";
     $different_email_address = "";
 
 $error = "";
+$error_same_user = "";
 if(isset($_POST['submit'])) {
 
     $first_name = $_POST['prenume'];
@@ -86,7 +88,7 @@ if(isset($_POST['submit'])) {
             if($row === NULL) {
                 $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('".$first_name."', '".$last_name."', '".$email_address."', '".$password."', '".$address."', sysdate());";  
 
-                if(!$conn->query($sql)){
+                if(!$conn->query($sql)) {
                     echo "Eroare" . $conn->error;
                 }
                 else {
@@ -94,6 +96,9 @@ if(isset($_POST['submit'])) {
                     $_SESSION["email"] = $email_address;
                     header("Location: login.php");
                 }
+            }
+            else {
+                $error_same_user = "Există deja un utilizator cu această adresa de e-mail!";
             }
     }
     else {
@@ -106,7 +111,6 @@ if(isset($_POST['submit'])) {
     $_SESSION["pre-email"] = $email_address;
     $_SESSION["pre-verify-email"] = $verify_email_address;
     $_SESSION["pre-address"] = $address;
-
 }
 
 if(isset($_SESSION['loggedIn'])){
@@ -171,7 +175,7 @@ if(isset($_SESSION['loggedIn'])){
                                         <div class="par">
                                             Verificare adresa de e-mail
                                         </div>
-                                        <input type="text" name="verifica_email" value="<?php if($error != '' && $email_address != $verify_email_address) echo $_SESSION['pre-verify-email']; else 
+                                        <input type="text" name="verifica_email" value="<?php if($error != '' || $email_address != $verify_email_address) echo $_SESSION['pre-verify-email']; else 
                                         echo 'your.email@yoursite.com'; ?>" <?php if($verify_email_address_error) echo "class = 'error'"; ?> onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                     </div>
 
@@ -180,14 +184,15 @@ if(isset($_SESSION['loggedIn'])){
                                         <div class="par">
                                             Parola
                                         </div>
-                                        <input type="password"  name="parola" class="pwd <?php if($password_error) echo  "password-error"; ?>">
+                                        <input type="password"  name="parola" class="pwd <?php if($password_error || $verify_password_error) echo  "password-error"; ?>">
 
                                     </div>
                                     <div class="col6 no-padding">
                                         <div class="par">
                                             Verificare parola
                                         </div>
-                                        <input type="password" name="verifica_parola" class = "pwd <?php if($verify_password_error != '' || $error != '') echo "password-error"; ?>" >
+                                        <input type="password" name="verifica_parola" class = "pwd <?php if($verify_password_error || 
+                                            $error) echo "password-error"; ?>" >
                                     </div>
                                     <div class="par">
                                         Adresa
@@ -203,6 +208,9 @@ if(isset($_SESSION['loggedIn'])){
                                     <?php
                                         if($error != "") {
                                             echo "<div class = 'error'>". $error . "</div>";
+                                        }
+                                        if($error_same_user != "") {
+                                            echo "<div class = 'error'>". $error_same_user . "</div>";
                                         }
                                     ?>
                                 </div>

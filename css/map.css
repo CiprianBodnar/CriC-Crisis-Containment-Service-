@@ -424,7 +424,14 @@ span.location-icon{
 	font-size: 18px;
 	margin-top: 0;
 }
-
+.modal .row p#toggle-route-container{
+	margin-top: 3px;
+	margin-left: 20px;
+}
+.modal .row p#toggle-route-container a#toggle-route{
+	color: #f4511E;
+	text-decoration: none;
+}
 .modal#view-event .feedback-votes{
 	padding-top: 20px;
 }

@@ -15,6 +15,7 @@
                     <i class="fas fa-map-marker"></i>
                 </span>
                 <p class="event-content" id="event-location"><!-- Event location goes here --></p>
+                <p id="toggle-route-container"><a href="#" id="toggle-route">[<span id="toggle-state"></span> ruta]</a></p>
             </div>
         </div>
         <div class="row">

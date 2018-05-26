@@ -6,9 +6,10 @@ class EventManager{
 		this.fTable = "1j2RBA86oA4o9sM6CA73766UpV4xI9l_g8i26XLjJ";
 		this.fKey = "AIzaSyCPPSKN76hoz7yARd-4yLxU4DhZJzKOoAc";
 		this.timeTable = [];
+		this.directionsService = new google.maps.DirectionsService();
 	}
 
-	codeLatLng(latLng, output) {
+	codeLatLng(latLng, output, callback) {
 		var latlng = new google.maps.LatLng(latLng.lat, latLng.lng);
 		var address=[];
 		this.geocoder.geocode({
@@ -23,6 +24,9 @@ class EventManager{
 							}
 							address = address.join(', ');
 							output.innerHTML = address;
+							if(callback){
+								callback();
+							}
 						}
 					}
 				} 
@@ -92,12 +96,11 @@ class EventManager{
 
 
 	setRoute(event){
-		if(navigator.geolocation){
-			let mp = this.map;
+		if(navigator.geolocation && !event.hasOwnProperty('route')){
+			let obj = this;
 			navigator.geolocation.getCurrentPosition(function(position){
-				var directionsService = new google.maps.DirectionsService();
-				var directionsDisplay = new google.maps.DirectionsRenderer({
-					map : mp,
+				let directionsDisplay = new google.maps.DirectionsRenderer({
+					map : null,
 					options : {
 						suppressMarkers : true
 					}
@@ -106,7 +109,7 @@ class EventManager{
 				let start = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 				let end = new google.maps.LatLng(event.location.lat, event.location.lng);
 
-				directionsService.route({
+				obj.directionsService.route({
 					origin: start,
 					destination: end,
 					travelMode: 'DRIVING',
@@ -115,6 +118,7 @@ class EventManager{
 						directionsDisplay.setDirections(response);
 					}
 				});
+				event.route=directionsDisplay;
 			});
 		}
 	}
@@ -172,7 +176,6 @@ class EventManager{
 					    event.circle = circle;
 					    google.maps.event.addDomListener(marker, 'click', function(){
 					    	obj.describeEvent(event);
-					    	obj.setRoute(event);
 					    });
 					   	obj.events.push(event);
 					}
@@ -229,6 +232,8 @@ class EventManager{
 			body: document.getElementById('view-event'),
 			title: document.getElementById('event-title'),
 			range: document.getElementById('event-range'),
+			route: document.getElementById('toggle-route'),
+			routeStatus: document.getElementById('toggle-state'),
 			description: document.getElementById('event-description'),
 			location: document.getElementById('event-location'),
 			votes:{
@@ -240,13 +245,46 @@ class EventManager{
 
 		modal.cover.style.display='block';
 		modal.body.classList.add('visible');
-		
-		this.loadEventFeedback(event);		
+		let obj = this;
+		this.loadEventFeedback(event, function(){
+			obj.prepareEventDisplay(event, modal);
+		});	
 
+	}
+
+
+	prepareEventDisplay(event, modal){
 		let eventTitle = this.getEventTitle(event.type);
 		modal.title.innerHTML = eventTitle;
 		let eventRange = this.getFormattedRange(event.range);
 		modal.range.innerHTML = eventRange;
+		if(!event.hasOwnProperty('route')){
+			modal.routeStatus.innerHTML = 'arată';
+		}
+		else if (event.route.getMap() === this.map){
+			modal.routeStatus.innerHTML = 'ascunde';
+		}
+		else{
+			modal.routeStatus.innerHTML = 'arată';
+		}
+		
+		let routeButtonClone = modal.route.cloneNode(true);
+		modal.route.parentNode.replaceChild(routeButtonClone, modal.route);
+		modal.route = document.getElementById('toggle-route');
+		modal.routeStatus = document.getElementById('toggle-state')
+		let obj = this;
+		modal.route.addEventListener('click', function(e){
+			e.preventDefault;
+			if(event.route.getMap() != null){
+				event.route.setMap(null);
+				modal.routeStatus.innerHTML = 'arată';
+			}
+			else{
+				event.route.setMap(obj.map);
+				modal.routeStatus.innerHTML = 'ascunde';
+			}
+		});
+
 		this.codeLatLng(event.location, modal.location);
 		modal.description.innerHTML = event.desc;
 		modal.votes.up.innerHTML = event.feedback.votes.up;
@@ -255,7 +293,6 @@ class EventManager{
 		if(event.feedback.comments.length === 0)
 			modal.comments.innerHTML = "Nu există comentarii.";
 		for (let comment of event.feedback.comments){
-			console.log(comment);
 			let commentContainer = document.createElement('div');
 			commentContainer.classList.add('row');
 			commentContainer.classList.add('comment');
@@ -284,19 +321,24 @@ class EventManager{
 
 		}
 
+		
 	}
 
-
-	loadEventFeedback(event){
+	loadEventFeedback(event, callback){
 		let request = new XMLHttpRequest();
-		request.open("POST", "query_event_feedback.php", false);
+		request.open("POST", "query_event_feedback.php", true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-		request.send('event_id='+event.id);
-		if(request.readyState===4 && request.status===200){
-			let feedback = JSON.parse(request.responseText);
-			event.feedback = feedback;
+		let obj = this;
+		request.onreadystatechange = function(){
+			if(request.readyState===4 && request.status===200){
+				let feedback = JSON.parse(request.responseText);
+				event.feedback = feedback;
+				obj.setRoute(event);
+				callback();
+			}	
 		}
+		request.send('event_id='+event.id);
+		
 	}
 
 	promptMessage(message){

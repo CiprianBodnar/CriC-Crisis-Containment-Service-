@@ -28,7 +28,7 @@
             $comment -> user -> lastname = $row['lastname'];
             $comment -> content = $row['content'];
             $comment -> removeable = false;
-            if($_SESSION['loggedIn'] === true){
+            if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true){
                 if($_SESSION['id_user'] == $row['user_id'])
                     $comment -> removeable = true;
             }

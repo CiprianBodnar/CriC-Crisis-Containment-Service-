@@ -53,8 +53,10 @@ function initDangerForm(latLng){
 		return;
 	document.getElementById('lat-input').setAttribute('value', latLng.lat);
 	document.getElementById('lng-input').setAttribute('value', latLng.lng);
-	var addressP = document.getElementById('location-from-coord');
+	let addressP = document.getElementById('location-from-coord');
 	eventManager.codeLatLng(latLng, addressP);
+
+	console.log(addr);
 
 }
 

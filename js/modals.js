@@ -14,6 +14,11 @@ $('#share-trigger').on('click', function(){
 	$('.cover').fadeIn(200);
 });
 
+$('#in-danger').on('click', function(){
+	$("#inDanger").addClass('visible');
+	$('.cover').fadeIn(200);
+});
+
 $('.cover').on("click", function(){
 	$('.modal').removeClass('visible');
 	$(this).fadeOut(200);

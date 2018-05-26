@@ -278,6 +278,7 @@ textarea:focus {
 	background: #1B1817;
 }
 
+
 .showthis {
     width: 100%;
     padding: 0 20px;
@@ -294,8 +295,15 @@ textarea:focus {
     font-size: 16px;
     background: #f4511E;
     float: left;
+    display: block;
 }
 
+.forceDisplay{
+    display: block !important;
+}
+.col12{
+    padding: 0;
+}
 .showthis:focus {
     color: #f4511E;
     background: #fff;

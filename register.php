@@ -10,6 +10,8 @@ include_once ("dbConnect.php");
     $verify_password_error_same_email = "";
     $address_error = "";
     $different_email_address = "";
+    $email_address = "";
+    $verify_email_address = "";
 
 $error = "";
 $error_same_user = "";
@@ -175,7 +177,7 @@ if(isset($_SESSION['loggedIn'])){
                                         <div class="par">
                                             Verificare adresa de e-mail
                                         </div>
-                                        <input type="text" name="verifica_email" value="<?php if($error != '' || $email_address != $verify_email_address) echo $_SESSION['pre-verify-email']; else 
+                                        <input type="text" name="verifica_email" value="<?php if($error != '' || $email_address != '') echo $_SESSION['pre-verify-email']; else 
                                         echo 'your.email@yoursite.com'; ?>" <?php if($verify_email_address_error) echo "class = 'error'"; ?> onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                     </div>
 

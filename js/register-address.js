@@ -35,6 +35,6 @@ autocompleteInDanger.addListener('place_changed', function() {
 	    addressInDanger = addressInDanger.join(', ');
 	}
 	inputInDanger.setAttribute("value",addressInDanger);
-	console.log(addressInDanger);
+	
 });
 

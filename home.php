@@ -46,7 +46,7 @@
 						 	</div>
 					 	</div>
 					 	<div class="button-wrapper">
-					 		<div  class="button"> 
+					 		<div id="in-danger"  class="button"> 
 					 			<i class="fas fa-exclamation-triangle"></i>
 						 		<div class="dropdown-content">
 									<span class="arrow-icon">
@@ -80,6 +80,7 @@
 	<?php include "modals/searchInfo.php" ?>
 	<?php include "modals/share-info.php" ?>
 
+
 	
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/miscs.js"></script>
@@ -90,5 +91,6 @@
 	<script src="js/event-manager.js"></script>
 	<script src="js/in-danger.js"></script>
 	<script src="js/address-value.js"></script>
+	<script src="js/users-autocomplete.js"></script>
 </body>
 </html>

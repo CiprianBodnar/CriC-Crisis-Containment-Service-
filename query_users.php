@@ -17,7 +17,7 @@
     
     $users = array();
     if($result = $conn->query($sql)){
-        if($row = $result->fetch_assoc()){
+        while($row = $result->fetch_assoc()){
             $user = new \stdClass();
             $user->name = $row['Name'];
             $user->id_user = $row['Id'];

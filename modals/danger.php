@@ -81,7 +81,7 @@
     <div class="modal" id="inDanger">
 		 <div class="container">
 			<div class="box-small white">
-				<form action="#" method="POST">
+				<form  method="POST">
 					<div class="row modal-title">
 						<h3>
 							Detalii despre situatia dvs.

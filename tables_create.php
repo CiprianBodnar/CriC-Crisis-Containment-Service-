@@ -138,7 +138,8 @@ $dbname = "CricDB";
         /*..*/
         $sql = "CREATE TABLE Person_Finder (
             id INT(6) NOT NULL PRIMARY KEY auto_increment,
-            name VARCHAR(30) NOT NULL,
+            id_user_in_danger NUMBER NOT NULL,
+            id_user_posting NUMBER NOT NULL,
             details VARCHAR(150),
             address VARCHAR(80),
             conn_date DATE

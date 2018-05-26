@@ -1,54 +1,5 @@
 <?php
  include_once("dbConnect.php");
- $error = "";
-if(isset($_POST['cauta'])){
-	$name = $_POST['Nume'];
-	$name = htmlspecialchars($name,ENT_QUOTES);
-	
-	$sql = "SELECT * FROM Person_Finder  WHERE name='".$name."';";
-	echo $sql;
-	if ($result = $conn ->query($sql)){
-		$row = $result->fetch_row();
-		
-		if($row === NULL){
-			$sql = "SELECT * FROM Users WHERE firstname||' '||lastname='".$name."';";
-			if ($result = $conn ->query($sql)){
-				$row = $result->fetch_row();
-				if($row === NULL)
-					$error = "Aceasta persoana nu exista în baza de date.";
-			}
-		else
-			header("Location: map.php");		
-		}
-	else
-		header("Location: map.php");
-	}
-}
-if(isset($_POST['ofera'])){
-	$name = $_POST['Nume2'];
-	$info = $_POST['Mesaj'];
-	$address = null;
-	if(isset($_POST['checkbox']))
-		$address = $_POST['address'];
-
-	$name = htmlspecialchars($name,ENT_QUOTES);
-	$info = htmlspecialchars($info , ENT_QUOTES);
-	$address = str_replace(array("ș","ă","ț","Ș","Ț","Ă","Â","â"),array("s","a","t","s","t","a","a","a"),$address);
-	$address = htmlspecialchars($address,ENT_QUOTES);
-	
-	
-	$sql = "INSERT INTO Person_Finder (name, details, address, conn_date)  VALUES ('".$name."', '".$info."', '".$address."' , sysdate());";  
-	if(!$conn->query($sql)){
-		echo "Eroare" . $conn->error;
-	}
-}
-
-if(isset($_POST['situatiaMea'])){
-	$message = $_POST['inDangerMessage'];
-	$address = $_POST["myAddress"];
-
-	
-}
 ?>
 
 
@@ -95,7 +46,7 @@ if(isset($_POST['situatiaMea'])){
 						 	</div>
 					 	</div>
 					 	<div class="button-wrapper">
-					 		<div  class="button" id="in-danger"> 
+					 		<div  class="button"> 
 					 			<i class="fas fa-exclamation-triangle"></i>
 						 		<div class="dropdown-content">
 									<span class="arrow-icon">
@@ -125,7 +76,9 @@ if(isset($_POST['situatiaMea'])){
 	<?php include "footer.php" ?>
 
 	<div class="cover"></div>  
-	<?php include "modals/popUp-inHome.php" ?>
+	<?php include "modals/danger.php" ?>
+	<?php include "modals/searchInfo.php" ?>
+	<?php include "modals/share-info.php" ?>
 
 	
 	<script src="js/jquery-3.2.1.min.js"></script>

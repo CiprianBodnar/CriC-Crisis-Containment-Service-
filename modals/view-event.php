@@ -1,7 +1,7 @@
 <div class="modal" id="view-event">  
     <div class="box-small white">
         <!-- hidden inputs -->
-        <input type="hidden" name="event-id">
+        <input type="hidden" id="event-id" name="event-id">
         <div class="row modal-title"> 
             <h3 id="event-title"><!-- event title goes here --></h3>
             <div class="modal-close"> 
@@ -67,10 +67,38 @@
             <div class="clear"></div>
         </div>
         <div class="row">
+            <div class="col12">
+                <p class="subtitle">Adăugat de</p>
+                <div id="poster-container">
+                    <!-- poster info goes here -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <p class="subtitle">Comentarii</p>
             <div id="comments-container" class="col12">
                 <!-- comments go here -->
             </div>
+            <?php if ($loggedIn === true){ ?>
+            <form id="add-comment" class="col12">
+                <div class="col1">
+                    <div id="user-av-container" class="av-container">
+                        <?php 
+                            $words = explode(" ", $_SESSION['name']);
+                            echo $words[0][0].$words[1][0];
+                         ?>
+                    </div>
+                </div>
+                <div class="col10 right-side">
+                    <textarea name="comment-content" id="comment-content"></textarea>
+                </div>
+                <div class="col1">
+                    <div id="add-comment-button"><i class="fas fa-paper-plane"></i></div>
+                </div>
+                <div class="clear"></div>
+            </form>
+            
+            <?php } ?>
         </div>
     </div>
 </div>

@@ -75,6 +75,7 @@ class EventManager{
 					map: mp,
 					position: center,
 					title: "You're here!",
+					clickable: false,
 					icon: markerIcon
 				});
 				setTimeout(function(){
@@ -198,11 +199,11 @@ class EventManager{
 
 	createEvent(args){
 		if(args.desc===""){
-			this.promptMessage("Introduceti o descriere pentru pericol.");
+			this.promptMessage("Introduceti o descriere pentru pericol.", "err");
 			return;
 		}
 		if(args.type==="Tipul de pericol"){
-			this.promptMessage("Selectati tipul de pericol");
+			this.promptMessage("Selectati tipul de pericol", "err");
 			return;
 		}
 		
@@ -217,18 +218,52 @@ class EventManager{
 			if(this.readyState===4 && this.status===200){
 				let resp = JSON.parse(this.responseText);
 				if(resp.id===-1){
-					obj.promptMessage("Unexpected error. Nu s-a putut realiza o treaba..");
+					obj.promptMessage("Unexpected error. Nu s-a putut realiza o treaba..", "err");
 					return;
 				}
 				obj.loadEvents(obj.timeTable[0], obj.timeTable[1]);
 			}
 		}
-		req.send('location='+latLng+'&range='+args.radius+'&type='+args.type+'&desc='+args.desc);
+		let desc = encodeURIComponent(args.desc);
+		req.send('location='+latLng+'&range='+args.radius+'&type='+args.type+'&desc='+desc);
+	}
+
+	createComment(args){
+		console.log(args);
+		if(args.content.length<=1){
+			this.promptMessage("Comentariu prea scurt.", "err");
+			return;
+		}
+		let obj = this;
+		let request = new XMLHttpRequest();
+		request.open("POST", "resources/add-comment.php", true);
+		request.onreadystatechange = function(){
+			if(this.readyState === 4 && this.status === 200){
+				let resp = JSON.parse(this.responseText);
+				if(resp.hasOwnProperty('error'))
+					obj.promptMessage(resp.error, "err");
+				else{
+					obj.promptMessage(resp.success, "succ");
+					console.log(obj.events);
+					for(let event of obj.events){
+						console.log('compar '+event.id+' cu '+args.eventId);
+						if(event.id === args.eventId){
+							console.log(event);
+							obj.describeEvent(event);
+						}
+					}
+				}
+			}
+		}
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		let content = encodeURIComponent(args.content);
+		request.send('event-id='+args.eventId+"&comment-content="+content);
 	}
 
 	describeEvent(event){ 
 		let modal = {
 			cover: document.getElementsByClassName('cover')[0],
+			id: document.getElementById('event-id'),
 			body: document.getElementById('view-event'),
 			title: document.getElementById('event-title'),
 			range: document.getElementById('event-range'),
@@ -239,6 +274,10 @@ class EventManager{
 			votes:{
 				up: document.getElementById('upvotes'),
 				down: document.getElementById('downvotes')
+			},
+			votebar:{
+				positive: document.getElementsByClassName('up-bar')[0],
+				negative: document.getElementsByClassName('down-bar')[0]
 			},
 			comments: document.getElementById('comments-container')
 		}
@@ -256,6 +295,7 @@ class EventManager{
 	prepareEventDisplay(event, modal){
 		let eventTitle = this.getEventTitle(event.type);
 		modal.title.innerHTML = eventTitle;
+		modal.id.value=event.id;
 		let eventRange = this.getFormattedRange(event.range);
 		modal.range.innerHTML = eventRange;
 		if(!event.hasOwnProperty('route')){
@@ -284,11 +324,23 @@ class EventManager{
 				modal.routeStatus.innerHTML = 'ascunde';
 			}
 		});
-
 		this.codeLatLng(event.location, modal.location);
-		modal.description.innerHTML = event.desc;
+		modal.description.innerHTML = event.desc.replace(/\n/g, "<br />");
 		modal.votes.up.innerHTML = event.feedback.votes.up;
 		modal.votes.down.innerHTML = event.feedback.votes.down;
+		if(event.feedback.votes.down === 0){
+			modal.votebar.positive.style.width='100%';
+			modal.votebar.negative.style.width='0';
+		}
+		else if(event.feedback.votes.up === 0){
+			modal.votebar.positive.style.width='0';
+			modal.votebar.negative.style.width='100%';
+		}
+		else{
+			let proc = 100/((event.feedback.votes.up+event.feedback.votes.down)/event.feedback.votes.up);
+			modal.votebar.positive.style.width=proc+'%';
+			modal.votebar.negative.style.width=(100-proc)+'%';
+		}
 		modal.comments.innerHTML = "";
 		if(event.feedback.comments.length === 0)
 			modal.comments.innerHTML = "Nu există comentarii.";
@@ -341,7 +393,7 @@ class EventManager{
 		
 	}
 
-	promptMessage(message){
+	promptMessage(message, type){
 		//print a message to the screen(pop-up);
 		console.log(message);
 	}

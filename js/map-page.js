@@ -46,7 +46,7 @@ function updateFilterOptions(){
 	eventManager.filter(filterOptions);
 }
 
-function initDangerForm(latLng){
+function showEventForm(latLng){
 	$('#add-danger').addClass('visible');
 	$('.cover').fadeIn();
 	if(!document.getElementById('lat-input'))
@@ -55,9 +55,6 @@ function initDangerForm(latLng){
 	document.getElementById('lng-input').setAttribute('value', latLng.lng);
 	let addressP = document.getElementById('location-from-coord');
 	eventManager.codeLatLng(latLng, addressP);
-
-	console.log(addr);
-
 }
 
 function init(){
@@ -84,7 +81,7 @@ function init(){
     			var latLng = {}
 		    	latLng.lat = e.latLng.lat();
 		    	latLng.lng = e.latLng.lng();
-		    	initDangerForm(latLng);
+		    	showEventForm(latLng);
     		}
     	}, 200);
     });
@@ -100,7 +97,6 @@ function init(){
 
     document.getElementById('add-danger-form').addEventListener('submit', function(e){
     	e.preventDefault();
-    	console.log('intra in submisie');
     	let captchaResponse = grecaptcha.getResponse();
     	if(!captchaResponse){
     		alert("robotu dreq");
@@ -140,6 +136,19 @@ function init(){
     });
     
 }
+
+
+let addCommentButton = document.getElementById('add-comment-button');
+if(addCommentButton){
+	addCommentButton.addEventListener('click', function(e){
+		e.preventDefault;
+		let args = {};
+		args.eventId = parseInt(document.getElementById('event-id').value);
+		args.content = document.getElementById('comment-content').value;
+		eventManager.createComment(args);
+	});
+}
+
 
 google.maps.event.addDomListener(window, 'load', init);
 

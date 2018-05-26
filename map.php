@@ -125,8 +125,10 @@
     </footer>
 
     <div class="cover"></div>
+    <div class="modalsContainer">
     <?php include "modals/add-event.php" ?>
     <?php include "modals/view-event.php" ?>
+    </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>

@@ -143,7 +143,7 @@ $dbname = "CricDB";
             id_user_posting INT(6) NOT NULL,
             details VARCHAR(150),
             address VARCHAR(80),
-            conn_date DATE
+            conn_date DATETIME
             )";
          if ($conn->query($sql) == TRUE){
             echo "Done create Person_Finder <br>";

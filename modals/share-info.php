@@ -16,9 +16,9 @@
 							<p>
 								Introduceți numele
 							</p>
-							<input class="clearinput" name="Nume2" id="user-autocomplete" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
-							<div id="users-suggest"></div>
-							<input type="hidden" name="suggested-user-id" id="suggested-user-id">
+							<input class="clearinput" name="Nume2" id="share-autocomplete" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+							<div id="share-users-suggest"></div>
+							<input type="hidden" name="suggested-user-id" id="share-suggested-user-id">
 	                        <div class="clear"></div>
 						</div>
 					</div>

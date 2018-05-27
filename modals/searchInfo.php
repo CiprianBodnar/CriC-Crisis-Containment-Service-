@@ -16,10 +16,16 @@
 							<p>
 								Introduceți numele
 							</p>
-							<input type="text" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';"> 
-							<button type="submit" id="submit-button" name="cauta">
+							<input type="text" id="search-autocomplete" autocomplete="off" name="Nume" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+							<div id="search-users-suggest"></div>
+							<input type="hidden" name="suggested-user-id" id="search-suggested-user-id">
+							<div id="search-info">
+								<div id="posted-search-info"></div>
+								<div id="user-search-info"></div>
+							</div>
+							<div id="submit-button" name="cauta">
 	                            <i class="fas fa-search"></i>
-	                        </button>
+	                        </div>
 	                        <div class="clear"></div>
 						</div>
 					</div>
@@ -27,5 +33,3 @@
 			</div>
 		</div>
 	</div>
-
-	

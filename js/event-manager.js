@@ -82,7 +82,7 @@ class EventManager{
 				setTimeout(function(){
 					mp.setCenter(center);
 					mp.setZoom(8);
-				}, 1000);
+				}, 500);
 			});
 		}
 	}
@@ -224,6 +224,7 @@ class EventManager{
 					obj.promptMessage("Unexpected error. Nu s-a putut realiza o treaba..", "err");
 					return;
 				}
+				obj.promptMessage("Evenimentul a fost adăugat.", "succ");
 				obj.loadEvents(obj.timeTable[0], obj.timeTable[1]);
 			}
 		}
@@ -457,8 +458,27 @@ class EventManager{
 	}
 
 	promptMessage(message, type){
-		//print a message to the screen(pop-up);
-		console.log(message);
+		let promptContainer = document.createElement('div');
+		promptContainer.classList.add('prompt-container');
+		let icon = document.createElement('span');
+		icon.classList.add('prompt-icon');
+		if(type==="err"){
+			icon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+			promptContainer.classList.add('err');
+		}
+		else if(type==="succ"){
+			icon.innerHTML = '<i class="fas fa-check-circle"></i>';
+			promptContainer.classList.add('succ');
+		}
+		promptContainer.innerText=message;
+		promptContainer.appendChild(icon);
+		document.getElementsByTagName('body')[0].appendChild(promptContainer);
+		promptContainer.classList.add('visible');
+		console.log(promptContainer);
+		setTimeout(function(){
+			promptContainer.classList.remove('visible');
+			setTimeout(function(){document.getElementsByTagName('body')[0].removeChild(promptContainer)}, 200);
+		}, 3000);
 	}
 
 	getMarkerStyle(eventType){

@@ -17,6 +17,41 @@ header{
 	line-height: 140px;
 }
 
+.prompt-container{
+	opacity: 0;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	position: absolute;
+	z-index:4;
+	bottom: 25px;
+	width: calc(100% - 40px);
+	left: 20px;
+	color: #fff;
+	background: rgba(0, 0, 0, .75);
+	padding: 10px 20px;
+	font-family: Calibri, sans-serif;
+}
+.prompt-container.err{
+	border-left: 10px solid #f4511e;
+}
+.prompt-container.succ{
+	border-left: 10px solid #fff;
+}
+.prompt-container.succ .prompt-icon{
+	color: #fff;
+}
+.prompt-container.err .prompt-icon{
+	color: #f4511e;
+}
+.prompt-container.visible{
+	opacity: 100;
+}
+.prompt-icon{
+	float: left;
+	font-size: 20px;
+	margin-right: 10px;
+}
 .col1{
 	float: left;
 	width: 10%;

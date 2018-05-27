@@ -118,7 +118,7 @@ function init(){
     	e.preventDefault();
     	let captchaResponse = grecaptcha.getResponse();
     	if(!captchaResponse){
-    		alert("robotu dreq");
+    		eventManager.promptMessage("Nu am putut confirma că nu sunteți robot.", "err");
     		return;
     	}
 

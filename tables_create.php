@@ -86,7 +86,7 @@ $dbname = "CricDB";
             email VARCHAR(50) NOT NULL,
             password CHAR(64) NOT NULL,
             address VARCHAR(80) NOT NULL,
-            conn_date DATE
+            conn_date DATETIME
         )";
         if ($conn->query($sql) == TRUE){
             echo "Done create Users <br>";
@@ -155,7 +155,7 @@ $dbname = "CricDB";
             user_id int(6) not null,
             event_id int(6) not null,
             content text not null,
-            post_date DATE not null
+            post_date DATETIME not null
             )";
          if ($conn->query($sql) == TRUE){
             echo "Done create comments <br>";

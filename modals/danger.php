@@ -18,7 +18,7 @@
 								Detalii
 							</p>
 
-							<textarea  name="inDangerMessage"  onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
+							<textarea id="inDangerMessageId" name="inDangerMessage"  onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" >Mesaj</textarea>
 		                    <div class="clear"></div>
 						</div>
 					</div>	
@@ -30,9 +30,9 @@
 							<span style="display: none;" id="hidden-address"> </span>
 							<input class="showthis forceDisplay" id="address-input2" name="myAddress"   >
 		                    <div class="clear"></div> 
-		                    <button id="index-send-button" type="submit" name="situatiaMea">
+		                    <div id="index-send-button" type="submit" name="situatiaMea">
 								Trimite
-							</button>
+							</div>
 						</div>
 					</div>	
 				</form>

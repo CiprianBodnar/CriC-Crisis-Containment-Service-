@@ -22,7 +22,7 @@ $('#in-danger').on('click', function(){
 $('.cover').on("click", function(){
 	$('.modal').removeClass('visible');
 	$(this).fadeOut(200);
-})
+});
 
  $(function(){
     $('input#address-input').hide();

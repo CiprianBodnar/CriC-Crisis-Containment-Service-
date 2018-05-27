@@ -8,7 +8,7 @@
         die("Name not found");
     $pre_name = $_POST['pre_name'];
     
-    $sql = "Select concat(firstname,' ',lastname) as 'Name', id_user as 'Id' from Users where lower(lastname) LIKE lower('%".$pre_name."%') or lower(firstname) LIKE lower('%".$pre_name."%')";
+    $sql = "Select concat(lastname,' ',firstname) as 'Name', id_user as 'Id' from Users where lower(lastname) LIKE lower('%".$pre_name."%') or lower(firstname) LIKE lower('%".$pre_name."%')";
 
     if(!$conn->query($sql)){
         echo json_encode(array("error"=>("Could not post your report.".$conn->error)));

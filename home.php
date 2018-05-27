@@ -2,7 +2,6 @@
  include_once("dbConnect.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,9 +78,8 @@
 	<?php include "modals/danger.php" ?>
 	<?php include "modals/searchInfo.php" ?>
 	<?php include "modals/share-info.php" ?>
+	<?php include "resources/add_person_info.php" ?>
 
-
-	
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/miscs.js"></script>
 	<script src="js/fill-page.js"></script>

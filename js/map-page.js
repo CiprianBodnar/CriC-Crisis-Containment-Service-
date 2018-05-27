@@ -1,6 +1,24 @@
 
 var eventManager;
 
+function requestConfirmation(title, message, callback){
+	let confCover = document.getElementsByClassName('second-cover')[0];
+	let conf = document.getElementById('confirmation-modal');
+	let confTitle = document.getElementById('confirmation-title');
+	let confContent = document.getElementById('confirmation-content');
+	let confButton = document.getElementById('confirm-button');
+	confTitle.innerHTML = title;
+	confContent.innerHTML = message;
+	let confButtonClone = confButton.cloneNode(true);
+	confButton.parentNode.replaceChild(confButtonClone, confButton);
+	confButton = confButtonClone;
+	confCover.style.display='block';
+	conf.classList.add('visible');
+	confButton.addEventListener('click', function(){
+		confCover.style.display='none';
+		callback();
+	});
+}
 function initAutocomplete(map){
 	var input = document.getElementById('address-keyword');
     var autocomplete = new google.maps.places.Autocomplete(input);
@@ -49,6 +67,7 @@ function updateFilterOptions(){
 function showEventForm(latLng){
 	$('#add-danger').addClass('visible');
 	$('.cover').fadeIn();
+	$('.modals-container').show();
 	if(!document.getElementById('lat-input'))
 		return;
 	document.getElementById('lat-input').setAttribute('value', latLng.lat);
@@ -114,6 +133,7 @@ function init(){
    		
    		$('.modal').removeClass('visible');
 		$('.cover').fadeOut(200);
+		$('.modals-container').hide();
     	/*
     	verify captcha (not possible from localhost)
     	grecaptchaVerify = new XMLHttpRequest();
@@ -139,16 +159,39 @@ function init(){
 
 
 let addCommentButton = document.getElementById('add-comment-button');
+let canAdd = true;
 if(addCommentButton){
 	addCommentButton.addEventListener('click', function(e){
-		e.preventDefault;
-		let args = {};
-		args.eventId = parseInt(document.getElementById('event-id').value);
-		args.content = document.getElementById('comment-content').value;
-		eventManager.createComment(args);
+		if(canAdd === true){
+			canAdd = false;
+			e.preventDefault;
+			let args = {};
+			args.eventId = parseInt(document.getElementById('event-id').value);
+			args.content = document.getElementById('comment-content').value;
+			document.getElementById('comment-content').value='';
+			eventManager.createComment(args);
+			setTimeout(function(){
+				canAdd = true;
+				console.log(canAdd);
+			}, 10000);
+		} 
+		else{
+			eventManager.promptMessage('Nu puteți adăuga alt comentariu așa de repede. (10s)', "err");
+		}
 	});
 }
 
+let removeEventButton = document.getElementById('remove-event');
+removeEventButton.addEventListener('click', function(){
+	console.log('intru');
+	requestConfirmation('Ștergere eveniment', "Doriți ștergerea acestui eveniment?", function(){
+		let eventId = document.getElementById('event-id').value;
+		eventManager.removeEvent(eventId);
+		$('.modal').removeClass('visible');
+		$('.cover').fadeOut(200);
+		$('.modals-container').fadeOut(200);
+	});
+});
 
 google.maps.event.addDomListener(window, 'load', init);
 
@@ -180,11 +223,19 @@ $("#address-keyword").on("blur", function(e){
 	$('.wrapper').removeClass('input-visible');
 	$('#map-cover').fadeOut(200);
 });
+$('.modal').on('click', function(e){e.stopPropagation();});
 $('.modal-close').on('click', function(){
 	$('.modal').removeClass('visible');
 	$('.cover').fadeOut(200);
+	$('.modals-container').hide();
 });
-$('.cover').on("click", function(){
+$('.modals-container').on("click", function(){
 	$('.modal').removeClass('visible');
+	$('.cover').fadeOut(200);
 	$(this).fadeOut(200);
 })
+$('.second-cover, .popup-close').on("click", function(e){
+	e.stopPropagation();
+	$('.second-cover').fadeOut();
+	$('.second-cover .modal').removeClass('visible');
+});

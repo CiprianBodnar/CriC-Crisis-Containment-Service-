@@ -4,6 +4,7 @@
         <input type="hidden" id="event-id" name="event-id">
         <div class="row modal-title"> 
             <h3 id="event-title"><!-- event title goes here --></h3>
+            <span id="remove-event">[șterge]</span>
             <div class="modal-close"> 
                 <i class="fas fa-times"></i>
             </div>

@@ -240,7 +240,6 @@ footer{
     top: 0;
     left: 0;
     width: 100%;
-    overflow: scroll;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: none;
@@ -270,6 +269,7 @@ footer{
     opacity: 1;
     overflow: initial;
     padding-top: 100px;
+    padding-bottom: 100px;
     height: auto;
 }
 
@@ -568,6 +568,7 @@ span.location-icon{
 }
 .modal#view-event #add-comment textarea{
 	height: 32px;
+	min-height: 32px;
 	overflow: hidden;
 	padding: 5px 10px;
 	margin: 0;
@@ -591,4 +592,70 @@ span.location-icon{
 .modal#view-event #add-comment-button:hover{
 	background: #f4511e;
 	color: #fff;
+}
+.modals-container{
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	display: none;
+}
+.modal#view-event .poster-name{
+	color: #fff;
+	margin-top: 5px;
+	padding: 5px 10px 5px 5px;
+	border-radius: 10px 25px 25px 10px;
+	background: #f4511e;
+	display: inline-block;
+	font-size: 14px;
+}
+.modal#view-event .poster-address{
+	color: #656565;
+	font-size: 12px;
+}
+span#remove-event {
+    float: left;
+    margin-left: 5px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 40px;
+}
+.second-cover {
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+.second-cover #confirm-button, .second-cover .popup-close{
+	height: 32px;
+	background: #f4511e;
+	color: #fff;
+	line-height: 32px;
+	padding: 0 30px;
+	cursor: pointer;
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	border: 1px solid #f4511e;
+	font-family: Calibri, sans-serif;
+}
+.second-cover #confirm-button{
+	float: left;
+}
+.second-cover .buttons-container{
+	padding-top: 20px;
+}
+.second-cover .popup-close{
+	float: right;
+}
+.second-cover #confirm-button:hover, .second-cover .popup-close:hover{
+	background: #fff;
+	color: #f4511e;
 }

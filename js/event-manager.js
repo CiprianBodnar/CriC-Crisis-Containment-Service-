@@ -34,6 +34,7 @@ class EventManager{
 	}
 
 	filter(options){
+		this.filterOptions = options;
 		for(let event of this.events){
 			if(options.hideAll){
 				if(event.marker.getMap() != null)
@@ -81,7 +82,7 @@ class EventManager{
 				setTimeout(function(){
 					mp.setCenter(center);
 					mp.setZoom(8);
-				}, 2000);
+				}, 1000);
 			});
 		}
 	}
@@ -179,6 +180,8 @@ class EventManager{
 					    	obj.describeEvent(event);
 					    });
 					   	obj.events.push(event);
+					   	if(obj.hasOwnProperty('filterOptions'))
+					   		obj.filter(obj.filterOptions);
 					}
 				}
 			}
@@ -229,7 +232,6 @@ class EventManager{
 	}
 
 	createComment(args){
-		console.log(args);
 		if(args.content.length<=1){
 			this.promptMessage("Comentariu prea scurt.", "err");
 			return;
@@ -244,11 +246,8 @@ class EventManager{
 					obj.promptMessage(resp.error, "err");
 				else{
 					obj.promptMessage(resp.success, "succ");
-					console.log(obj.events);
 					for(let event of obj.events){
-						console.log('compar '+event.id+' cu '+args.eventId);
 						if(event.id === args.eventId){
-							console.log(event);
 							obj.describeEvent(event);
 						}
 					}
@@ -262,12 +261,15 @@ class EventManager{
 
 	describeEvent(event){ 
 		let modal = {
+			container: document.getElementsByClassName('modals-container')[0],
 			cover: document.getElementsByClassName('cover')[0],
 			id: document.getElementById('event-id'),
 			body: document.getElementById('view-event'),
 			title: document.getElementById('event-title'),
+			removeButton: document.getElementById('remove-event'),
 			range: document.getElementById('event-range'),
 			route: document.getElementById('toggle-route'),
+			poster: document.getElementById('poster-container'),
 			routeStatus: document.getElementById('toggle-state'),
 			description: document.getElementById('event-description'),
 			location: document.getElementById('event-location'),
@@ -283,7 +285,9 @@ class EventManager{
 		}
 
 		modal.cover.style.display='block';
+		modal.container.style.display='block';
 		modal.body.classList.add('visible');
+		modal.body.addEventListener('click', function(e){e.stopPropagation();});
 		let obj = this;
 		this.loadEventFeedback(event, function(){
 			obj.prepareEventDisplay(event, modal);
@@ -295,6 +299,12 @@ class EventManager{
 	prepareEventDisplay(event, modal){
 		let eventTitle = this.getEventTitle(event.type);
 		modal.title.innerHTML = eventTitle;
+		if(event.hasOwnProperty('removeable') && event.removeable === true){
+			modal.removeButton.style.display='block';
+		}
+		else{
+			modal.removeButton.style.display='none';
+		}
 		modal.id.value=event.id;
 		let eventRange = this.getFormattedRange(event.range);
 		modal.range.innerHTML = eventRange;
@@ -341,6 +351,11 @@ class EventManager{
 			modal.votebar.positive.style.width=proc+'%';
 			modal.votebar.negative.style.width=(100-proc)+'%';
 		}
+		let posterAddr = event.user.address;
+		if(posterAddr.length>75)
+			posterAddr = posterAddr.substr(0, 75)+'...';
+		modal.poster.innerHTML="<div class='poster-name-container'><span class='poster-name'>"+event.user.firstname+' '+event.user.lastname+"</span></div>"+
+								"<div class='poster-address' title='"+event.user.address+"'>"+posterAddr+"</div";
 		modal.comments.innerHTML = "";
 		if(event.feedback.comments.length === 0)
 			modal.comments.innerHTML = "Nu există comentarii.";
@@ -356,10 +371,12 @@ class EventManager{
 			"</div>"+
 			"<div class='col11 right-side'>"+
 				"<span class='user-name'>"+comment.user.firstname+' '+comment.user.lastname+"</span>"+
-				"<p class='comment-content'>"+comment.content+"</p>"+
+				"<p class='comment-content'>"+comment.content.replace(/\n/g, "<br />")+"</p>"+
 				"<p class='comment-date'>"+comment.date+"</p>"+
 			"</div><div class='clear'></div>";
+
 			commentContainer.innerHTML=commentBody;
+
 			if(comment.removeable===true){
 				let removeButton = document.createElement('button');
 				removeButton.classList.add('remove-comment');
@@ -367,13 +384,59 @@ class EventManager{
 				commentContainer.appendChild(removeButton);
 				let obj = this;
 				removeButton.addEventListener('click', function(){
-					obj.removeComment(comment);
+					obj.removeComment(event, comment);
 				});
 			}
 
 		}
 
 		
+	}
+
+	removeEvent(eventId){
+		let obj = this;
+		let request = new XMLHttpRequest();
+		request.open("POST", "resources/remove-event.php", true);
+		request.onreadystatechange = function(){
+			if(this.readyState === 4 && this.status === 200){
+				let resp = JSON.parse(this.responseText);
+				if(resp.hasOwnProperty('error'))
+					obj.promptMessage(resp.error, "err");
+				else{
+					obj.promptMessage(resp.success, "succ");
+					for (let i = 0; i < obj.events.length; i++){
+						if(obj.events[i].id == eventId){
+							obj.events[i].marker.setMap(null);
+							obj.events[i].circle.setMap(null);
+							obj.events.splice(i, 1);
+						}
+					}
+				}
+			}
+		}
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send('event-id='+encodeURIComponent(eventId));
+
+	}
+
+	removeComment(event, comment){
+		let request = new XMLHttpRequest();
+		let obj = this;
+		request.open("POST", "resources/remove-comment.php", true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.onreadystatechange = function(){
+			if(request.readyState === 4 && request.status === 200){
+				let response = JSON.parse(request.responseText);
+				if(response.error){
+					obj.promptMessage(response.error, "err");
+				}
+				else{
+					obj.promptMessage(response.success, "succ");
+				}
+				obj.describeEvent(event);
+			}
+		}
+		request.send('comment-id='+encodeURIComponent(comment.id));
 	}
 
 	loadEventFeedback(event, callback){

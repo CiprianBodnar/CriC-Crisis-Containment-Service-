@@ -125,9 +125,10 @@
     </footer>
 
     <div class="cover"></div>
-    <div class="modalsContainer">
+    <div class="modals-container">
     <?php include "modals/add-event.php" ?>
     <?php include "modals/view-event.php" ?>
+    <?php include "modals/confirmation-popup.php" ?>
     </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>

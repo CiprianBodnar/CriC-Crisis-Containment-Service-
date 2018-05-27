@@ -29,7 +29,7 @@
 							<span style="display: none;" id="hidden-address"> </span>
 							<input class="showthis forceDisplay" id="address-input2" name="myAddress"   >
 		                    <div class="clear"></div> 
-		                    <div id="index-send-button" type="submit" name="situatiaMea">
+		                    <div class="index-send-button" id="sendInDanger" >
 								Trimite
 							</div>
 						</div>

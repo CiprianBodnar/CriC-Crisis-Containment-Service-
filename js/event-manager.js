@@ -93,7 +93,7 @@ class EventManager{
 		let month = date.getMonth()+1;
 		month = month<10?'0'+month:month;
 		let year = date.getFullYear();
-		return "str_to_date('"+days+"-"+month+"-"+year+"', '%d-%m-%Y')";
+		return days+"-"+month+"-"+year;
 	}
 
 

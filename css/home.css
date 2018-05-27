@@ -254,7 +254,7 @@ textarea:focus {
     background: #fff;
 }
 
-#index-send-button {
+.index-send-button {
 	margin-top: 30px;
 	height: 40px;
 	padding: 0 20px;
@@ -274,7 +274,7 @@ textarea:focus {
     text-decoration: none;
 }
 
-#index-send-button:hover {
+.index-send-button:hover {
 	background: #1B1817;
 }
 

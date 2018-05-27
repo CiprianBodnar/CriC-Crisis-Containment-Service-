@@ -1,4 +1,5 @@
- document.getElementById('index-send-button').addEventListener('click', function(e){
+ document.getElementById('sendInDanger').addEventListener('click', function(e){
+
     let inDangerMessage = document.getElementById("inDangerMessageId").value;
     let address = document.getElementById("address-input2").value;
 
@@ -7,6 +8,7 @@
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onreadystatechange = (function() {
 		if(request.readyState === 4 && request.status === 200) {
+            
            
             let geocoder = new google.maps.Geocoder();
             geocoder.geocode({ "address": address}, function(results) {

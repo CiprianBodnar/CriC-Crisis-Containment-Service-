@@ -7,10 +7,16 @@ if(isset($_GET['key'])){
     $key = $_GET['key'];
 }
 
-$sql = "SELECT * FROM Reset_Pwd WHERE ekey='".$key."'";
-if($conn->query($sql) == FALSE){
-    echo "Error: " . $conn->error;
-}
+#$sql = "SELECT * FROM Reset_Pwd WHERE ekey='".$key."'";
+$email='';
+$ekey='';
+$stmt = $conn->prepare("Select email ekey from reset_pwd where ekey=? ");
+$stmt -> bind_param("s",$key);
+$stmt -> execute();
+$stmt -> bind_result($email,$ekey);
+$stmt -> fetch();
+$stmt -> close();
+
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $email = htmlspecialchars($row['email'],ENT_QUOTES);

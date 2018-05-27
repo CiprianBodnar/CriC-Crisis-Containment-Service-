@@ -8,11 +8,33 @@ if(isset($_POST['conectare'])){
     $email = $_POST['email'];
     $email = htmlspecialchars($email,ENT_QUOTES);    
     $pass = hash("sha256",$_POST['parola']);
-    $sql = "SELECT * FROM Users WHERE email='".$email."' AND password='".$pass."';";
+    #$sql = "SELECT * FROM Users WHERE email='".$email."' AND password='".$pass."';";
    
-   
+    $id_user = '';
+    $firstname='';
+    $lastname='';
+    $stmt = $conn->prepare("Select id_user,firstname,lastname FROM Users where email =? and password = ?");
+    $stmt -> bind_param("ss",$email,$pass);
+    $stmt -> execute();
+    $stmt -> bind_result($id_user,$firstname,$lastname);
+    $stmt -> fetch();
+    $stmt -> close();
 
-    if ($result = $conn ->query($sql)){
+
+    if($id_user !='' and $lastname!='' and $firstname!=''){
+        $_SESSION ["name"] = $firstname . " " . $lastname;
+        $_SESSION["loggedIn"] = TRUE;
+        $_SESSION["id_user"] = $id_user;
+       #$sql = "UPDATE Users set conn_date=sysdate where email='".$email."';";
+        $stmt = $conn -> prepare("UPDATE Users set conn_date=sysdate() where email = ?");
+        $stmt -> bind_param("s",$email);
+        $stmt -> execute();
+        $stmt -> close();
+    }
+    else
+        $error = "Email sau parolă greșită!";
+    
+   /* if ($result = $conn ->query($sql)){
         $row = $result->fetch_row();
         if($row === NULL)
             $error = "Email sau parolă greșită!";
@@ -30,7 +52,7 @@ if(isset($_POST['conectare'])){
         
     }else{
        $error = "Error: " . $conn->error;
-    } 
+    } */
 
     if(isset($_SESSION['loggedIn'])){
         $loggedIn = $_SESSION['loggedIn'];

@@ -1,4 +1,3 @@
-
     <div class="modal" id="inDanger">
 		 <div class="container">
 			<div class="box-small white">

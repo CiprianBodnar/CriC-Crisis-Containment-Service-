@@ -33,26 +33,8 @@ if(isset($_POST['conectare'])){
     }
     else
         $error = "Email sau parolă greșită!";
-    
-   /* if ($result = $conn ->query($sql)){
-        $row = $result->fetch_row();
-        if($row === NULL)
-            $error = "Email sau parolă greșită!";
-        else{
-            $firstname = $row[1];
-            $lastname = $row[2];
-            $_SESSION ["name"] = $firstname . " " . $lastname;
-            $_SESSION["loggedIn"] = TRUE;
-            $_SESSION["id_user"] = $row[0];
-            $sql = "UPDATE Users set conn_date=sysdate where email='".$email."';";
-            if(!$conn->query($sql))
-                echo "Eroare" . $conn->error;
-            
-        }
-        
-    }else{
-       $error = "Error: " . $conn->error;
-    } */
+
+    $_SESSION["email"] = $email;
 
     if(isset($_SESSION['loggedIn'])){
         $loggedIn = $_SESSION['loggedIn'];

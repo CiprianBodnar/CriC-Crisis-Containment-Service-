@@ -36,11 +36,13 @@ if(isset($_POST['submit'])) {
     $address = str_replace(array("ș","ă","ț","Ș","Ț","Ă","Â","â"),array("s","a","t","s","t","a","a","a"),$address);
     $address = htmlspecialchars($address, ENT_QUOTES);
 
-    $sql = "SELECT * FROM Users WHERE email='".$email_address."';";
-
-    if($result = $conn->query($sql)) {
-        $row = $result->fetch_row();
-
+    $sql = $conn->prepare("SELECT * FROM Users WHERE email = ?");
+    $sql -> bind_param('s', $email_address);
+    $sql -> execute();
+    
+    if($result = $sql -> get_result()) { 
+        $row = $result -> fetch_assoc();
+        
     if($last_name === 'Nume') {
         $last_name_error = 'Camp gol!';
     }
@@ -61,7 +63,6 @@ if(isset($_POST['submit'])) {
         $password_error = 'Parola prea scurta!';
     }
 
-
     if($email_address != $verify_email_address || $verify_email_address === 'your.email@yoursite.com') {
         $verify_email_address_error = 'Adresele nu corespund!';
     }
@@ -75,7 +76,6 @@ if(isset($_POST['submit'])) {
     }
 
    
-
     /*print_r( $last_name_error);
     print_r( $first_name_error);
     print_r( $email_address_error);
@@ -88,16 +88,16 @@ if(isset($_POST['submit'])) {
     if($last_name_error === "" && $first_name_error === "" &&  $different_email_address === "" && $email_address_error === "" &&  $verify_email_address_error === "" && $password_error === "" && $verify_password_error === "" && $address_error === "") {
 
             if($row === NULL) {
-                $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('".$first_name."', '".$last_name."', '".$email_address."', '".$password."', '".$address."', sysdate());";  
 
-                if(!$conn->query($sql)) {
-                    echo "Eroare" . $conn->error;
-                }
-                else {
-                    $_SESSION["name"] = $first_name . " " . $last_name;
-                    $_SESSION["email"] = $email_address;
-                    header("Location: login.php");
-                }
+                $sql = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, address, conn_date) VALUES (?, ?, ?, ?, ?, sysdate())");
+                
+                $sql -> bind_param("sssss", $first_name, $last_name, $email_address, $password, $address);
+                $sql -> execute();
+                $sql -> close();
+
+                $_SESSION["name"] = $first_name . " " . $last_name;
+                $_SESSION["email"] = $email_address;
+                header("Location: login.php");
             }
             else {
                 $error_same_user = "Există deja un utilizator cu această adresa de e-mail!";

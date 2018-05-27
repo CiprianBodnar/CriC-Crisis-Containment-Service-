@@ -41,7 +41,7 @@
 								<input class="showthis" id="address-input" name="address"  >
 
 		                    <div class="clear"></div> 
-		                    <button id="index-send-button" type="submit" name="ofera">
+		                    <button class="index-send-button" type="submit" name="ofera">
 								Trimite
 							</button>
 						</div>

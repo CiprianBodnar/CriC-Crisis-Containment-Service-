@@ -3,6 +3,7 @@ if(isset($_POST['ofera']) and isset($_POST['Nume2'])){
 	$name = $_POST['Nume2'];
 	$info = $_POST['Mesaj'];
 	$address = null;
+	$date = date("Y-m-d");
 	if(isset($_POST['checkbox']))
 		$address = $_POST['address'];
 
@@ -13,6 +14,7 @@ if(isset($_POST['ofera']) and isset($_POST['Nume2'])){
 	$token = strtok($name, ' ');
 	$lastname = $token;
 	$firstname = '';
+	$id_user_in_danger = '';
 
 
 if(isset($_SESSION['id_user'])) 
@@ -28,9 +30,23 @@ if(isset($_SESSION['id_user']))
 					$firstname = $firstname.' '.$token;
 		}
 		
-		$sql = "Select id_user from users where lastname = '".$lastname."' and firstname = '".$firstname."';";
-		
-		if ($result = $conn->query($sql)){
+		$stmt = $conn->prepare("Select id_user from users where lastname = ? and firstname = ?");
+		$stmt -> bind_param('ss',$lastname, $firstname);
+		$stmt -> execute();
+		$stmt -> bind_result($id_user_in_danger);
+		$stmt -> fetch();
+		$stmt -> close();
+
+		if($id_user_in_danger != '') {
+			$stmt = $conn -> prepare("INSERT INTO person_finder (id_user_in_danger, id_user_posting, details, address, conn_date) VALUES (?, ?, ?, ?, ?)");
+			$stmt -> bind_param("sssss",$id_user_in_danger, $id_user, $info, $address, $date);
+			$stmt -> execute();
+			$stmt -> close();
+		}
+		else
+			echo "Eroare" . $conn->error;
+
+		/*if ($result = $conn->query($sql)){
 			if($row = $result->fetch_row()) {	
 				$sql = "INSERT INTO Person_Finder (id_user_in_danger, id_user_posting, details, address, conn_date)  VALUES ('".$row[0]."','".$id_user."', '".$info."', '".$address."' , sysdate());"; 
 				if(!$conn->query($sql))
@@ -39,7 +55,7 @@ if(isset($_SESSION['id_user']))
 		}
 		else {
 			echo $conn->error;
-		}
+		}*/
 	}
 }
 ?>

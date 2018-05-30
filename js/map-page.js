@@ -77,7 +77,6 @@ function showEventForm(latLng){
 }
 
 function init(){
-
 	var geocoder = new google.maps.Geocoder();
     var mapContainer = document.getElementById("map-container");
     var mapOptions = {
@@ -113,85 +112,99 @@ function init(){
     for(let option of document.getElementsByClassName('filter-option')){
     	option.addEventListener('click', updateFilterOptions);
     }
-
+    let canAddEvent = true;
     document.getElementById('add-danger-form').addEventListener('submit', function(e){
     	e.preventDefault();
-    	let captchaResponse = grecaptcha.getResponse();
-    	if(!captchaResponse){
-    		eventManager.promptMessage("Nu am putut confirma că nu sunteți robot.", "err");
-    		return;
-    	}
+    	if(canAddEvent === true){
+    		canAddEvent = false;
+    		setTimeout(function(){canAdd = true;}, 10000);
+    		let captchaResponse = grecaptcha.getResponse();
+	    	if(!captchaResponse){
+	    		eventManager.promptMessage("Nu am putut confirma că nu sunteți robot.", "err");
+	    		return;
+	    	}
 
-    	let args = {};
-    	args.desc = document.getElementById('event-desc').value;
-    	args.type = document.getElementById('event-type').value;
-    	args.radius = document.getElementById('event-radius').value;
-    	args.lat = document.getElementById('lat-input').value;
-    	args.lng = document.getElementById('lng-input').value;
-    	args.date = new Date();
-    	eventManager.createEvent(args);
-   		
-   		$('.modal').removeClass('visible');
-		$('.cover').fadeOut(200);
-		$('.modals-container').hide();
-    	/*
-    	verify captcha (not possible from localhost)
-    	grecaptchaVerify = new XMLHttpRequest();
-    	grecaptchaVerify.open('POST', 'https://www.google.com/recaptcha/api/siteverify', true);
-		grecaptchaVerify.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	grecaptchaVerify.send('secret=6LfQ2FcUAAAAAKWrgX0OQuXGH-9mMXvX4uwski3f&response='+captchaResponse);
-    	grecaptchaVerify.onreadystatechange=function(){
-    		if (this.readyState == 4 && this.status == 200) {
-	    		console.log(grecaptchaVerify);
-		    	let args = {};
-		    	args.desc = document.getElementById('event-desc').value;
-		    	args.type = document.getElementById('event-type').value;
-		    	args.radius = document.getElementById('event-radius').value;
-		    	args.lat = document.getElementById('lat-input').value;
-		    	args.lng = document.getElementById('lng-input').value;
-		    	args.date = new Date();
-		    	eventManager.createEvent(args);
-		    }
-    	}*/
+	    	let args = {};
+	    	args.desc = document.getElementById('event-desc').value;
+	    	args.type = document.getElementById('event-type').value;
+	    	args.radius = document.getElementById('event-radius').value;
+	    	args.lat = document.getElementById('lat-input').value;
+	    	args.lng = document.getElementById('lng-input').value;
+	    	args.date = new Date();
+	    	eventManager.createEvent(args);
+	   		
+	   		$('.modal').removeClass('visible');
+			$('.cover').fadeOut(200);
+			$('.modals-container').hide();
+	    	/*
+	    	verify captcha (not possible from localhost)
+	    	grecaptchaVerify = new XMLHttpRequest();
+	    	grecaptchaVerify.open('POST', 'https://www.google.com/recaptcha/api/siteverify', true);
+			grecaptchaVerify.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    	grecaptchaVerify.send('secret=6LfQ2FcUAAAAAKWrgX0OQuXGH-9mMXvX4uwski3f&response='+captchaResponse);
+	    	grecaptchaVerify.onreadystatechange=function(){
+	    		if (this.readyState == 4 && this.status == 200) {
+		    		console.log(grecaptchaVerify);
+			    	let args = {};
+			    	args.desc = document.getElementById('event-desc').value;
+			    	args.type = document.getElementById('event-type').value;
+			    	args.radius = document.getElementById('event-radius').value;
+			    	args.lat = document.getElementById('lat-input').value;
+			    	args.lng = document.getElementById('lng-input').value;
+			    	args.date = new Date();
+			    	eventManager.createEvent(args);
+			    }
+	    	}*/
+
+	    	setTimeout(function(){
+				canAddEvent = true;
+				console.log(canAddEvent);
+			}, 10000);
+    	}
+    	else{
+    		eventManager.promptMessage("Nu puteti alt eveniment așa de repede. (10s)", "err");
+    	}
     });
+
+    let addCommentButton = document.getElementById('add-comment-button');
+	let canAddComment = true;
+	if(addCommentButton){
+		addCommentButton.addEventListener('click', function(e){
+			if(canAddComment === true){
+				canAddComment = false;
+				e.preventDefault;
+				let args = {};
+				args.eventId = parseInt(document.getElementById('event-id').value);
+				args.content = document.getElementById('comment-content').value;
+				document.getElementById('comment-content').value='';
+				eventManager.createComment(args);
+				setTimeout(function(){
+					canAddComment = true;
+					console.log(canAddComment);
+				}, 5000);
+			} 
+			else{
+				eventManager.promptMessage('Nu puteți adăuga alt comentariu așa de repede. (5s)', "err");
+			}
+		});
+	}
+
+	let removeEventButton = document.getElementById('remove-event');
+	removeEventButton.addEventListener('click', function(){
+		console.log('intru');
+		requestConfirmation('Ștergere eveniment', "Doriți ștergerea acestui eveniment?", function(){
+			let eventId = document.getElementById('event-id').value;
+			eventManager.removeEvent(eventId);
+			$('.modal').removeClass('visible');
+			$('.cover').fadeOut(200);
+			$('.modals-container').fadeOut(200);
+		});
+	});
     
 }
 
 
-let addCommentButton = document.getElementById('add-comment-button');
-let canAdd = true;
-if(addCommentButton){
-	addCommentButton.addEventListener('click', function(e){
-		if(canAdd === true){
-			canAdd = false;
-			e.preventDefault;
-			let args = {};
-			args.eventId = parseInt(document.getElementById('event-id').value);
-			args.content = document.getElementById('comment-content').value;
-			document.getElementById('comment-content').value='';
-			eventManager.createComment(args);
-			setTimeout(function(){
-				canAdd = true;
-				console.log(canAdd);
-			}, 10000);
-		} 
-		else{
-			eventManager.promptMessage('Nu puteți adăuga alt comentariu așa de repede. (10s)', "err");
-		}
-	});
-}
 
-let removeEventButton = document.getElementById('remove-event');
-removeEventButton.addEventListener('click', function(){
-	console.log('intru');
-	requestConfirmation('Ștergere eveniment', "Doriți ștergerea acestui eveniment?", function(){
-		let eventId = document.getElementById('event-id').value;
-		eventManager.removeEvent(eventId);
-		$('.modal').removeClass('visible');
-		$('.cover').fadeOut(200);
-		$('.modals-container').fadeOut(200);
-	});
-});
 
 google.maps.event.addDomListener(window, 'load', init);
 

@@ -239,14 +239,14 @@ class EventManager{
 		}
 		let obj = this;
 		let request = new XMLHttpRequest();
-		request.open("POST", "resources/add-comment.php", true);
+		request.open("POST", "resources/add_comment.php", true);
 		request.onreadystatechange = function(){
 			if(this.readyState === 4 && this.status === 200){
 				let resp = JSON.parse(this.responseText);
 				if(resp.hasOwnProperty('error'))
 					obj.promptMessage(resp.error, "err");
 				else{
-					obj.promptMessage(resp.success, "succ");
+					//obj.promptMessage(resp.success, "succ");
 					for(let event of obj.events){
 						if(event.id === args.eventId){
 							obj.describeEvent(event);

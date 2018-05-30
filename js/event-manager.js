@@ -474,7 +474,6 @@ class EventManager{
 		promptContainer.appendChild(icon);
 		document.getElementsByTagName('body')[0].appendChild(promptContainer);
 		promptContainer.classList.add('visible');
-		console.log(promptContainer);
 		setTimeout(function(){
 			promptContainer.classList.remove('visible');
 			setTimeout(function(){document.getElementsByTagName('body')[0].removeChild(promptContainer)}, 200);

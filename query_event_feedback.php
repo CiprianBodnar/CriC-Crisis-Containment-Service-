@@ -4,7 +4,7 @@
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));
         die();
     }
-	$event_id = $_POST['event_id'];    
+	$event_id = trim($_POST['event_id']);    
     if(!($stmt = $conn->prepare("select id, user_id , content, post_date, firstname, lastname from comments 
                             join users on users.id_user=comments.user_id where event_id = ? order by post_date;"))){
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));

@@ -24,6 +24,7 @@ $('.cover').on("click", function(){
 	$(this).fadeOut(200);
 });
 
+
  $(function(){
     $('input#address-input').hide();
     $('input#checkbox').on('click', function(){

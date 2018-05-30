@@ -78,8 +78,10 @@
 	<?php include "modals/danger.php" ?>
 	<?php include "modals/searchInfo.php" ?>
 	<?php include "modals/share-info.php" ?>
+	<?php include "modals/notLoggedInAlert.php" ?>
 	<?php include "resources/add_person_info.php" ?>
 
+	
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/miscs.js"></script>
 	<script src="js/fill-page.js"></script>
@@ -91,5 +93,6 @@
 	<script src="js/address-value.js"></script>
 	<script src="js/users-autocomplete.js"></script>
 	<script src="js/search-info-print.js"></script>
+	
 </body>
 </html>

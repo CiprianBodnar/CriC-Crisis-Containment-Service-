@@ -3,7 +3,7 @@
 	$begin_date=trim($_POST['begin']);
 	$end_date=trim($_POST['end']);
 
-	if(!($stmt = $conn->prepare("select id_event, events.id_user, location, event_range, type, description, event_date, firstname, lastname, address, feedback from events left join users on users.id_user = events.id_user left join feedback on feedback.id_user = users.id_user and feedback.id_danger = id_event where event_date >= str_to_date(?,'%d-%m-%Y') and event_date <= str_to_date(?,'%d-%m-%Y')"))){
+	if(!($stmt = $conn->prepare("select id_event, events.id_user, location, event_range, type, description, event_date, firstname, lastname, address from events left join users on users.id_user = events.id_user where event_date >= str_to_date(?,'%d-%m-%Y') and event_date <= str_to_date(?,'%d-%m-%Y')"))){
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));
         die();                       
     }
@@ -23,8 +23,20 @@
             $event->user->firstname = $row['firstname'];
             $event->user->lastname = $row['lastname'];
 			$event->user->address = $row['address'];
-            if($row['feedback'] != null)
-                $event->feedbackValue = $row['feedback'];
+            if(isset($_SESSION['id_user'])){
+                $user_id = $_SESSION['id_user'];
+                if(!($fbstmt = $conn -> prepare("select feedback from feedback where id_danger = ? and id_user = ?"))){
+                    echo json_encode(array("error"=>"Could not post your request. ".$conn->error));
+                    die();
+                }
+                $fbstmt->bind_param("ii", $event->id, $user_id);
+                $fbstmt->execute();
+                if($fbrow = $fbstmt->get_result()->fetch_assoc()){
+                    $event->feedbackValue = $fbrow['feedback'];
+                }
+                $fbstmt->close();
+                    
+            }
             
             if($event->user->firstname === null) {
                 $event->user->firstname = 'anonim';

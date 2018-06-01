@@ -43,7 +43,7 @@ function updateFilterOptions(){
 	filterOptions.fire = document.getElementById('fire').checked;
 	filterOptions.person = document.getElementById('person').checked;
 	filterOptions.earthquake = document.getElementById('earthquake').checked;
-	filterOptions.snow_storm = document.getElementById('snow-storm').checked;
+	filterOptions.snowstorm = document.getElementById('snow-storm').checked;
 	filterOptions.flood = document.getElementById('flood').checked;
 	filterOptions.radius = document.getElementById('radius').checked;
 
@@ -200,55 +200,42 @@ function init(){
 			$('.modals-container').fadeOut(200);
 		});
 	});
-    
+
+	let upvoteBtn = document.getElementById('upvote-event');
+	let downvoteBtn = document.getElementById('downvote-event');
+	if(upvoteBtn && downvoteBtn){
+		upvoteBtn.addEventListener('click', function(e){
+			let fbVal = document.getElementById('feedback-val').value;
+			fbVal = fbVal == 1? 0 : 1;
+			let eventId = document.getElementById('event-id').value;
+			eventManager.setEventFeedback(eventId, fbVal, function(){
+				for(let event of eventManager.events){
+					if (event.id == eventId){
+						event.feedbackValue = parseInt(fbVal);
+						eventManager.describeEvent(event);
+						break;
+					}
+				}
+			});
+		});
+		downvoteBtn.addEventListener('click', function(e){
+			let fbVal = document.getElementById('feedback-val').value;
+			fbVal = fbVal == -1? 0 : -1;
+			let eventId = document.getElementById('event-id').value;
+			eventManager.setEventFeedback(eventId, fbVal, function(){
+				for(let event of eventManager.events){
+					if (event.id == eventId){
+						event.feedbackValue = parseInt(fbVal);
+						eventManager.describeEvent(event);
+						break;
+					}
+				}
+			});
+		});
+	} 
 }
 
 
 
 
 google.maps.event.addDomListener(window, 'load', init);
-
-$('.bottom-nav-menu ul li').on("click", function(){
-	if($(this).is('.tab-selected')){
-		$(this).removeClass('tab-selected');
-		$('.tab').removeClass('tab-visible');
-	}
-	else{
-		$('.bottom-nav-menu ul li').removeClass('tab-selected');
-		$(this).addClass('tab-selected');
-		var tab = $(this).data('tab');
-		$('.tab').removeClass('tab-visible');
-		$('.tab#'+tab).addClass('tab-visible');
-	}
-});
-
-$('.input-trigger').on("click", function(){
-	$(this).removeClass('visible');
-	$('#map-cover').fadeIn(200);
-	$('.wrapper').addClass('input-visible');
-	document.getElementById('address-keyword').focus();
-});
-
-$("#address-keyword").on("blur", function(e){
-	e.preventDefault();
-	$('.input-trigger').addClass('visible');
-	$(this).val('');
-	$('.wrapper').removeClass('input-visible');
-	$('#map-cover').fadeOut(200);
-});
-$('.modal').on('click', function(e){e.stopPropagation();});
-$('.modal-close').on('click', function(){
-	$('.modal').removeClass('visible');
-	$('.cover').fadeOut(200);
-	$('.modals-container').hide();
-});
-$('.modals-container').on("click", function(){
-	$('.modal').removeClass('visible');
-	$('.cover').fadeOut(200);
-	$(this).fadeOut(200);
-})
-$('.second-cover, .popup-close').on("click", function(e){
-	e.stopPropagation();
-	$('.second-cover').fadeOut();
-	$('.second-cover .modal').removeClass('visible');
-});

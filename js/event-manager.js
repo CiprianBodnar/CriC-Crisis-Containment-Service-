@@ -81,8 +81,8 @@ class EventManager{
 				});
 				setTimeout(function(){
 					mp.setCenter(center);
-					mp.setZoom(8);
-				}, 500);
+					mp.setZoom(7);
+				}, 200);
 			});
 		}
 	}
@@ -239,7 +239,7 @@ class EventManager{
 		}
 		let obj = this;
 		let request = new XMLHttpRequest();
-		request.open("POST", "resources/add_comment.php", true);
+		request.open("POST", "resources/add-comment.php", true);
 		request.onreadystatechange = function(){
 			if(this.readyState === 4 && this.status === 200){
 				let resp = JSON.parse(this.responseText);
@@ -263,6 +263,7 @@ class EventManager{
 	describeEvent(event){ 
 		let modal = {
 			container: document.getElementsByClassName('modals-container')[0],
+			preloader: document.getElementsByClassName('preloader')[0],
 			cover: document.getElementsByClassName('cover')[0],
 			id: document.getElementById('event-id'),
 			body: document.getElementById('view-event'),
@@ -284,10 +285,10 @@ class EventManager{
 			},
 			comments: document.getElementById('comments-container')
 		}
-
 		modal.cover.style.display='block';
 		modal.container.style.display='block';
 		modal.body.classList.add('visible');
+		modal.preloader.style.display='block';
 		modal.body.addEventListener('click', function(e){e.stopPropagation();});
 		let obj = this;
 		this.loadEventFeedback(event, function(){
@@ -317,6 +318,26 @@ class EventManager{
 		}
 		else{
 			modal.routeStatus.innerHTML = 'arată';
+		}
+		let feedbackInput = document.getElementById('feedback-val');
+		if(event.hasOwnProperty('feedbackValue')){
+			feedbackInput.value = event.feedbackValue;
+			console.log(event.feedbackValue);
+
+			if (event.feedbackValue == 1){
+				document.getElementById('upvote-event').classList.add('pressed');
+				document.getElementById('downvote-event').classList.remove('pressed');
+			}
+			else if(event.feedbackValue == -1){
+				document.getElementById('downvote-event').classList.add('pressed');
+				document.getElementById('upvote-event').classList.remove('pressed');
+			}else{
+				document.getElementById('downvote-event').classList.remove('pressed');
+				document.getElementById('upvote-event').classList.remove('pressed');
+			}
+		}
+		else{
+			feedbackInput.value='0';
 		}
 		
 		let routeButtonClone = modal.route.cloneNode(true);
@@ -355,7 +376,10 @@ class EventManager{
 		let posterAddr = event.user.address;
 		if(posterAddr.length>75)
 			posterAddr = posterAddr.substr(0, 75)+'...';
-		modal.poster.innerHTML="<div class='poster-name-container'><span class='poster-name'>"+event.user.firstname+' '+event.user.lastname+"</span></div>"+
+		modal.poster.innerHTML="<div class='poster-name-container'>"+
+									"<span class='poster-name'>"+event.user.firstname+' '+event.user.lastname+"</span>"+
+									"<span class='post-date'>"+event.date.toLocaleDateString('ro-RO')+' '+event.date.toLocaleTimeString('ro-RO')+"</span>"+
+								"</div>"+
 								"<div class='poster-address' title='"+event.user.address+"'>"+posterAddr+"</div";
 		modal.comments.innerHTML = "";
 		if(event.feedback.comments.length === 0)
@@ -391,7 +415,7 @@ class EventManager{
 
 		}
 
-		
+		modal.preloader.style.display='none';
 	}
 
 	removeEvent(eventId){
@@ -455,6 +479,26 @@ class EventManager{
 		}
 		request.send('event_id='+event.id);
 		
+	}
+
+	setEventFeedback(eventId, feedback, callback){
+		console.log('ajunge');
+		let request = new XMLHttpRequest();
+		request.open("POST", "resources/set-feedback.php", true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.onreadystatechange = function(){
+			if(request.readyState === 4 && request.status === 200){
+				let response = JSON.parse(request.responseText);
+				if(response.hasOwnProperty('error')){
+					obj.promptMessage(response.error, "err");
+				}
+				else
+					callback();
+			}
+		}
+		let postBody = 'event_id='+encodeURIComponent(eventId)+'&feedback_val='+encodeURIComponent(feedback);
+		console.log(postBody);
+		request.send(postBody);
 	}
 
 	promptMessage(message, type){

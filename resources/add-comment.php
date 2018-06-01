@@ -15,7 +15,7 @@
 		$stmt = $conn->prepare("insert into comments (user_id, event_id, content, post_date) values(?, ?, ?, sysdate())");
 		$stmt->bind_param('iis', $userId, $eventId, $commentContent);
 		$stmt->execute();
-		$result->success = "Comment posted";
+		$result->success = "Comentariu adăugat";
 		echo json_encode($result);
 		$stmt->close();
 		$stmt = $conn -> prepare("update users set conn_date = sysdate() where id_user = ?");

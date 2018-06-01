@@ -8,6 +8,7 @@
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/media.css">
     <!-- captcha verification -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -132,6 +133,7 @@
     </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/modals.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
     <script src="js/event-manager.js"></script>
     <script src="js/map-page.js"></script>

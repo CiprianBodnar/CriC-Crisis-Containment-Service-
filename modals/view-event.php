@@ -1,5 +1,6 @@
 <div class="modal" id="view-event">  
     <div class="box-small white">
+        <div class="preloader"><i class="fas fa-spinner fa-spin"></i></div>
         <!-- hidden inputs -->
         <input type="hidden" id="event-id" name="event-id">
         <div class="row modal-title"> 
@@ -34,11 +35,12 @@
                 <div class="row feedback-votes">
                      <!-- if user is logged in display upvote/downvote buttons -->
                     <?php if($loggedIn === true){ ?>
-                    <button class="up-col" id="upvote-event" onclick="upvote()">
+                    <input type="hidden" name="feedback_val" id="feedback-val">
+                    <button class="up-col" id="upvote-event">
                         <i class="fas fa-arrow-up"></i>
                         <span id="upvotes"><!-- number of positive votes goes here --></span>
                     </button>
-                    <button class="down-col" id="downvote-event" onclick="downvote()">
+                    <button class="down-col" id="downvote-event">
                         <i class="fas fa-arrow-down"></i>
                         <span id="downvotes"><!-- numer of negative votes goes here --></span>
                     </button>

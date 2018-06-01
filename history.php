@@ -8,6 +8,7 @@
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/history.css">
+    <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
 
@@ -130,10 +131,17 @@
             <div class="clear"></div>
         </div>
     </footer>
+    
+
+    <div class="cover"></div>
+    <div class="modals-container">
+    <?php include "modals/view-event.php" ?>
+    <?php include "modals/confirmation-popup.php" ?>
+    </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="http://www.google.com/jsapi"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&callback"></script>
+    <script src="js/modals.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
     <script src="js/event-manager.js"></script>
     <script src="js/history-map-page.js"></script>
 	<script src="js/miscs.js"></script>

@@ -33,9 +33,9 @@
             </div>
             <div class="col6">
                 <div class="row feedback-votes">
+                    <input type="hidden" name="feedback_val" id="feedback-val">
                      <!-- if user is logged in display upvote/downvote buttons -->
                     <?php if($loggedIn === true){ ?>
-                    <input type="hidden" name="feedback_val" id="feedback-val">
                     <button class="up-col" id="upvote-event">
                         <i class="fas fa-arrow-up"></i>
                         <span id="upvotes"><!-- number of positive votes goes here --></span>

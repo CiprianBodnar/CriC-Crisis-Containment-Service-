@@ -107,7 +107,7 @@ $dbname = "CricDB";
             event_range INT(9) not null,
             type varchar(15) not null,
             description text not null,
-            event_date date not null
+            event_date datetime not null
             )";
         if ($conn->query($sql) == TRUE){
             echo "Done create events <br>";

@@ -177,7 +177,7 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error."<br>";
         }
     
-        $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('Jhon','Doe','john_doe@myemail.com','D74FF0EE8DA3B9806B18C877DBF29BBDE50B5BD8E4DAD7A3A725000FEB82E8F1','Iasi, Romania',sysdate())";
+        $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('Jhon','Doe','john_doe@myemail.com','D74FF0EE8DA3B9806B18C877DBF29BBDE50B5BD8E4DAD7A3A725000FEB82E8F1','46.05178614016413 23.53747432532782',sysdate())";
         if (!$conn->query($sql) ){
             echo "Error: " . $conn->error."<br>";
         }

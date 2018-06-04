@@ -42,8 +42,8 @@
            		<p class="tab-title"> Interval de căutare</p>
                 <span  class="amount" > </span>
 				<div class="slider-range">
-                    <input value="75" min="0" max="120" step="1" type="range">
-                    <input value="120" min="0" max="120" step="1" type="range">
+                    <input value="30" min="0" max="60" step="1" type="range">
+                    <input value="60" min="0" max="60" step="1" type="range">
                     <div class="pretty"></div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
     <script src="js/modals.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
     <script src="js/event-manager.js"></script>
-    <script src="js/history-map-page.js"></script>
+    <script src="js/map-page.js"></script>
 	<script src="js/miscs.js"></script>
 	<script src="js/slider_custom.js"></script>
     

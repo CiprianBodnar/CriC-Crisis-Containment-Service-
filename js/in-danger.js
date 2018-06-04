@@ -1,6 +1,5 @@
  document.getElementById('sendInDanger').addEventListener('click', function(e){
 
-
     let inDangerMessage = document.getElementById("inDangerMessageId").value;
     let address = document.getElementById("address-input2").value;
     let request = new XMLHttpRequest();

@@ -9,6 +9,14 @@ class EventManager{
 		this.directionsService = new google.maps.DirectionsService();
 	}
 
+	getMap(){
+		return this.map;
+	}
+
+	getGeocoder(){
+		return this.geocoder;
+	}
+
 	codeLatLng(latLng, output, callback) {
 		var latlng = new google.maps.LatLng(latLng.lat, latLng.lng);
 		var address=[];
@@ -322,7 +330,6 @@ class EventManager{
 		let feedbackInput = document.getElementById('feedback-val');
 		if(event.hasOwnProperty('feedbackValue')){
 			feedbackInput.value = event.feedbackValue;
-			console.log(event.feedbackValue);
 
 			if (event.feedbackValue == 1){
 				document.getElementById('upvote-event').classList.add('pressed');
@@ -482,7 +489,6 @@ class EventManager{
 	}
 
 	setEventFeedback(eventId, feedback, callback){
-		console.log('ajunge');
 		let request = new XMLHttpRequest();
 		request.open("POST", "resources/set-feedback.php", true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -497,7 +503,6 @@ class EventManager{
 			}
 		}
 		let postBody = 'event_id='+encodeURIComponent(eventId)+'&feedback_val='+encodeURIComponent(feedback);
-		console.log(postBody);
 		request.send(postBody);
 	}
 

@@ -3,7 +3,7 @@
 	$begin_date=trim($_POST['begin']);
 	$end_date=trim($_POST['end']);
 
-	if(!($stmt = $conn->prepare("select id_event, events.id_user, location, event_range, type, description, event_date, firstname, lastname, address from events left join users on users.id_user = events.id_user where event_date >= str_to_date(?,'%d-%m-%Y') and event_date <= str_to_date(?,'%d-%m-%Y')"))){
+	if(!($stmt = $conn->prepare("select id_event, events.id_user, location, event_range, type, description, event_date, firstname, lastname, address from events left join users on users.id_user = events.id_user where event_date >= str_to_date(?,'%d-%m-%Y') and event_date <= (str_to_date(?,'%d-%m-%Y')+1)"))){
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));
         die();                       
     }

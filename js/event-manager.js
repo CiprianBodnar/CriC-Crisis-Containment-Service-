@@ -38,7 +38,11 @@ class EventManager{
 						}
 					}
 				} 
-			});
+				else{
+					output.innerHTML = 'adresă necunoscută';
+				}
+			}
+		);
 	}
 
 	filter(options){
@@ -328,20 +332,18 @@ class EventManager{
 			modal.routeStatus.innerHTML = 'arată';
 		}
 		let feedbackInput = document.getElementById('feedback-val');
+		let upvoteButton = document.getElementById('upvote-event');
+		let downvoteButton = document.getElementById('downvote-event');
+		if(upvoteButton && downvoteButton){
+			upvoteButton.classList.remove('pressed');
+			downvoteButton.classList.remove('pressed');
+		}
 		if(event.hasOwnProperty('feedbackValue')){
 			feedbackInput.value = event.feedbackValue;
-
-			if (event.feedbackValue == 1){
-				document.getElementById('upvote-event').classList.add('pressed');
-				document.getElementById('downvote-event').classList.remove('pressed');
-			}
-			else if(event.feedbackValue == -1){
-				document.getElementById('downvote-event').classList.add('pressed');
-				document.getElementById('upvote-event').classList.remove('pressed');
-			}else{
-				document.getElementById('downvote-event').classList.remove('pressed');
-				document.getElementById('upvote-event').classList.remove('pressed');
-			}
+			if (event.feedbackValue == 1)
+				upvoteButton.classList.add('pressed');
+			else if(event.feedbackValue == -1)
+				downvoteButton.classList.add('pressed');
 		}
 		else{
 			feedbackInput.value='0';
@@ -380,14 +382,20 @@ class EventManager{
 			modal.votebar.positive.style.width=proc+'%';
 			modal.votebar.negative.style.width=(100-proc)+'%';
 		}
-		let posterAddr = event.user.address;
-		if(posterAddr.length>75)
-			posterAddr = posterAddr.substr(0, 75)+'...';
 		modal.poster.innerHTML="<div class='poster-name-container'>"+
 									"<span class='poster-name'>"+event.user.firstname+' '+event.user.lastname+"</span>"+
 									"<span class='post-date'>"+event.date.toLocaleDateString('ro-RO')+' '+event.date.toLocaleTimeString('ro-RO')+"</span>"+
 								"</div>"+
-								"<div class='poster-address' title='"+event.user.address+"'>"+posterAddr+"</div";
+								"<div id='poster-address' class='poster-address'></div";
+		let posterAddressContainer = document.getElementById('poster-address');
+		this.codeLatLng(event.user.location, posterAddressContainer, function(){
+			let posterAddress = posterAddressContainer.innerHTML;
+			posterAddressContainer.setAttribute('title', posterAddress);
+			if(posterAddress.length>50){
+				posterAddress = posterAddress.substr(0, 50)+'...';
+				posterAddressContainer.innerHTML = posterAddress;
+			}
+		})
 		modal.comments.innerHTML = "";
 		if(event.feedback.comments.length === 0)
 			modal.comments.innerHTML = "Nu există comentarii.";
@@ -492,14 +500,19 @@ class EventManager{
 		let request = new XMLHttpRequest();
 		request.open("POST", "resources/set-feedback.php", true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		let obj = this;
 		request.onreadystatechange = function(){
 			if(request.readyState === 4 && request.status === 200){
 				let response = JSON.parse(request.responseText);
 				if(response.hasOwnProperty('error')){
 					obj.promptMessage(response.error, "err");
 				}
-				else
+				else{
+					if(response.hasOwnProperty('removed')){
+						window.location.reload();
+					}
 					callback();
+				}
 			}
 		}
 		let postBody = 'event_id='+encodeURIComponent(eventId)+'&feedback_val='+encodeURIComponent(feedback);

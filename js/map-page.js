@@ -80,7 +80,7 @@ function init(){
     initAutocomplete(map);
     eventManager = new EventManager(map, geocoder);
     let startDate = new Date();
-    startDate.setDate(1);
+    startDate.setDate(startDate.getDate()-3);
     eventManager.loadEvents(startDate, new Date());
     eventManager.setCurrentLocation();
     for(let option of document.getElementsByClassName('filter-option')){

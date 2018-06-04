@@ -34,27 +34,26 @@
         array_push($comments, $comment);
     }
 
-    $stmt = $conn->prepare("select count(*) as upvotes from feedback where feedback = 1 and id_danger =?");
+    $stmt = $conn->prepare("select count(case when feedback = 1 then feedback end) as upvotes, 
+                                count(case when feedback = -1 then feedback end) as downvotes 
+                                from feedback where id_danger = ?");
     $stmt-> bind_param("i",$event_id);
     $stmt->execute();
     $res = $stmt->get_result();
     $up;
-    if($row = $res->fetch_assoc())
-        $up = floatval($row['upvotes']);
-   
-    $stmt = $conn->prepare("select count(*) as downvotes from feedback where feedback = -1 and id_danger =?");
-    $stmt-> bind_param("i",$event_id);
-    $stmt->execute();
-    $res = $stmt->get_result();
     $down;
-    if($row = $res->fetch_assoc())
+    if($row = $res->fetch_assoc()){
+        $up = floatval($row['upvotes']);
         $down = floatval($row['downvotes']);
-     
+    }
+    else{
+        $up= 0 ;
+        $down = 0;
+    }
     $feedback = new \stdClass();
     $feedback -> votes = new \stdClass();
     $feedback -> votes -> up = $up;
     $feedback -> votes -> down = $down;
-    $feedback -> comments = $comments;
-    
+    $feedback -> comments = $comments;    
     echo json_encode($feedback);
  ?>

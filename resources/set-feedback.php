@@ -54,6 +54,39 @@
 	$stmt->bind_param("iii", $feedback, $user_id, $event_id);
 	$stmt->execute();
 	$stmt->close();
+	$stmt = $conn->prepare("select count(case when feedback = 1 then feedback end) as upvotes, 
+                                count(case when feedback = -1 then feedback end) as downvotes 
+                                from feedback where id_danger = ?");
+    $stmt-> bind_param("i",$event_id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $up;
+    $down;
+    if($row = $res->fetch_assoc()){
+        $up = floatval($row['upvotes']);
+        $down = floatval($row['downvotes']);
+    }
+    else{
+        $up= 0 ;
+        $down = 0;
+    }
+    if($up+$down>=10){
+    	if($down/($up+$down)>0.66){
+    		$rmEvent = $conn->prepare("delete from events where id_event = ?");
+    		$rmEvent->bind_param('i', $event_id);
+    		$rmEvent->execute();
+    		$rmEvent->close();
+    		$rmEvent = $conn->prepare("delete from comments where event_id = ?");
+    		$rmEvent->bind_param('i', $event_id);
+    		$rmEvent->execute();
+    		$rmEvent->close();
+    		$rmEvent = $conn->prepare("delete from feedback where id_danger = ?");
+    		$rmEvent->bind_param('i', $event_id);
+    		$rmEvent->execute();
+    		$rmEvent->close();
+    		$response->removed=true;
+    	}
+    }
 	$response->success="feedback updated";
 	echo json_encode($response);
 

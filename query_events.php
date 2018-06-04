@@ -15,14 +15,20 @@
 	if ($res = $stmt->get_result()){
 		
         while($row = $res->fetch_assoc()){
-			
+            $user_address;
+            if ($row['address'] == null)
+                $user_address = array(-1, -1);
+            else
+                $user_address = explode(" ", $row['address']);
         	$event = new \stdClass();
         	$event->id = floatval($row['id_event']);
             $event->user = new \stdClass();
         	$event->user->id = floatval($row['id_user']);
             $event->user->firstname = $row['firstname'];
             $event->user->lastname = $row['lastname'];
-			$event->user->address = $row['address'];
+			$event->user->location = new \stdClass();
+            $event->user->location->lat = floatval($user_address[0]);
+            $event->user->location->lng = floatval($user_address[1]);
             if(isset($_SESSION['id_user'])){
                 $user_id = $_SESSION['id_user'];
                 if(!($fbstmt = $conn -> prepare("select feedback from feedback where id_danger = ? and id_user = ?"))){

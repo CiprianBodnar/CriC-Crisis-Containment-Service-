@@ -33,7 +33,7 @@ for($i=1;$i<$NUM_OF_RECORDS;$i++){
 
     $location = $prima.' '.$adoua;
     $id_user = rand(0,$NUM_OF_RECORDS);
-    $event_range = rand(10,5000);
+    $event_range = rand(5000,50000);
 
     $type_num = rand(1,4);
     if($type_num ==1) 
@@ -96,7 +96,7 @@ for($i=$NUM_OF_RECORDS;$i<$NUM_OF_RECORDS_TODAY+$NUM_OF_RECORDS;$i++){
 
     $location = $prima.' '.$adoua;
     $id_user = rand(0,$NUM_OF_RECORDS+$NUM_OF_RECORDS_TODAY);
-    $event_range = rand(10,5000);
+    $event_range = rand(5000,50000);
 
     $type_num = rand(1,4);
     if($type_num ==1) 

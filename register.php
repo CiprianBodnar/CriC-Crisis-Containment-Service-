@@ -202,7 +202,7 @@ if(isset($_SESSION['loggedIn'])){
 
                                     <input type="text" name="Adresa" value="<?php if($error) echo $_SESSION['pre-address']; else 
                                         echo 'Adresa'; ?>" <?php if($address_error) echo "class = 'error'"; ?> onfocus="if(this.value=='Adresa') this.value='';" onblur="if(this.value=='') this.value='Adresa';" id = "address-input">
-                                    <input type="text" id ="formatted-addr" name ="formatted-address" value="" style="display:none;">
+                                    <input type="hidden" id ="formatted-addr" name ="formatted-address" value="">
                                     <button type="submit" id="submit-button" name="submit">
                                         Trimitere
                                     </button>
@@ -229,7 +229,6 @@ if(isset($_SESSION['loggedIn'])){
     <script src="js/miscs.js"></script>
     <script src="js/fill-page.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
-
     <script src="js/register-address.js"></script>
 </body>
 </html>

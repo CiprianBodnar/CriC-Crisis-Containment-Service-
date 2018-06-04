@@ -87,6 +87,7 @@ $dbname = "CricDB";
             email VARCHAR(50) NOT NULL,
             password CHAR(64) NOT NULL,
             address VARCHAR(80) NOT NULL,
+            posted INT(6),
             conn_date DATETIME
         )";
         if ($conn->query($sql) == TRUE){

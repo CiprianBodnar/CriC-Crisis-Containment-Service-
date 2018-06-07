@@ -73,7 +73,15 @@
             <div class="col12">
                 <p class="subtitle">Adăugat de</p>
                 <div id="poster-container">
-                    <!-- poster info goes here -->
+                    <div class="poster-name-container">
+                        <span class="poster-name">
+                            <!-- poster name goes here -->
+                        </span>
+                        <span class="post-date">
+                            <!-- post datetime goes here -->
+                        </span>
+                    </div>
+                    <div id="poster-address" class="poster-address"></div>
                 </div>
             </div>
         </div>

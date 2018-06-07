@@ -1,8 +1,10 @@
 <?php
-include_once('../dbConnect.php');
 
 #################
-set_time_limit(120);
+set_time_limit(240);
+
+include_once('../dbConnect.php');
+
 $NUM_OF_RECORDS = 115;
 $NUM_OF_RECORDS_TODAY=15;
 
@@ -19,7 +21,7 @@ for($i=1;$i<$NUM_OF_RECORDS;$i++){
     $adoua = '2'.$frst.'.'.$aftercoma2;
 
     $location = $prima.' '.$adoua;
-    $stmt = $conn->prepare("INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES (?,?,?,'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',?,sysdate())");
+    $stmt = $conn->prepare("INSERT INTO Users (firstname, lastname, email, password, address, posted, conn_date) VALUES (?,?,?,'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',?, 0, sysdate())");
 	$stmt ->bind_param("ssss",$name,$f,$email,$location);
     $stmt->execute();
     
@@ -59,6 +61,10 @@ for($i=1;$i<$NUM_OF_RECORDS;$i++){
     $stmt = $conn->prepare("INSERT INTO events (id_event,id_user, location, event_range, type, description, event_date) values(?,?, ?, ?, ?, ?,?)");
 	$stmt ->bind_param("iisisss", $i,$id_user, $location, $event_range, $type, $desciption,$full_date);
     $stmt->execute();
+    $update_stmt = $conn->prepare("update users set posted = ifnull(posted, 0)+1 where id_user = ?");
+    $update_stmt->bind_param('i', $id_user);
+    $update_stmt->execute();
+    $update_stmt->close();
     
 
 
@@ -121,6 +127,10 @@ for($i=$NUM_OF_RECORDS;$i<$NUM_OF_RECORDS_TODAY+$NUM_OF_RECORDS;$i++){
     $stmt = $conn->prepare("INSERT INTO events (id_event,id_user, location, event_range, type, description, event_date) values(?,?, ?, ?, ?, ?,sysdate())");
 	$stmt ->bind_param("iisiss", $i,$id_user, $location, $event_range, $type, $desciption);
     $stmt->execute();
+    $update_stmt = $conn->prepare("update users set posted = ifnull(posted, 0)+1 where id_user = ?");
+    $update_stmt->bind_param('i', $id_user);
+    $update_stmt->execute();
+    $update_stmt->close();
 
 
     $num_of_comments = rand(1,7);

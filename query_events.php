@@ -3,7 +3,7 @@
 	$begin_date=trim($_POST['begin']);
 	$end_date=trim($_POST['end']);
 
-	if(!($stmt = $conn->prepare("select id_event, events.id_user, location, event_range, type, description, event_date, firstname, lastname, address from events left join users on users.id_user = events.id_user where event_date >= str_to_date(?,'%d-%m-%Y') and event_date <= (str_to_date(?,'%d-%m-%Y')+1)"))){
+	if(!($stmt = $conn->prepare("select id_event, events.id_user, location, event_range, type, description, event_date, firstname, lastname, address, posted from events left join users on users.id_user = events.id_user where event_date >= str_to_date(?,'%d-%m-%Y') and event_date <= (str_to_date(?,'%d-%m-%Y')+1)"))){
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));
         die();                       
     }
@@ -29,6 +29,17 @@
 			$event->user->location = new \stdClass();
             $event->user->location->lat = floatval($user_address[0]);
             $event->user->location->lng = floatval($user_address[1]);
+
+            //score for user;
+            $score_stmt = $conn->prepare("select count(*) as valid from events where id_user = ?");
+            $score_stmt->bind_param('i', $event->user->id);
+            $score_stmt->execute();
+            $valid_events = floatval($score_stmt->get_result()->fetch_assoc()['valid']);
+            if($row['posted']!=0)
+                $event->user->score= $valid_events/floatval($row['posted']);
+            else
+                $event->user->score = 1;
+
             if(isset($_SESSION['id_user'])){
                 $user_id = $_SESSION['id_user'];
                 if(!($fbstmt = $conn -> prepare("select feedback from feedback where id_danger = ? and id_user = ?"))){

@@ -3,8 +3,6 @@ class EventManager{
 		this.map = map;
 		this.geocoder = geocoder;
 		this.events = [];
-		this.fTable = "1j2RBA86oA4o9sM6CA73766UpV4xI9l_g8i26XLjJ";
-		this.fKey = "AIzaSyCPPSKN76hoz7yARd-4yLxU4DhZJzKOoAc";
 		this.timeTable = [];
 		this.directionsService = new google.maps.DirectionsService();
 	}
@@ -20,6 +18,7 @@ class EventManager{
 	codeLatLng(latLng, output, callback) {
 		var latlng = new google.maps.LatLng(latLng.lat, latLng.lng);
 		var address=[];
+		output.innerHTML = "<i class='fas fa-spinner fa-spin'></i>";
 		this.geocoder.geocode({
 			'latLng': latlng
 			}, 
@@ -283,7 +282,11 @@ class EventManager{
 			removeButton: document.getElementById('remove-event'),
 			range: document.getElementById('event-range'),
 			route: document.getElementById('toggle-route'),
-			poster: document.getElementById('poster-container'),
+			poster: {
+				name: document.getElementsByClassName('poster-name')[0],
+				date: document.getElementsByClassName('post-date')[0],
+				address: document.getElementById('poster-address')
+			},
 			routeStatus: document.getElementById('toggle-state'),
 			description: document.getElementById('event-description'),
 			location: document.getElementById('event-location'),
@@ -379,21 +382,21 @@ class EventManager{
 		}
 		else{
 			let proc = 100/((event.feedback.votes.up+event.feedback.votes.down)/event.feedback.votes.up);
+			proc = proc.toFixed(2);
 			modal.votebar.positive.style.width=proc+'%';
 			modal.votebar.negative.style.width=(100-proc)+'%';
 		}
-		modal.poster.innerHTML="<div class='poster-name-container'>"+
-									"<span class='poster-name'>"+event.user.firstname+' '+event.user.lastname+"</span>"+
-									"<span class='post-date'>"+event.date.toLocaleDateString('ro-RO')+' '+event.date.toLocaleTimeString('ro-RO')+"</span>"+
-								"</div>"+
-								"<div id='poster-address' class='poster-address'></div";
-		let posterAddressContainer = document.getElementById('poster-address');
-		this.codeLatLng(event.user.location, posterAddressContainer, function(){
-			let posterAddress = posterAddressContainer.innerHTML;
-			posterAddressContainer.setAttribute('title', posterAddress);
-			if(posterAddress.length>50){
-				posterAddress = posterAddress.substr(0, 50)+'...';
-				posterAddressContainer.innerHTML = posterAddress;
+		modal.poster.name.innerText = event.user.firstname+' '+event.user.lastname;
+		if(event.user.id!=-1){
+			modal.poster.name.innerHTML = this.getFormattedScore(event.user.score) + modal.poster.name.innerHTML;
+		}
+		modal.poster.date.innerText = event.date.toLocaleDateString('ro-RO')+' '+event.date.toLocaleTimeString('ro-RO');
+		this.codeLatLng(event.user.location, modal.poster.address, function(){
+			let posterAddress = modal.poster.address.innerHTML;
+			modal.poster.address.setAttribute('title', posterAddress);
+			if(posterAddress.length>75){
+				posterAddress = posterAddress.substr(0, 75)+'...';
+				modal.poster.address.innerHTML = posterAddress;
 			}
 		})
 		modal.comments.innerHTML = "";
@@ -554,6 +557,8 @@ class EventManager{
 				return {icon: new google.maps.MarkerImage('img/danger-icons/fire.png', null, null, new google.maps.Point(20, 21)), color: '#f41e1e'};
 			case 'person':
 				return {icon: new google.maps.MarkerImage('img/danger-icons/person.png', null, null, new google.maps.Point(10, 10)), color: '#ffffff'};
+			case 'safehouse':
+				return {icon: new google.maps.MarkerImage('img/danger-icons/safehouse.pnh', null, null, new google.maps.Point(14, 14)), color: '#00a651'};
 			default:
 				return null;
 		}
@@ -581,7 +586,30 @@ class EventManager{
 		}
 	}
 
+	getFormattedScore(score){
+		score=score*4;
+		let diff = score-parseInt(score);
+		score = parseInt(score);
+		let html = "";
+		for(let x = 1; x <= score; x++){
+			html+="<i class='fas fa-star fa-fw'></i>";
+		}
+		if(score<4){
+			if(diff >= 0.25 && diff <= 0.75){
+				html+="<i class='fas fa-star-half fa-fw'></i><i class='far fa-star-half fa-fw fix-half-star'></i>";
+				score++;
+			}
+			else if (diff>0.75){
+				html+="<i class='fas fa-star fa-fw'></i>";
+				score++;
+			}
 
+			for(let x = score; x<4;x++){
+				html+="<i class='far fa-star fa-fw'></i>";
+			}
+		}
+		return html;
+	}
 
 	getFormattedRange(range){
 		if(range<1000)

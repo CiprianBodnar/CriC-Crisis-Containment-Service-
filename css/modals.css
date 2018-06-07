@@ -379,6 +379,28 @@ span.location-icon{
 	font-size: 14px;
 	z-index: 1;
 }
+.modal#view-event .poster-name i{
+	font-size: 10px;
+	position: relative;
+	top: -1px;
+}
+.modal#view-event .poster-name i:last-child{
+	margin-right: 8px;
+}
+.modal#view-event .poster-name i:last-child:after{
+	content:"|";
+	font-size: 13px;
+	position: relative;
+	left: 3px;
+	top: -1px;
+}
+.modal#view-event .poster-name i.fix-half-star{
+	-webkit-transform: scaleX(-1);
+	-ms-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	transform: scaleX(-1);
+	margin-left: -1.25em;
+}
 .modal#view-event .pressed{
 	background: #eee;
 }
@@ -390,7 +412,7 @@ span.location-icon{
 .modal#view-event .post-date{
 	padding: 6px 10px 6px 15px;
 	background: #dddddd;
-	margin-left: -10px;
+	margin-left: -15px;
 	color: #5f5f5f;
 	letter-spacing: 1px;
 	position: relative;

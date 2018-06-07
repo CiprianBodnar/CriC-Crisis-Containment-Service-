@@ -19,6 +19,27 @@ include_once('dbConnect.php');
 			$response -> id = $row['max'];
 		}
 	}
+	if($id_user != -1){
+		// increment posted events to build up the score by substracting valid events from posted events
+		$stmt = $conn->prepare("select posted from users where id_user = ?");
+		$stmt->bind_param('i', $id_user);
+		$stmt->execute();
+		$posted = $stmt->get_result()->fetch_assoc()["posted"];
+		if($posted === null)
+			$posted = 1;
+		else{
+			$posted = floatval($posted)+1;
+		}
+		$stmt = $conn->prepare("update users set posted = ? where id_user = ?");
+		$stmt->bind_param('ii', $posted, $id_user);
+		$stmt->execute();
+		$stmt->close();
+		// set last online datetime for current user
+		$stmt = $conn -> prepare("update users set conn_date = sysdate() where id_user = ?");
+		$stmt -> bind_param('i', $id_user);
+		$stmt -> execute();
+		$stmt -> close();
+	}
 	echo json_encode($response);
 	$conn->close();
  ?>

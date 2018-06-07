@@ -71,7 +71,7 @@
         $down = 0;
     }
     if($up+$down>=10){
-    	if($down/($up+$down)>0.66){
+    	if($down/($up+$down)>0.66 && $feedback === -1){
     		$rmEvent = $conn->prepare("delete from events where id_event = ?");
     		$rmEvent->bind_param('i', $event_id);
     		$rmEvent->execute();
@@ -87,6 +87,13 @@
     		$response->removed=true;
     	}
     }
+
+    // set last online datetime for current user
+	$stmt = $conn -> prepare("update users set conn_date = sysdate() where id_user = ?");
+	$stmt -> bind_param('i', $user_id);
+	$stmt -> execute();
+	$stmt -> close();
+
 	$response->success="feedback updated";
 	echo json_encode($response);
 

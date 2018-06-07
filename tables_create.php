@@ -177,33 +177,6 @@ $dbname = "CricDB";
         }else{
             echo "Error: " . $conn->error."<br>";
         }
-    
-        $sql = "INSERT INTO Users (firstname, lastname, email, password, address, conn_date) VALUES ('Jhon','Doe','john_doe@myemail.com','D74FF0EE8DA3B9806B18C877DBF29BBDE50B5BD8E4DAD7A3A725000FEB82E8F1','46.05178614016413 23.53747432532782',sysdate())";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
-            
-        $sql = "INSERT INTO events (id_user, location, event_range, type, description, event_date) values(1, '46.05178614016413 23.53747432532782',50000,'flood', 'Description 1', STR_TO_DATE('1-01-2012', '%d-%m-%Y'))";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
-        $sql = "INSERT INTO events (id_user, location, event_range, type, description, event_date) values(1, '47.376147952677464 25.731042861637434',3500,'fire', 'Description 2', STR_TO_DATE('1-01-2010', '%d-%m-%Y'))";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
-        $sql = "INSERT INTO events (id_user, location, event_range, type, description, event_date) values(1, '47.8433692 25.9116992', 5000,'person', 'Description 3', STR_TO_DATE('1-01-2014', '%d-%m-%Y'))";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
-        $sql = "INSERT INTO events (id_user, location, event_range, type, description, event_date) values(1, '46.942902018973214 23.178674297477528', 100000,'snowstorm', 'Description 4', STR_TO_DATE('1-01-2017', '%d-%m-%Y'))";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
-        $sql = "INSERT INTO events (id_user, location, event_range, type, description, event_date) values(1, '45.7838705 26.4059382', 99999,'earthquake', 'Description 5', STR_TO_DATE('08-05-2018', '%d-%m-%Y'))";
-        if (!$conn->query($sql) ){
-            echo "Error: " . $conn->error."<br>";
-        }
-
        
 
     

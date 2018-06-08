@@ -4,20 +4,35 @@ function loadUsers(source, hiddenInput, output) {
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = (function() {
 		if(request.readyState === 4 && request.status === 200) {
-			let users = JSON.parse(request.responseText);
-			let input = output;
-			input.innerHTML = '';
+			let response = JSON.parse(request.responseText);
+			output.innerHTML = '';
+			if(response.status === "null"){
+				return;
+			}
+			let users = response.result;
+			hiddenInput.setAttribute('value', users[0].id_user);
 			for(let user of users) {
 				let newUser = document.createElement('div');
 				newUser.classList.add('user');
 				newUser.innerHTML = user.name;
+				let location = document.createElement('span');
+				location.classList.add('user-location');
+				let latLng = user.address.split(" ");
+				latLng = {lat: latLng[0], lng: latLng[1]};
+				new EventManager(null, new google.maps.Geocoder()).codeLatLng(latLng, location, function(){
+					if(location.innerText.length>35){
+						location.setAttribute('title', location.innerText);
+						location.innerText = location.innerText.substr(0, 35)+'...';
+					}
+				});
+				newUser.appendChild(location);
 				
 				newUser.addEventListener('click', function(){
 					hiddenInput.setAttribute('value', user.id_user);
 					source.value=user.name;
-					input.innerHTML = '';
+					output.innerHTML = '';
 				});
-				input.appendChild(newUser);
+				output.appendChild(newUser);
 			}
 		}
 	});
@@ -25,20 +40,28 @@ function loadUsers(source, hiddenInput, output) {
 	request.send(sendName);
 }
 
-let shareSource = document.getElementById('share-autocomplete');
-let shareHiddenInput = document.getElementById('share-suggested-user-id');
-let shareOutput = document.getElementById('share-users-suggest');
+let instances = [
+	{
+		source: document.getElementById('share-autocomplete'),
+		hiddenInput: document.getElementById('share-suggested-user-id'),
+		output: document.getElementById('share-users-suggest')
+	},
+	{
+		source: document.getElementById('search-autocomplete'),
+		hiddenInput: document.getElementById('search-suggested-user-id'),
+		output: document.getElementById('search-users-suggest')
+	}
+];
 
-let searchSource = document.getElementById('search-autocomplete');
-let searchHiddenInput = document.getElementById('search-suggested-user-id');
-let searchOutput = document.getElementById('search-users-suggest');
-
-shareSource.addEventListener('keydown', function(){
-	if(shareSource.value.length>=3)
-		loadUsers(shareSource, shareHiddenInput, shareOutput);
-});
-
-searchSource.addEventListener('keydown', function(){
-	if(searchSource.value.length>=3)
-		loadUsers(searchSource, searchHiddenInput, searchOutput);
-});
+for(let instance of instances){
+	if(instance.source && instance.hiddenInput && instance.output){
+		instance.source.addEventListener('keydown', function(){
+			if(instance.source.value.length>=3)
+				loadUsers(instance.source, instance.hiddenInput, instance.output);
+			else{
+				instance.output.innerHTML = '';
+				instance.hiddenInput.value='';
+			}
+		});
+	}
+}

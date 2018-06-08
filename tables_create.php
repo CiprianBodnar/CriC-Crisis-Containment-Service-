@@ -142,7 +142,7 @@ $dbname = "CricDB";
             id INT(6) NOT NULL PRIMARY KEY auto_increment,
             id_user_in_danger INT(6) NOT NULL,
             id_user_posting INT(6) NOT NULL,
-            details VARCHAR(150),
+            details TEXT,
             address VARCHAR(80),
             conn_date DATETIME
             )";

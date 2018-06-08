@@ -1,6 +1,6 @@
 .cover {
     z-index: 2;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -74,13 +74,12 @@
     font-family: 'Calibri';
     font-size: 16px;
 }
-
 #submit-button {
     border: none;
-    background: #5c2716;
+    background: #5c2716;   
     text-align: center;
     display: block;
-    padding: 0 10px;
+    font-size: 18px;
     color: white;
     top: 5px;
     position: relative;
@@ -89,10 +88,16 @@
     transition: All .2s ease;
     -webkit-transition: All .2s ease;
     -o-transition: All .2s ease;
-    /* float: left; */
+    float: left;
+    width: 40px;
     height: 40px;
     line-height: 40px;
 }
+
+#submit-button:hover {
+	background: #1B1817;
+}
+
 
 #submit-button:hover {
     background: #1B1817;
@@ -360,7 +365,7 @@ span.location-icon{
 }
 .modals-container{
 	z-index: 2;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -477,4 +482,62 @@ span#remove-event {
 	display: none;
 	background: #fff;
 	padding: calc(50% - 26px) 0;
+}
+.modal .search-users-suggest{
+	max-height: 300px;
+	overflow-y: auto;
+	margin-top: -5px;
+	position: absolute;
+	width: calc(100% - 40px);
+	background: #fff;
+}
+.modal .search-users-suggest .user{
+	-webkit-transition: All .2s ease;
+	-o-transition: All .2s ease;
+	transition: All .2s ease;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 20px;
+	border-bottom: 1px solid #eee;
+	color: #454545;
+	cursor: pointer;
+	font-family: Calibri, sans-serif;
+}
+.modal .search-users-suggest .user:hover{
+	color: #333;
+	background: #efefef;
+}
+.modal .search-users-suggest .user-location{
+	margin-left: 15px;
+	font-style: italic;
+	font-size: 12px;
+}
+.modal#search input[type=text]{
+	width: calc(100% - 40px);
+	height: 40px;
+	float: left;
+}
+.modal#search #user-search-info{
+	color: #454545;
+	font-family: Calibri, sans-serif;
+}
+.modal#search #user-search-info .user-date, .modal#search #user-search-info .user-address{
+	font-size: 16px;
+	/* height: 18px; */
+	padding-left: 127px;
+	line-height: 18px;
+	margin-top: 5px;
+}
+.modal#search #user-search-info .user-date:before, .modal#search #user-search-info .user-address:before{
+	content: "Ultima activitate la:";
+	float:left;
+	margin-left: -127px;
+	font-size: 13px;
+	background: #f4511e;
+	color: #fff;
+	border-radius: 10px;
+	padding: 0 10px;
+}
+.modal#search #user-search-info .user-address:before{
+	content: "Adresa înregistrată:";
 }

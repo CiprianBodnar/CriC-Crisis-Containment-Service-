@@ -26,8 +26,8 @@
 							<p>
 								Locatia dumneavoastra este: 
 							</p>
-							<span style="display: none;" id="hidden-address"> </span>
-							<input class="showthis forceDisplay" id="address-input2" name="myAddress"   >
+							<input type="hidden" id="danger-location">
+							<input class="showthis forceDisplay" id="address-input2" name="myAddress" autocomplete="off">
 		                    <div class="clear"></div> 
 		                    <div class="index-send-button" id="sendInDanger" >
 								Trimite

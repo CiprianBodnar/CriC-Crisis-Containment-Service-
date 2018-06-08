@@ -1,15 +1,12 @@
 <?php
     include_once("dbConnect.php");
-
-    if(!isset($_SESSION['loggedIn']))
-        die("User not logged in");
-
     if(!isset($_POST['pre_name']))
         die("Name not found");
     
+    
     $pre_name = trim("%{$_POST['pre_name']}%");
 
-    if(!($stmt=$conn->prepare("Select concat(lastname,' ',firstname) as 'Name', id_user as 'Id' from Users where lower(lastname) LIKE lower(?) or lower(firstname) LIKE lower(?) "))){
+    if(!($stmt=$conn->prepare("Select concat(lastname,' ',firstname) as 'Name', id_user as 'Id', address from Users where lower(lastname) LIKE lower(?) or lower(firstname) LIKE lower(?) "))){
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));
         die();        
     }
@@ -22,10 +19,12 @@
             $user = new \stdClass();
             $user->name = $row['Name'];
             $user->id_user = $row['Id'];
-            
-
+            $user->address = $row['address'];
             array_push($users,$user);
         }
     }
-    echo json_encode($users);
+    if(count($users) === 0)
+        echo json_encode(array("status"=> "null", "result" => array()));
+    else
+        echo json_encode(array("status" => "users", "result" => $users));
 ?>

@@ -11,6 +11,7 @@
 	<title data-href="index">Acasă &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modals.css">
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="css/media.css">
 </head>
@@ -74,10 +75,12 @@
 
 	<?php include "footer.php" ?>
 
-	<div class="cover"></div>  
+	<div class="cover"></div>
+	<div class="modals-container">
 	<?php include "modals/danger.php" ?>
 	<?php include "modals/searchInfo.php" ?>
 	<?php include "modals/share-info.php" ?>
+	</div>
 	
 
 	
@@ -85,13 +88,22 @@
 	<script src="js/miscs.js"></script>
 	<script src="js/fill-page.js"></script>
 	<script src="js/modals.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
-	<script src="js/register-address.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
 	<script src="js/event-manager.js"></script>
 	<script src="js/in-danger.js"></script>
-	<script src="js/address-value.js"></script>
 	<script src="js/users-autocomplete.js"></script>
 	<script src="js/search-info-print.js"></script>
+	<script src="js/share-info.js"></script>
+	<script src="js/address-autocomplete.js"></script>
+	<script>
+        var shareAddressInput = document.getElementById('share-address-input');
+        var finalInput = document.getElementById('share-info-location');
+        prepareAddressAutocomplete(shareAddressInput, finalInput);
+        shareAddressInput = document.getElementById('address-input2');
+        finalInput = document.getElementById('danger-location');
+        prepareAddressAutocomplete(shareAddressInput, finalInput);
+    </script>
+	<script src="js/modals.js"></script>
 	
 </body>
 </html>

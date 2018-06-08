@@ -229,6 +229,11 @@ if(isset($_SESSION['loggedIn'])){
     <script src="js/miscs.js"></script>
     <script src="js/fill-page.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
-    <script src="js/register-address.js"></script>
+    <script src="js/address-autocomplete.js"></script>
+    <script>
+        var input = document.getElementById('address-input');
+        var finalInput = document.getElementById('formatted-addr');
+        prepareAddressAutocomplete(input, finalInput);
+    </script>
 </body>
 </html>

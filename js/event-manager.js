@@ -37,8 +37,11 @@ class EventManager{
 						}
 					}
 				} 
-				else{
+				else if (status === google.maps.GeocoderStatus.ZERO_RESULTS){
 					output.innerHTML = 'adresă necunoscută';
+				}
+				else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+					output.innerHTML = '...';
 				}
 			}
 		);

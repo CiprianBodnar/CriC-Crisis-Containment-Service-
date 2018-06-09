@@ -17,7 +17,7 @@ function convert  (min, max) {
   maxDate = new Date(aux-1);
 }
 
-console.log(minDate.getMonth()+' '+minDate.getFullYear());
+
 
 function getVals(){
   	// Get slider values
@@ -25,7 +25,7 @@ function getVals(){
   	var slides = parent.getElementsByTagName("input");
     var slide1 = parseFloat( slides[0].value );
     var slide2 = parseFloat( slides[1].value );
-    console.log(minDate.getMonth()+' '+minDate.getFullYear()+'da');
+    
   	// Neither slider will clip the other, so make sure we determine which is larger
   	if( slide1 > slide2 ){
       var tmp = slide2; 
@@ -43,7 +43,7 @@ function getVals(){
     eventManager.loadEvents(minDate, maxDate, {animation: false});
     
     displayElement.innerHTML=(months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear();
-    console.log(minDate.getMonth()+' '+minDate.getFullYear());
+  
 }
 
 window.onload = function(){

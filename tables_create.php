@@ -181,5 +181,5 @@ $dbname = "CricDB";
 
     
     $conn->close();
-
+    header("Location: resources/shelters-parse.php");
 ?>

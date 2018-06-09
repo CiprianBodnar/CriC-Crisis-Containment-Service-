@@ -541,3 +541,52 @@ span#remove-event {
 .modal#search #user-search-info .user-address:before{
 	content: "Adresa înregistrată:";
 }
+.modal#search #posted-search-info .row{
+	font-family: Calibri, sans-serif;
+	padding: 10px 0;
+	border-bottom: 1px solid #efefef;
+}
+.modal#search #posted-search-info .row:last-child{
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+.modal#search #posted-search-info .poster-name{
+	padding: 0 10px;
+	margin-right: 5px;
+	font-weight: bold;
+	color: #f4511e;
+	border-radius: 10px;
+	float: left;
+	background: #efefef;
+}
+.modal#search #posted-search-info .posted-details{
+	color: #555;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+.modal#search #posted-search-info .posted-address, .modal#search #posted-search-info .posted-date{
+	color: #777;
+	font-size: 12px;
+	font-style: italic;
+	margin-top: 5px;
+}
+.modal#search #posted-search-info .posted-address:before, .modal#search #posted-search-info .posted-date:before{
+	content: "Adresa oferită:";
+	background: #fff;
+	color: #f4511f;
+	/* border-left: 1px solid #f4511f; */
+	padding: 0 3px;
+	/* font-weight: bold; */
+	margin-right: 5px;
+	/* border-radius: 20px; */
+}
+.modal#search #posted-search-info .posted-date:before{
+	content: "Data postării:";
+}
+.modal .info{
+	color: #555;
+	/* display: inline-block; */
+	background: #ffffad;
+	padding: 10px 20px;
+	font-family: Calibri, sans-serif;
+}

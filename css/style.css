@@ -22,7 +22,7 @@ header{
 	-webkit-transition: All .2s ease;
 	-o-transition: All .2s ease;
 	transition: All .2s ease;
-	position: absolute;
+	position: fixed;
 	z-index:4;
 	bottom: 25px;
 	width: calc(100% - 40px);

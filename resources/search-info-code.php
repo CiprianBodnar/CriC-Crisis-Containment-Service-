@@ -14,7 +14,7 @@
 				$searchResult -> user -> firstname = $row['firstname'];
 				$searchResult -> user -> lastname = $row['lastname'];
 				$searchResult -> user -> address = $row['address'];
-				$searchResult -> user -> conn_date = $row['conn_date'];
+				$searchResult -> user -> conn_date = date('Y/m/d H:i:s', strtotime($row['conn_date']));
 			}
 
 		}
@@ -31,7 +31,7 @@
 				$info -> lastname = $row['lastname'];
 				$info -> details = $row['details'];
 				$info -> address = $row['address'];
-				$info -> conn_date = $row['conn_date'];
+				$info -> conn_date = date('Y/m/d H:i:s', strtotime($row['conn_date']));
 				array_push($searchResult -> posted, $info); 
 			}
 		}

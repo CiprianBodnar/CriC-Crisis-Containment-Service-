@@ -1,6 +1,6 @@
 <div class="modal" id="search">  
 	<div class="box-small white">
-		<form action="#" method="POST">
+		<form action="#" id="search-info-form" method="POST">
 			<div class="row modal-title"> 
 				<h3>
 					Caută pe cineva

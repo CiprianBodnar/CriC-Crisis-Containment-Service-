@@ -19,8 +19,12 @@ function shareInfo(){
 			let response = JSON.parse(request.responseText);
 			if(response.hasOwnProperty('error'))
 				new EventManager(null, null).promptMessage(response.error, 'err');
-			else
+			else{
 				new EventManager(null, null).promptMessage(response.success, 'succ');
+				document.getElementById('share').classList.remove('visible');
+				document.getElementsByClassName('modals-container')[0].style.display='none';
+				document.getElementsByClassName('cover')[0].style.display='none';
+			}
 		}
 	}
 	let postBody = 'id_user='+encodeURIComponent(idContainer.value)+'&message='+encodeURIComponent(messageContainer.value);
@@ -29,6 +33,14 @@ function shareInfo(){
 	request.send(postBody);
 }
 
+let canShare = true;
 document.getElementById('share-info-submit').addEventListener('click', function(){
-	shareInfo();
+	if(canShare === true){
+		canShare = false;
+		shareInfo();
+		setTimeout(function(){canShare = true;}, 5000);
+	}
+	else{
+		new EventManager(null, null).promptMessage("Nu puteți oferii alte informații așa de repede. (5s)", "err");
+	}
 })

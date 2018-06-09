@@ -1,4 +1,4 @@
-function prepareAddressAutocomplete(input, finalInput){
+function prepareAddressAutocomplete(input, finalInput, callback){
 	var address=[];
 	var autocomplete = new google.maps.places.Autocomplete(input);
 	var geocoder = new google.maps.Geocoder();
@@ -20,8 +20,10 @@ function prepareAddressAutocomplete(input, finalInput){
 								}
 								address = address.join(', ');
 								input.value=address;
-								
 							}
+						}
+						if(callback){
+							callback();
 						}
 					} 
 				}
@@ -31,7 +33,6 @@ function prepareAddressAutocomplete(input, finalInput){
 	input.setAttribute('placeholder', '');
 	autocomplete.addListener('place_changed', function() {
 		var place = autocomplete.getPlace();
-		console.log(place);
 		if (place.address_components) {
 			address =[];
 			for (var i = 0; i < place.address_components.length; i++ ){
@@ -40,6 +41,6 @@ function prepareAddressAutocomplete(input, finalInput){
 		    address = address.join(', ');
 		}
 		finalInput.setAttribute('value', place.geometry.location.lat()+' '+place.geometry.location.lng());
-		console.log('adresa:'+address);
+		
 	});
 }

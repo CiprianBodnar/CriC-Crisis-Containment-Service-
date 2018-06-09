@@ -96,12 +96,19 @@
 	<script src="js/share-info.js"></script>
 	<script src="js/address-autocomplete.js"></script>
 	<script>
+		//autocomplete address for sharing information
         var shareAddressInput = document.getElementById('share-address-input');
         var finalInput = document.getElementById('share-info-location');
-        prepareAddressAutocomplete(shareAddressInput, finalInput);
-        shareAddressInput = document.getElementById('address-input2');
-        finalInput = document.getElementById('danger-location');
-        prepareAddressAutocomplete(shareAddressInput, finalInput);
+        prepareAddressAutocomplete(shareAddressInput, finalInput, function(){
+        	shareAddressInput.value='';
+        	console.log(shareAddressInput);
+        	finalInput.value='';
+        	console.log(finalInput);
+        });
+        //autocomplete address for setting in-danger
+        let dangerAddressInput = document.getElementById('address-input2');
+        dangerFinalInput = document.getElementById('danger-location');
+        prepareAddressAutocomplete(dangerAddressInput, dangerFinalInput);
     </script>
 	<script src="js/modals.js"></script>
 	

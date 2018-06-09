@@ -70,8 +70,10 @@ $('.second-cover, .popup-close').on("click", function(e){
 	$('.second-cover .modal').removeClass('visible');
 });
 
- $(function(){
+ $(document).ready(function(){
     $('input#share-address-input').hide();
+    document.getElementById('share-info-location').value='';
+    document.getElementById('share-address-input').value='';
     $('input#checkbox').on('click', function(){
         if ($(this).prop('checked')){
             $('input#share-address-input').fadeIn();

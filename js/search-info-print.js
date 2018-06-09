@@ -11,27 +11,63 @@ function loadInfo() {
 			let info = JSON.parse(request.responseText);
 			postedOutput.innerHTML = '';
 			for(let row of info.posted){
+				row.conn_date = new Date(row.conn_date);
 				let postedInfo = document.createElement('div');
 				postedInfo.classList.add('row');
-				postedInfo.innerHTML = "<div class='poster-name'>"+row.firstname+' '+row.lastname+"</div>"+
-									"<div class='posted-details'>"+row.details+"</div>"+
-									"<div class='posted-address'>"+row.address+"</div>"+
-									"<div class='posted-date'>"+row.conn_date+"</div>";
+
+				//<div class='poster-name'> <<poster name>> </div>
+				let posterNameContainer = document.createElement('div');
+				posterNameContainer.classList.add('poster-name');
+				posterNameContainer.innerText = row.firstname+' '+row.lastname;
+				postedInfo.appendChild(posterNameContainer);
+
+				//<div class='posted-details'> <<posted details>> </div>
+				let postedDetailsContainer = document.createElement('div');
+				postedDetailsContainer.classList.add('posted-details');
+				postedDetailsContainer.innerHTML = row.details.replace(/\n/g, "<br />");
+				postedInfo.appendChild(postedDetailsContainer);
+
+				if(row.address != null){
+					//<div class='posted-address'> <<address offered by user>> </div>
+					let addressContainer = document.createElement('div');
+					addressContainer.classList.add('posted-address');
+					postedInfo.appendChild(addressContainer);
+
+					//convert coordinates to phisical address
+					let latLng = row.address.split(" ");
+					latLng = {lat: latLng[0], lng: latLng[1]};
+					new EventManager(null, new google.maps.Geocoder()).codeLatLng(latLng, addressContainer);
+				}
+
+				//<div class='posted-date'> <<posted at>> </div>
+				let dateContainer = document.createElement('div');
+				dateContainer.classList.add('posted-date');
+				dateContainer.innerText = row.conn_date.toLocaleDateString('ro-RO')+' '+row.conn_date.toLocaleTimeString('ro-RO');
+				postedInfo.appendChild(dateContainer);
+
+				//append the row to the parent element
 				postedOutput.appendChild(postedInfo);
 			}
 			if(info.posted.length === 0){
 				postedOutput.innerHTML = '<div class="info">Nu există informații oferite</div>';
 			}
 			userOutput.innerHTML = '';
+
+			// <div class='user-address'> <<generated user address>> </div>
 			let userAddress = document.createElement('div');
 			userAddress.classList.add('user-address');
+			userOutput.appendChild(userAddress);
+
+			//convert coordinates to phisical address
 			let latLng = info.user.address.split(" ");
 			latLng = {lat: latLng[0], lng: latLng[1]};
 			new EventManager(null, new google.maps.Geocoder()).codeLatLng(latLng, userAddress);
+
+			//<div class='user-date'> <<generated user last active date>> </div>
 			let userDate = document.createElement('div');
 			userDate.classList.add('user-date');
-			userDate.innerText = info.user.conn_date;
-			userOutput.appendChild(userAddress);
+			info.user.conn_date = new Date(info.user.conn_date);
+			userDate.innerText = info.user.conn_date.toLocaleDateString('ro-RO')+' '+info.user.conn_date.toLocaleTimeString('ro-RO');
 			userOutput.appendChild(userDate);
 		}
 	});
@@ -49,5 +85,16 @@ function loadInfo() {
 }
 
 document.getElementById('submit-button').addEventListener('click', function(){
+	for(let input of document.getElementsByTagName('input'))
+		input.blur();
+	document.getElementById('search-users-suggest').innerHTML='';
+	loadInfo();
+});
+document.getElementById('search-info-form').addEventListener('submit', function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	for(let input of document.getElementsByTagName('input'))
+		input.blur();
+	document.getElementById('search-users-suggest').innerHTML='';
 	loadInfo();
 });

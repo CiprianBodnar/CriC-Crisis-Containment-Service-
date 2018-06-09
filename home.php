@@ -80,6 +80,7 @@
 	<?php include "modals/danger.php" ?>
 	<?php include "modals/searchInfo.php" ?>
 	<?php include "modals/share-info.php" ?>
+	<?php include "modals/notifications.php" ?>
 	</div>
 	
 
@@ -111,6 +112,7 @@
         prepareAddressAutocomplete(dangerAddressInput, dangerFinalInput);
     </script>
 	<script src="js/modals.js"></script>
+	<script src="js/notifications.js"></script>
 	
 </body>
 </html>

@@ -36,6 +36,14 @@ $('.bottom-nav-menu ul li').on("click", function(){
 	}
 });
 
+$('.notifications-trigger').on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	$(".modal#notifications").addClass('visible');
+	$(".modals-container").fadeIn(200);
+	$('.cover').fadeIn(200);
+});
+
 $('.input-trigger').on("click", function(){
 	$(this).removeClass('visible');
 	$('#map-cover').fadeIn(200);
@@ -72,8 +80,6 @@ $('.second-cover, .popup-close').on("click", function(e){
 
  $(document).ready(function(){
     $('input#share-address-input').hide();
-    document.getElementById('share-info-location').value='';
-    document.getElementById('share-address-input').value='';
     $('input#checkbox').on('click', function(){
         if ($(this).prop('checked')){
             $('input#share-address-input').fadeIn();

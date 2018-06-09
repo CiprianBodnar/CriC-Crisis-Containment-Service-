@@ -1,6 +1,9 @@
 <?php
 include_once ("dbConnect.php");
 
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true)
+    header("Location: home.php");
+
     $last_name_error = "";
     $first_name_error = "";
     $email_address_error = "";

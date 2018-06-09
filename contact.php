@@ -153,6 +153,11 @@
 	</section>
 
 	<?php include "footer.php" ?>
+
+    <div class="cover"></div>
+    <div class="modals-container">
+    <?php include "modals/notifications.php" ?>
+    </div>
     
 	<script  src="js/miscs.js"></script>
     <script  src="js/fill-page.js"></script>

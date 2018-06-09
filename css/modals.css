@@ -93,7 +93,11 @@
     height: 40px;
     line-height: 40px;
 }
-
+.modal#add-danger #submit-button{
+	width: auto;
+	font-size:14px;
+	letter-spacing:1px;
+}
 #submit-button:hover {
 	background: #1B1817;
 }
@@ -472,7 +476,7 @@ span#remove-event {
 }
 .modal .preloader{
 	position: absolute;
-	w100%:;
+	width:100%;
 	text-align: center;
 	margin-top: 40px;
 	width: 100%;

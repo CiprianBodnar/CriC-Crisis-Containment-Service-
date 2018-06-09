@@ -2,7 +2,7 @@
 include_once('dbConnect.php');
 
 	$id_user = -1;
-	if(isset($_SESSION['id_user']))
+	if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true)
 		$id_user = $_SESSION['id_user'];
 
 	$desc = htmlspecialchars($_POST['desc'], ENT_QUOTES);
@@ -41,5 +41,33 @@ include_once('dbConnect.php');
 		$stmt -> close();
 	}
 	echo json_encode($response);
-	$conn->close();
+
+	$latLng = new \stdClass();
+	$location = explode(" ", $location);
+	$latLng -> lat = floatval($location[0]);
+	$latLng -> lng = floatval($location[1]);
+
+	$users = $conn->query("select id_user, address from users");
+	while($user = $users->fetch_assoc()){
+		$message;
+		if($type === 'person')
+			$message = "Va aflat pe raza unei persoane aflate in pericol.<br /><a href='map.php?view=".$response->id."'>informații</a>";
+		else
+			$message = "Va aflat pe raza unui pericol.<br /><a href='map.php?view=".$response->id."'>informații despre pericol.</a>";
+		$user_id = floatval($user['id_user']);
+		$user_address = explode(" ", $user['address']);
+		$user_location =  new \stdClass();
+		$user_location -> lat = floatval($user_address[0]);
+		$user_location -> lng = floatval($user_address[1]);
+		$d = pow($user_location->lat-$latLng->lat, 2)+ pow($user_location->lng-$latLng->lng, 2);
+		$d = sqrt($d);
+	    $d = $d*100000;
+	    if($d < floatval($_POST['range'])){
+	    	$stmt = $conn->prepare("insert into notifications (user_id, infos, notification_date, unread) values(?, ?, sysdate(), -1)");
+	    	$stmt->bind_param('is', $user_id, $message);
+	    	$stmt->execute();
+	    	$stmt->close();
+	    }
+
+	}
  ?>

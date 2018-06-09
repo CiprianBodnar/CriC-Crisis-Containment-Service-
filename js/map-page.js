@@ -45,6 +45,7 @@ function updateFilterOptions(){
 	filterOptions.earthquake = document.getElementById('earthquake').checked;
 	filterOptions.snowstorm = document.getElementById('snow-storm').checked;
 	filterOptions.flood = document.getElementById('flood').checked;
+	filterOptions.safehouse = document.getElementById('shelter').checked;
 	filterOptions.radius = document.getElementById('radius').checked;
 
 	if (filterOptions.hideAll){
@@ -86,7 +87,7 @@ function init(){
     for(let option of document.getElementsByClassName('filter-option')){
     	option.addEventListener('click', updateFilterOptions);
     }
-    
+    updateFilterOptions();
     let addCommentButton = document.getElementById('add-comment-button');
 	let canAddComment = true;
 	if(addCommentButton){
@@ -101,7 +102,6 @@ function init(){
 				eventManager.createComment(args);
 				setTimeout(function(){
 					canAddComment = true;
-					console.log(canAddComment);
 				}, 5000);
 			} 
 			else{
@@ -112,7 +112,6 @@ function init(){
 
 	let removeEventButton = document.getElementById('remove-event');
 	removeEventButton.addEventListener('click', function(){
-		console.log('intru');
 		requestConfirmation('Ștergere eveniment', "Doriți ștergerea acestui eveniment?", function(){
 			let eventId = document.getElementById('event-id').value;
 			eventManager.removeEvent(eventId);

@@ -2,7 +2,8 @@
 include_once('dbConnect.php');
 
 $error ="";
-
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true)
+    header("Location: home.php");
 if(isset($_POST['conectare'])){
 
     $email = $_POST['email'];

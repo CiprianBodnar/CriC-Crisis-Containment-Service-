@@ -169,7 +169,8 @@ $dbname = "CricDB";
             id INT(6) NOT NULL PRIMARY KEY auto_increment,
             user_id int(6) NOT NULL,
             infos text,
-            notification_date DATETIME NOT NULL
+            notification_date DATETIME NOT NULL,
+            unread int(2)
             )";
         
         if ($conn->query($sql) == TRUE){
@@ -181,5 +182,4 @@ $dbname = "CricDB";
 
     
     $conn->close();
-    header("Location: resources/shelters-parse.php");
 ?>

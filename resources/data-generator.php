@@ -114,7 +114,7 @@ class DataGenerator{
     }
 
     function getIdUser(){
-        return rand(0,115);
+        return rand(1,115);
     }
 
     function getYear(){

@@ -1,6 +1,7 @@
 @import url(fontawesome-all.min.css);
 @import url(reset.css);
 
+
 .container{
 	max-width: 1280px;
 	margin: 0 auto;
@@ -162,7 +163,7 @@ header{
 	display: none;
 }
 
-.nav-menu ul.nav li#username span {
+.nav-menu ul.nav li#username span.username-wrapper {
     font-size: 18px;
     background: rgba(255, 255, 255, 1.4);
     font-weight: bold;
@@ -185,6 +186,7 @@ header{
 	background: #c8481f;
 }
 .nav-menu .nav-trigger{
+	position: relative;
 	-webkit-transition: All .2s ease;
 	-o-transition: All .2s ease;
 	transition: All .2s ease;
@@ -223,4 +225,31 @@ section#content{
 section#content .gradient-bg{
 	background: url('../img/gradient.png') top left repeat-x;
 	padding-top: 80px;
+}
+.notificationStatusDisplay{
+	cursor: pointer;
+	font-size: 13px;
+	height: 20px;
+	line-height: 20px;
+	margin-right:5px;
+	display: inline-block;
+	text-align: center;
+	padding: 0 5px;
+	background: #5c2716;
+	position: relative;
+	color: #fff;
+	border-radius: 5px;
+}
+.username-wrapper .notificationStatusDisplay{
+	top: -2px;
+}
+.notificationStatusDisplay i{
+	font-size: 12px;
+	margin: 0 !important;
+}
+.notifications-trigger{
+	cursor: pointer;
+}
+span.notificationCount{
+	
 }

@@ -19,9 +19,15 @@
 			</div>
 			<ul class="nav" id="nav-menu">
 				<?php if( $loggedIn === true){ ?>
-					<li class="hidden-large" id="username"><span>
-						<?php echo $username ?>
-					</span></li>
+					<li class="hidden-large notifications-trigger" id="username">
+						<span class="username-wrapper">
+							<span class="notificationStatusDisplay">
+								<i class="fas fa-comment"></i>
+								<span class="notificationCount">0</span>
+							</span>	
+							<?php if(strlen($username)>15) echo explode(" ", $username)[0]; else echo $username; ?>
+						</span>
+					</li>
 				<?php } ?>
 				<li id="home-page"><a href="home.php"><i class="fas fa-home"></i>Acasă</a></li>
 				<li id="map-page"><a href="map.php"><i class="fas fa-location-arrow"></i>Hartă</a></li>	
@@ -32,10 +38,16 @@
 				<?php } else { ?>
 					<li class="hasSub">
 						<span class="visible-large">
-							<i class="fas fa-user"></i> <?php echo $username ?> <i class="fas fa-chevron-down"></i>
+							<span class="notifications-trigger">
+								<span class="notificationStatusDisplay">
+									<i class="fas fa-comment"></i>
+									<span class="notificationCount">0</span>
+								</span>
+							</span>
+							<?php if(strlen($username)>15) echo explode(" ", $username)[0]; else echo $username; ?> <i class="fas fa-chevron-down"></i>
 						</span>
 						<ul class="sub-nav">
-							<li><a href="#"><i class="fas fa-cog"></i>Setări</a></li>
+							<li id="setting-page"><a href="settings.php"><i class="fas fa-cog"></i>Setări</a></li>
 							<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i>Deconectare</a></li>
 							
 						</ul>

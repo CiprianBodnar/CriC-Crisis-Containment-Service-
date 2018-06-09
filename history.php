@@ -76,6 +76,10 @@
                             <input id="person" class="filter-option" type="checkbox" checked  >
                             Persoane aflate în pericol
                         </div>
+                        <div class="row">
+                            <input id="shelter" class="filter-option" type="checkbox">
+                            Adăposturi
+                        </div>
                     </div>
                     <div class="section">
                         <div class="row">
@@ -114,6 +118,10 @@
                         <span class="icon"><img src="img/danger-icons/person.png" alt=""></span>
                         <span class="content">Persoană aflată în pericol</span>
                     </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/safehouse.png" alt=""></span>
+                        <span class="content">Adăpost</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -137,6 +145,7 @@
     <div class="modals-container">
     <?php include "modals/view-event.php" ?>
     <?php include "modals/confirmation-popup.php" ?>
+    <?php include "notifications.php" ?>
     </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>

@@ -1,7 +1,7 @@
 <?php
 include_once('../dbConnect.php');
-$ID_USER = 50000;
-$RANGE = 5000;
+$ID_USER = -1;
+$RANGE = 10000;
 $TYPE = 'safehouse';
 if (($handle = fopen("shelters.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {

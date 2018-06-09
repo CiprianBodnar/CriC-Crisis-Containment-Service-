@@ -561,7 +561,7 @@ class EventManager{
 			case 'person':
 				return {icon: new google.maps.MarkerImage('img/danger-icons/person.png', null, null, new google.maps.Point(10, 10)), color: '#ffffff'};
 			case 'safehouse':
-				return {icon: new google.maps.MarkerImage('img/danger-icons/safehouse.pnh', null, null, new google.maps.Point(14, 14)), color: '#00a651'};
+				return {icon: new google.maps.MarkerImage('img/danger-icons/safehouse.png', null, null, new google.maps.Point(14, 14)), color: '#00a651'};
 			default:
 				return null;
 		}

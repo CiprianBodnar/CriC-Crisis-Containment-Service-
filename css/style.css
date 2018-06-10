@@ -226,7 +226,7 @@ section#content .gradient-bg{
 	background: url('../img/gradient.png') top left repeat-x;
 	padding-top: 80px;
 }
-.notificationStatusDisplay{
+.notifications-status-display{
 	cursor: pointer;
 	font-size: 13px;
 	height: 20px;
@@ -240,16 +240,21 @@ section#content .gradient-bg{
 	color: #fff;
 	border-radius: 5px;
 }
-.username-wrapper .notificationStatusDisplay{
+.notifications-status-display.unread{
+	background: #f4511e;
+	-webkit-box-shadow: 0 0 0 1px #fff;
+	box-shadow: 0 0 0 1px #fff;
+}
+.username-wrapper .notifications-status-display{
 	top: -2px;
 }
-.notificationStatusDisplay i{
+.notifications-status-display i{
 	font-size: 12px;
 	margin: 0 !important;
 }
 .notifications-trigger{
 	cursor: pointer;
 }
-span.notificationCount{
+span.notification-count{
 	
 }

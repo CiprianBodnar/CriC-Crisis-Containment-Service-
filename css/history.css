@@ -236,7 +236,12 @@ span.amount{
 	border: none;
 	height: 12px;
 }
-
+.edge .slider-range input, .firefox .slider-range input, .ie .slider-range input{
+	position: relative;
+}
+.edge .pretty, .firefox .pretty, .ie .pretty{
+	display: none;
+}
 .slider-range input[type=range]::-moz-range-track {
 	position: relative;
 	z-index: -1;

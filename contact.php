@@ -64,6 +64,7 @@
 	<title data-href="index">Contact &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
@@ -159,7 +160,10 @@
     <?php include "modals/notifications.php" ?>
     </div>
     
-	<script  src="js/miscs.js"></script>
-    <script  src="js/fill-page.js"></script>
+	<script src="js/miscs.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/fill-page.js"></script>
 </body>
 </html>

@@ -145,7 +145,7 @@
     <div class="modals-container">
     <?php include "modals/view-event.php" ?>
     <?php include "modals/confirmation-popup.php" ?>
-    <?php include "notifications.php" ?>
+    <?php include "modals/notifications.php" ?>
     </div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -154,6 +154,7 @@
     <script src="js/event-manager.js"></script>
     <script src="js/map-page.js"></script>
 	<script src="js/miscs.js"></script>
+    <script src="js/notifications.js"></script>
 	<script src="js/slider_custom.js"></script>
     
 

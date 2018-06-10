@@ -10,7 +10,7 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-			<div class="row">
+			<div class="row no-padding">
 				<div class="col12" id="notifications-container">
 					
 				</div>

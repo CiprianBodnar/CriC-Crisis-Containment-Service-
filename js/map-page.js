@@ -48,15 +48,18 @@ function updateFilterOptions(){
 	filterOptions.safehouse = document.getElementById('shelter').checked;
 	filterOptions.radius = document.getElementById('radius').checked;
 
+	let filters = document.getElementsByClassName('filter-option');
 	if (filterOptions.hideAll){
-		for(let other of document.getElementsByClassName('filter-option')){
+		for(let i = 0; i<filters.length;i++){
+			let oother  = filters[i];
 			if(other != document.getElementById('hide-all')){
 				other.disabled = true;
 			}
 		}
 	}
 	else{
-		for(let other of document.getElementsByClassName('filter-option')){
+		for(let i = 0; i<filters.length; i++){
+			let other  = filters[i];
 			if(other != document.getElementById('hide-all')){
 				other.disabled = false;
 			}
@@ -84,7 +87,9 @@ function init(){
     startDate.setDate(startDate.getDate()-3);
     eventManager.loadEvents(startDate, new Date());
     eventManager.setCurrentLocation();
-    for(let option of document.getElementsByClassName('filter-option')){
+    let filters = document.getElementsByClassName('filter-option');
+    for(let i = 0 ; i < filters.length; i++){
+    	let option = filters[i];
     	option.addEventListener('click', updateFilterOptions);
     }
     updateFilterOptions();

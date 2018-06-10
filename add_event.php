@@ -51,7 +51,7 @@ include_once('dbConnect.php');
 	while($user = $users->fetch_assoc()){
 		$message;
 		if($type === 'person')
-			$message = "Va aflat pe raza unei persoane aflate in pericol.<br /><a href='map.php?view=".$response->id."'>informații</a>";
+			$message = "Va aflați pe raza unei persoane aflate in pericol.<br /><a href='map.php?view=".$response->id."'>informații</a>";
 		else
 			$message = "Va aflat pe raza unui pericol.<br /><a href='map.php?view=".$response->id."'>informații despre pericol.</a>";
 		$user_id = floatval($user['id_user']);

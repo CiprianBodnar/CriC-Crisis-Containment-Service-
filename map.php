@@ -147,6 +147,7 @@
     <script src="js/event-manager.js"></script>
     <script src="js/add-event.js"></script>
     <script src="js/map-page.js"></script>
+    <script src="js/notifications.js"></script>
 	<script src="js/miscs.js"></script>
 </body>
 </html>

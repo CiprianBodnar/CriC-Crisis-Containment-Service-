@@ -8,6 +8,7 @@
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
 <body id="setting-page">
@@ -61,7 +62,13 @@
             </div>
         </div>
     </section>
+
+    <div class="cover"></div>
+    <div class="modals-container">
+        <?php include "modals/notifications.php" ?>
+    </div>
     <?php include "footer.php" ?>    
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
     <script src="js/miscs.js"></script>
     <script src="js/selected-page.js"></script>
@@ -70,6 +77,8 @@
     <script src="js/settings-set-value.js"></script>
     <script src="js/event-manager.js"></script>
     <script src="js/settings-get-value.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/notifications.js"></script>
     <script>
         let hiddenInput = document.getElementById("user-coordinates");
         let addressInput = document.getElementById("address-setting");

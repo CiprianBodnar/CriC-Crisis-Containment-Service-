@@ -21,7 +21,7 @@
 	$response->new = floatval($row['new']);
 	$response->unread = floatval($row['unread']);
 	if($response->new>0 || $all){
-		$stmt=$conn->prepare("select * from notifications where user_id=?");
+		$stmt=$conn->prepare("select * from notifications where user_id=? order by notification_date desc");
 		$stmt->bind_param('i', $user_id);
 		$stmt->execute();
 		$result = $stmt->get_result();

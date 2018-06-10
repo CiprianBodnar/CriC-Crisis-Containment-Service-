@@ -21,9 +21,9 @@
 				<?php if( $loggedIn === true){ ?>
 					<li class="hidden-large notifications-trigger" id="username">
 						<span class="username-wrapper">
-							<span class="notificationStatusDisplay">
+							<span class="notifications-status-display">
 								<i class="fas fa-comment"></i>
-								<span class="notificationCount">0</span>
+								<span class="notification-count">0</span>
 							</span>	
 							<?php if(strlen($username)>15) echo explode(" ", $username)[0]; else echo $username; ?>
 						</span>
@@ -39,9 +39,9 @@
 					<li class="hasSub">
 						<span class="visible-large">
 							<span class="notifications-trigger">
-								<span class="notificationStatusDisplay">
+								<span class="notifications-status-display">
 									<i class="fas fa-comment"></i>
-									<span class="notificationCount">0</span>
+									<span class="notification-count">0</span>
 								</span>
 							</span>
 							<?php if(strlen($username)>15) echo explode(" ", $username)[0]; else echo $username; ?> <i class="fas fa-chevron-down"></i>

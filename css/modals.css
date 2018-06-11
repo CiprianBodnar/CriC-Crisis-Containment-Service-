@@ -618,8 +618,27 @@ span#remove-event {
 	background: #fefefe;
 }
 
+#notifications-container .row .notification-info strong{
+	font-weight: bold;
+}
+#notifications-container .row .notification-date{
+	margin-top:5px;
+	font-style:italic;
+	color: #444;
+}
 #notifications-container .row .notification-date:before{
+	font-style: normal;
 	content: "Generat la:";
+	font-size: 12px;
+	position: relative;
+	top: -1px;
+	height: 16px;
+	padding: 0 5px;
+	border-radius: 20px;
+	margin-right: 5px;
+	color: #fff;
+	background: #f4511e;
+	line-height: 16px;
 }
 #notifications-container .row a{
 	color: #f4511e;

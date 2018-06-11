@@ -20,10 +20,13 @@ function shareInfo(){
 			if(response.hasOwnProperty('error'))
 				new EventManager(null, null).promptMessage(response.error, 'err');
 			else{
-				new EventManager(null, null).promptMessage(response.success, 'succ');
+				let evMng = new EventManager(null, null);
+				evMng.promptMessage(response.success, 'succ');
 				document.getElementById('share').classList.remove('visible');
 				document.getElementsByClassName('modals-container')[0].style.display='none';
 				document.getElementsByClassName('cover')[0].style.display='none';
+				let notifyArgs = {userId: idContainer.value, name: document.getElementById('username-container').value};
+				evMng.notify('posted_info', notifyArgs.userId+' '+notifyArgs.name);
 			}
 		}
 	}

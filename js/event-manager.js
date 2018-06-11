@@ -240,6 +240,9 @@ class EventManager{
 				}
 				obj.promptMessage("Evenimentul a fost adăugat.", "succ");
 				obj.loadEvents(obj.timeTable[0], obj.timeTable[1]);
+				let notifyArgs = {type: 'event', args: resp.id+' '+latLng+' '+args.radius};
+				if (args.type === 'person') notifyArgs.type='person';
+				obj.notify(notifyArgs.type, notifyArgs.args);
 			}
 		}
 		let desc = encodeURIComponent(args.desc);
@@ -525,6 +528,23 @@ class EventManager{
 		request.send(postBody);
 	}
 
+	notify(type, args){
+		let request = new XMLHttpRequest();
+		request.open("POST", 'resources/notify.php', true);
+		request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+		let obj = this;
+		request.onreadystatechange = function(){
+			if(request.readyState === 4 && request.status === 200){
+				let response = JSON.parse(request.responseText);
+				if(!response.hasOwnProperty('success')){
+					obj.promptMessage('A aparut o problema la notificarea celorlalti utilizatori', 'err');
+				}
+			}
+		}
+		let postBody = 'type='+encodeURIComponent(type)+'&args='+encodeURIComponent(args);
+		request.send(postBody);
+	}
+
 	promptMessage(message, type){
 		let promptContainer = document.createElement('div');
 		promptContainer.classList.add('prompt-container');
@@ -579,7 +599,7 @@ class EventManager{
 				return 'Inundație';
 				break;
 			case 'snowstorm':
-				return 'Furtună de zăpadă';
+				return 'Viscol';
 				break;
 			case 'earthquake':
 				return 'Cutremur';
@@ -590,7 +610,7 @@ class EventManager{
 	}
 
 	getFormattedScore(score){
-		score=score*4;
+		score=Math.min(score*4, 4);
 		let diff = score-parseInt(score);
 		score = parseInt(score);
 		let html = "";

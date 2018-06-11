@@ -8,6 +8,7 @@
 		}
 
  ?>
+<input type="hidden" value="<?php echo $username; ?>" id="username-container">
 <header id="header">
 	<div class="container">
 		<div class="logo fl">

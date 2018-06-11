@@ -140,7 +140,7 @@ class EventManager{
 	}
 
 
-	loadEvents(lowerBound, upperBound, args){
+	loadEvents(lowerBound, upperBound, args, callback){
 		//lowerBound & upperBound are dates
 		this.timeTable = [];
 		this.timeTable.push(lowerBound);
@@ -196,6 +196,9 @@ class EventManager{
 					   	obj.events.push(event);
 					   	if(obj.hasOwnProperty('filterOptions'))
 					   		obj.filter(obj.filterOptions);
+					}
+					if(callback){
+						callback(obj);
 					}
 				}
 			}
@@ -578,6 +581,16 @@ class EventManager{
 				return {icon: new google.maps.MarkerImage('img/danger-icons/earthquake.png', null, null, new google.maps.Point(20, 21)), color: '#ac4e2f'};
 			case 'fire':
 				return {icon: new google.maps.MarkerImage('img/danger-icons/fire.png', null, null, new google.maps.Point(20, 21)), color: '#f41e1e'};
+			case 'storm':
+				return {icon: new google.maps.MarkerImage('img/danger-icons/storm.png', null, null, new google.maps.Point(20, 21)), color: '#365e7a'};
+			case 'nuclear':
+				return {icon: new google.maps.MarkerImage('img/danger-icons/nuclear.png', null, null, new google.maps.Point(20, 21)), color: '#9e9c15'};
+			case 'landslide':
+				return {icon: new google.maps.MarkerImage('img/danger-icons/landslide.png', null, null, new google.maps.Point(20, 21)), color: '#7f6560'};
+			case 'volcano':
+				return {icon: new google.maps.MarkerImage('img/danger-icons/volcano.png', null, null, new google.maps.Point(20, 21)), color: '#800d0d'};
+			case 'psd':
+				return {icon: new google.maps.MarkerImage('img/danger-icons/psd.png', null, null, new google.maps.Point(20, 21)), color: '#000'};
 			case 'person':
 				return {icon: new google.maps.MarkerImage('img/danger-icons/person.png', null, null, new google.maps.Point(10, 10)), color: '#ffffff'};
 			case 'safehouse':
@@ -591,19 +604,24 @@ class EventManager{
 		switch(eventType){
 			case 'person':
 				return 'Persoana în pericol';
-				break;
 			case 'fire':
 				return 'Incendiu';
-				break;
 			case 'flood':
 				return 'Inundație';
-				break;
 			case 'snowstorm':
 				return 'Viscol';
-				break;
 			case 'earthquake':
 				return 'Cutremur';
-				break;
+			case 'nuclear':
+				return 'Pericol nuclear';
+			case 'volcano':
+				return 'Erupție vulcanică';
+			case 'storm':
+				return 'Furtună';
+			case 'landslide':
+				return 'Alunecare de teren';
+			case 'psd':
+				return 'Miting PSD';
 			default:
 				return 'Eveniment';
 		}

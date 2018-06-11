@@ -26,10 +26,15 @@
 
                     <select name="danger-type" id="event-type">
                         <option selected disabled hidden>Tipul de pericol</option>
-                        <option value="fire"><i class="fas fa-fire"></i> Incendiu</option>
-                        <option value="flood"><i class="fas fa-tint"></i> Inundație</option>
-                        <option value="earthquake"><i class="fas-fa-globe"></i> Cutremur</option>
-                        <option value="snowstorm"><i class="fas fa-snowflake"></i> Furtuna de zăpadă</option>
+                        <option value="landslide">Alunecare de teren</option>
+                        <option value="earthquake">Cutremur</option>
+                        <option value="volcano">Erupție vulcanică</option>
+                        <option value="storm">Furtună</option>
+                        <option value="fire">Incendiu</option>
+                        <option value="flood">Inundație</option>
+                        <option value="psd">Miting PSD</option>
+                        <option value="nuclear">Pericol nuclear</option>
+                        <option value="snowstorm">Viscol</option>
                     </select>
                     <p>
                         Raza pericolului (m): 

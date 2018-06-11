@@ -1,6 +1,29 @@
 
 var eventManager;
 
+function previewEvent(eventManager){
+	let href = window.location.href.split("?");
+
+	if(href.length === 1)
+		return;
+	href = href[1].split("=");
+	if(href.length === 1)
+		return;
+	let param = href[0];
+	let value = href[1];
+	if(param === 'view'){
+		found = false;
+		for(let event of eventManager.events){
+			if(event.id == value){
+				eventManager.describeEvent(event);
+				found = true;
+			}
+		}
+		if(!found)
+			eventManager.promptMessage("Evenimentul cautat nu (mai) exista sau nu mai este actual.", "err");
+	}
+	
+}
 function requestConfirmation(title, message, callback){
 	let confCover = document.getElementsByClassName('second-cover')[0];
 	let conf = document.getElementById('confirmation-modal');
@@ -45,13 +68,18 @@ function updateFilterOptions(){
 	filterOptions.earthquake = document.getElementById('earthquake').checked;
 	filterOptions.snowstorm = document.getElementById('snow-storm').checked;
 	filterOptions.flood = document.getElementById('flood').checked;
+	filterOptions.storm = document.getElementById('storm').checked;
+	filterOptions.landslide = document.getElementById('landslide').checked;
+	filterOptions.nuclear = document.getElementById('nuclear').checked;
+	filterOptions.volcano = document.getElementById('volcano').checked;
+	filterOptions.psd = document.getElementById('psd').checked;
 	filterOptions.safehouse = document.getElementById('shelter').checked;
 	filterOptions.radius = document.getElementById('radius').checked;
 
 	let filters = document.getElementsByClassName('filter-option');
 	if (filterOptions.hideAll){
 		for(let i = 0; i<filters.length;i++){
-			let oother  = filters[i];
+			let other  = filters[i];
 			if(other != document.getElementById('hide-all')){
 				other.disabled = true;
 			}
@@ -85,7 +113,7 @@ function init(){
     eventManager = new EventManager(map, geocoder);
     let startDate = new Date();
     startDate.setDate(startDate.getDate()-3);
-    eventManager.loadEvents(startDate, new Date());
+    eventManager.loadEvents(startDate, new Date(), null, previewEvent);
     eventManager.setCurrentLocation();
     let filters = document.getElementsByClassName('filter-option');
     for(let i = 0 ; i < filters.length; i++){
@@ -158,6 +186,7 @@ function init(){
 			});
 		});
 	} 
+
 	if(typeof(addEventInit) != 'undefined'){
 		addEventInit();
 	}

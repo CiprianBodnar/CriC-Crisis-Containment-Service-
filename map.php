@@ -43,7 +43,7 @@
         <div class="tab" id="tab-layers">
             <div class="tab-content align-left">
                 <p class="tab-title">Filtru</p>
-                <div class="tab-content" id="filter">
+                <div class="tab-rows" id="filter">
                     <div class="section">
                         <div class="row">
                             <input type="checkbox" class="filter-option" id="hide-all"> Ascunde tot
@@ -64,11 +64,31 @@
                         </div>
                         <div class="row">
                             <input id="snow-storm" class="filter-option" type="checkbox" checked>
-                            Furtuni de zăpadă
+                            Viscol
+                        </div>
+                        <div class="row">
+                            <input id="storm" class="filter-option" type="checkbox" checked>
+                            Furtuni
+                        </div>
+                        <div class="row">
+                            <input id="nuclear" class="filter-option" type="checkbox" checked>
+                            Pericole nucleare
+                        </div>
+                        <div class="row">
+                            <input id="landslide" class="filter-option" type="checkbox" checked>
+                            Alunecări de teren
+                        </div>
+                        <div class="row">
+                            <input id="volcano" class="filter-option" type="checkbox" checked>
+                            Erupții vulcanice
+                        </div>
+                        <div class="row">
+                            <input id="psd" class="filter-option" type="checkbox" checked>
+                            Mitinguri PSD
                         </div>
                         <div class="row">
                             <input id="person" class="filter-option" type="checkbox" checked  >
-                            Persoane aflate în pericol
+                            Persoane în pericol
                         </div>
                         <div class="row">
                             <input id="shelter" class="filter-option" type="checkbox" checked  >
@@ -78,7 +98,7 @@
                     <div class="section">
                         <div class="row">
                             <input id="radius" class="filter-option" type="checkbox" checked>
-                            Raza de acoperire a pericolelor
+                            Raza de acoperire
                         </div>
                     </div>
                 </div>
@@ -87,7 +107,7 @@
         <div class="tab" id="tab-legend">
             <div class="tab-content align-left">
                 <div class="tab-title">Legendă</div>
-                <div class="tab-content">
+                <div class="tab-rows">
                     <p class="row">
                         <span class="icon">
                             <img src="img/danger-icons/earthquake.png" alt="cutremur">
@@ -106,15 +126,35 @@
                     </p>
                     <p class="row">
                         <span class="icon"><img src="img/danger-icons/snow-storm.png" alt=""></span>
-                        <span class="content">Furtună de zăpadă</span>
+                        <span class="content">Viscol</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/storm.png" alt=""></span>
+                        <span class="content">Furtună</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/nuclear.png" alt=""></span>
+                        <span class="content">Pericol nuclear</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/volcano.png" alt=""></span>
+                        <span class="content">Erupție vulcanică</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/landslide.png" alt=""></span>
+                        <span class="content">Alunecare de teren</span>
+                    </p>
+                    <p class="row">
+                        <span class="icon"><img src="img/danger-icons/psd.png" alt=""></span>
+                        <span class="content">Miting PSD</span>
                     </p>
                     <p class="row">
                         <span class="icon"><img src="img/danger-icons/person.png" alt=""></span>
-                        <span class="content">Persoană aflată în pericol</span> 
+                        <span class="content">Persoană în pericol</span> 
                     </p>
                     <p class="row">
                         <span class="icon"><img src="img/danger-icons/safehouse.png" alt=""></span>
-                        <span class="content">Adăpost</span> 
+                        <span class="content">Adăpost</span>
                     </p>
                 </div>
             </div>

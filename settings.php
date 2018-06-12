@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title data-href="index">Settings &bull; Crisis Containment Service</title>
+	<title data-href="index">Setări &bull; Crisis Containment Service</title>
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/register.css">
@@ -24,36 +24,62 @@
                             </h3>
                             <form class="contact-form" action="#" method="POST">
                                 <div class="row">
-                                    <div class="col6 no-padding">
+                                    <div class="col6 no-padding" id="firstname-row">
                                         <div class="par">
                                             Nume familie
                                         </div>
-                                        <input type="text" name="nume" id="firstname-setting">
+                                        <div class="input-wrapper">
+                                          <input type="text" name="nume" id="firstname-setting">
+                                        </div>
                                     </div>
-                                    <div class="col6 no-padding">
+                                    <div class="col6 no-padding" id="lastname-row">
                                         <div class="par">
                                             Prenume
                                         </div>
-                                        <input type="text" name="prenume" id="lastname-setting">
+                                        <div class="input-wrapper">
+                                            <input type="text" name="prenume" id="lastname-setting">
+                                        </div> 
                                     </div>
-                                    <div class="col12 no-padding">
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col12 no-padding" id ="email-row">
                                         <div class="par">
                                             Adresa de e-mail
                                         </div>
-                                        <input type="text" name="email" id="email-setting">
+                                        <div class="input-wrapper">
+                                            <input type="text" name="email" id="email-setting">
+                                        </div>  
                                     </div>
-                                    <div class="col12 no-padding">
+                                </div>
+                                <div class="row">
+                                    <div class="col12 no-padding" id="address-row">
                                         <span style = "display:none" id="span-setting"> </span>
                                         <div class="par">
                                             Adresa
                                         </div>
                                         <input type="hidden" id="user-coordinates">
-                                        <input type="text" name="adresa" id="address-setting" autocomplte="off">
-                                        <div  id="settings-submit-button" class = "settings-button">
-                                            Salveaza
+                                        <div class="input-wrapper">
+                                            <input type="text" id="address-setting" autocomplte="off">
+                                        </div>                               
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col12 no-padding" id="password-row">
+                                        <div class="par">
+                                            Introduceti parola actuala pentru validare
+                                        </div>
+                                        <div class="input-wrapper">
+                                            <input type="password" value=""  id="password-setting">
                                         </div>
                                     </div>
-                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col12 no-padding">
+                                        <div  id="settings-submit-button" class = "settings-button">
+                                                Salveaza
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -67,22 +93,34 @@
     <div class="modals-container">
         <?php include "modals/notifications.php" ?>
     </div>
-    <?php include "footer.php" ?>    
-    <script src="js/jquery-3.2.1.min.js"></script>
+    <?php include "footer.php" ?> 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
-    <script src="js/miscs.js"></script>
-    <script src="js/selected-page.js"></script>
-    <script src="js/fill-page.js"></script>
     <script src="js/address-autocomplete.js"></script>
-    <script src="js/settings-set-value.js"></script>
     <script src="js/event-manager.js"></script>
     <script src="js/settings-get-value.js"></script>
-    <script src="js/modals.js"></script>
-    <script src="js/notifications.js"></script>
+    <script src="js/settings-set-value.js"></script>
     <script>
         let hiddenInput = document.getElementById("user-coordinates");
         let addressInput = document.getElementById("address-setting");
-        prepareAddressAutocomplete(addressInput, hiddenInput, loadUserInfo);
+        for(let prop in containers){
+            if(containers.hasOwnProperty(prop)){
+                let container = document.querySelector("#"+containers[prop]+" .input-wrapper");
+                let preloader = document.createElement("span");
+                preloader.classList.add("input-preloader");
+                preloader.innerHTML = " <i class='fas fa-spinner fa-spin'></i>";
+                container.appendChild(preloader);
+            }
+        }
+         
+            prepareAddressAutocomplete(addressInput, hiddenInput);
+            loadUserInfo();
     </script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/miscs.js"></script>
+    <script src="js/selected-page.js"></script>
+    <script src="js/fill-page.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/notifications.js"></script>
+    
 </body>
 </html>

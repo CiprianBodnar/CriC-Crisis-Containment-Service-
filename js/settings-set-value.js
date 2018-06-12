@@ -1,3 +1,11 @@
+
+let containers = {
+    firstname: "firstname-row",
+    lastname: "lastname-row",
+    email: "email-row",
+    address: "address-row"
+}
+
 function loadUserInfo(){
     let request = new XMLHttpRequest();
     request.open('POST', 'resources/get-user-information.php', true);
@@ -20,6 +28,12 @@ function loadUserInfo(){
             new EventManager(null,new google.maps.Geocoder()).codeLatLng(latLng,hidden,function(){
                 address.value = hidden.innerText;
             });   
+            for(let prop in containers){
+                if(containers.hasOwnProperty(prop)){
+                    let container = document.querySelector("#"+containers[prop]+" .input-wrapper");
+                    container.removeChild(container.lastChild);
+                }
+            }   
         }
     });
     request.send();

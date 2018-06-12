@@ -35,7 +35,7 @@
 
 }
 
-.contact-form input[type=text] {
+.contact-form input[type=text], .contact-form input[type="password"] {
     width: calc(100% - 10px);
     padding: 0 20px;
     height: 40px;
@@ -201,14 +201,37 @@
 }
 
 .error {
-    padding: 20px 0;
+    padding: 0;
     color: #fff;
     font-family: Calibri;
-    font-size: 17px;  
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.has-error input{
+    border: 3px solid #5c2716 !important;
+    
 }
 
 .contact-form input[type=password].password-error {
     border: 3px solid #5c2716;
     border-radius: 3px;
     color: #5c2716;
+}
+.input-wrapper{
+    position: relative;
+}
+.input-preloader{
+    position: absolute;
+    top: 5px;
+    left: 0;
+    padding-left: 20px;
+    height: 40px;
+    width: 100%;
+    line-height:40px;
+    display: inline-block;
+    text-align: left;
+    color: #f4511e;
+    font-size: 20px;
 }

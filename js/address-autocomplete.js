@@ -2,7 +2,7 @@ function prepareAddressAutocomplete(input, finalInput, callback){
 	var address=[];
 	var autocomplete = new google.maps.places.Autocomplete(input);
 	var geocoder = new google.maps.Geocoder();
-	if(navigator.geolocation){
+	if(navigator.geolocation && input.value == ""){
 		navigator.geolocation.getCurrentPosition(function(position){
 			let center = position.coords.latitude+' '+position.coords.longitude;
 			finalInput.value=center;

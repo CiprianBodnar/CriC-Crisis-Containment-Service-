@@ -11,7 +11,7 @@ $NUMBER_MAX_OF_FEEDBACK = 5;
 
 
 function usersInsert($lastname,$firstname,$email,$location,$conn){
-    $stmt = $conn->prepare("INSERT INTO Users (firstname, lastname, email, password, address, posted, conn_date) VALUES (?,?,?,'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',?, 0, sysdate())");
+    $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, address, posted, conn_date) VALUES (?,?,?,'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',?, 0, sysdate())");
     $stmt ->bind_param("ssss",$lastname,$firstname,$email,$location);
     $stmt->execute();
     $stmt->close();

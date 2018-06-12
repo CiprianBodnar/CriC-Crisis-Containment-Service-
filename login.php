@@ -14,7 +14,7 @@ if(isset($_POST['conectare'])){
     $id_user = '';
     $firstname='';
     $lastname='';
-    $stmt = $conn->prepare("Select id_user,firstname,lastname FROM Users where email =? and password = ?");
+    $stmt = $conn->prepare("Select id_user,firstname,lastname FROM users where email =? and password = ?");
     $stmt -> bind_param("ss",$email,$pass);
     $stmt -> execute();
     $stmt -> bind_result($id_user,$firstname,$lastname);
@@ -27,7 +27,7 @@ if(isset($_POST['conectare'])){
         $_SESSION["loggedIn"] = TRUE;
         $_SESSION["id_user"] = $id_user;
        #$sql = "UPDATE Users set conn_date=sysdate where email='".$email."';";
-        $stmt = $conn -> prepare("UPDATE Users set conn_date=sysdate() where email = ?");
+        $stmt = $conn -> prepare("UPDATE users set conn_date=sysdate() where email = ?");
         $stmt -> bind_param("s",$email);
         $stmt -> execute();
         $stmt -> close();

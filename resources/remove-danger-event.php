@@ -9,7 +9,7 @@ else{
 }
     
 
-$stmt = $conn->prepare("Select id_event FROM Events where id_user =? and type = 'person'");
+$stmt = $conn->prepare("Select id_event FROM events where id_user =? and type = 'person'");
 $stmt -> bind_param("i",$id_user);
 $stmt -> execute();
 $stmt -> bind_result($id_event);
@@ -18,17 +18,17 @@ $stmt -> close();
 
 
 
-$stmt = $conn->prepare("DELETE FROM Events where id_user = ? and type = 'person'");
+$stmt = $conn->prepare("DELETE FROM events where id_user = ? and type = 'person'");
 $stmt ->bind_param("i",$id_user);
 $stmt->execute();
 $stmt -> close();
 
-$stmt = $conn->prepare("DELETE FROM Comments where event_id= ?");
+$stmt = $conn->prepare("DELETE FROM comments where event_id= ?");
 $stmt ->bind_param("i",$id_event);
 $stmt->execute();
 $stmt -> close();
 
-$stmt = $conn->prepare("DELETE FROM Feedback where id_danger= ?");
+$stmt = $conn->prepare("DELETE FROM feedback where id_danger= ?");
 $stmt ->bind_param("i",$id_event);
 $stmt->execute();
 $stmt -> close();

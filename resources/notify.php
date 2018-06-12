@@ -29,9 +29,9 @@
 
 		$message;
 		if($type === 'person')
-			$message = "Va aflați pe raza unei <strong>persoane aflate in pericol</strong>. <a href='map.php?view=".$eventId."'>Vedeți informații</a>";
+			$message = "Vă aflați pe raza unei <strong>persoane aflate în pericol</strong>. <a href='map.php?view=".$eventId."'>Vedeți informații</a>";
 		elseif($type === 'event')
-			$message = "Va aflat pe raza unui <strong>pericol</strong>. <a href='map.php?view=".$eventId."'>Informații despre pericol.</a>";
+			$message = "Vă aflați pe raza unui <strong>pericol</strong>. <a href='map.php?view=".$eventId."'>Informații despre pericol.</a>";
 		
 		$users = $conn->query("select id_user, address from users");
 		while($user = $users->fetch_assoc()){
@@ -75,7 +75,7 @@
 		$stmt->close();
 	}elseif ($type === 'event_removed') {
 		if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === false){
-			echo json_encode(array("error"=>"Nu sunteti autentificat"));
+			echo json_encode(array("error"=>"Nu sunteți autentificat"));
 			die();
 		}
 		$userId = floatval($args[0]);

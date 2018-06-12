@@ -8,7 +8,7 @@ else{
     $searchResult = new \stdClass();
     if(isset($_SESSION['id_user'])){
         $id_user = $_SESSION["id_user"];
-        $stmt = $conn->prepare("Select firstname,lastname,email,address FROM Users where id_user= ? ");
+        $stmt = $conn->prepare("Select firstname,lastname,email,address FROM users where id_user= ? ");
         $stmt -> bind_param("i",$id_user);
         $stmt -> execute();
         if ($result = $stmt ->get_result()){

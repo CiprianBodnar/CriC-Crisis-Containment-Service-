@@ -39,7 +39,7 @@ if(isset($_POST['submit'])) {
     $address = str_replace(array("ș","ă","ț","Ș","Ț","Ă","Â","â"),array("s","a","t","s","t","a","a","a"),$address);
     $address = htmlspecialchars($address, ENT_QUOTES);
 
-    $sql = $conn->prepare("SELECT * FROM Users WHERE email = ?");
+    $sql = $conn->prepare("SELECT * FROM users WHERE email = ?");
     $sql -> bind_param('s', $email_address);
     $sql -> execute();
     

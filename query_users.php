@@ -6,7 +6,7 @@
     
     $pre_name = trim("%{$_POST['pre_name']}%");
 
-    if(!($stmt=$conn->prepare("Select concat(lastname,' ',firstname) as 'Name', id_user as 'Id', address from Users where lower(lastname) LIKE lower(?) or lower(firstname) LIKE lower(?) "))){
+    if(!($stmt=$conn->prepare("Select concat(lastname,' ',firstname) as 'Name', id_user as 'Id', address from users where lower(lastname) LIKE lower(?) or lower(firstname) LIKE lower(?) "))){
         echo json_encode(array("error"=>("Could not post your report. ".$conn->error)));
         die();        
     }

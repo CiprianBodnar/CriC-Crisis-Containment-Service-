@@ -25,7 +25,7 @@ $dbname = "CricDB";
     
     }
         //drop users
-        $sql = "DROP TABLE Users;";
+        $sql = "DROP TABLE users;";
         if ($conn->query($sql) == TRUE){
             echo "Done drop Users<br>";
         }else{
@@ -51,14 +51,14 @@ $dbname = "CricDB";
         //..
 
         //drop feedback
-        $sql = "DROP TABLE Feedback;";
+        $sql = "DROP TABLE feedback;";
         if ($conn->query($sql) == TRUE){
             echo "Done drop Feedback <br>";
         }else{
             echo "Error: " . $conn->error."<br>";
         }
         //drop reset_pwd
-        $sql = "DROP TABLE Reset_Pwd;";
+        $sql = "DROP TABLE reset_pwd;";
         if ($conn->query($sql) == TRUE){
             echo "Done drop Reset_Pwd <br>";
         }else{
@@ -66,7 +66,7 @@ $dbname = "CricDB";
         }
 
         //drop person_finder
-        $sql = "DROP TABLE Person_Finder;";
+        $sql = "DROP TABLE person_finder;";
         if ($conn->query($sql) == TRUE){
             echo "Done drop Person Finder<br>";
         }else{
@@ -80,7 +80,7 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error."<br>";
         }
         //..
-        $sql = "CREATE TABLE Users (
+        $sql = "CREATE TABLE users (
             id_user INT(6)  AUTO_INCREMENT PRIMARY KEY,
             firstname VARCHAR(30) NOT NULL,
             lastname VARCHAR(30) NOT NULL,
@@ -117,7 +117,7 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error."<br>";
         }
 
-        $sql = "CREATE TABLE Feedback (
+        $sql = "CREATE TABLE feedback (
             id_user INT(6) NOT NULL,
             id_danger INT(6) NOT NULL,
             feedback INT(2) NOT NULL
@@ -128,7 +128,7 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error."<br>";
         }
         /*..*/
-        $sql = "CREATE TABLE Reset_Pwd (
+        $sql = "CREATE TABLE reset_pwd (
             email VARCHAR(50) NOT NULL,
             ekey VARCHAR(50) NOT NULL
             )";
@@ -138,7 +138,7 @@ $dbname = "CricDB";
             echo "Error: " . $conn->error."<br>";
         }
         /*..*/
-        $sql = "CREATE TABLE Person_Finder (
+        $sql = "CREATE TABLE person_finder (
             id INT(6) NOT NULL PRIMARY KEY auto_increment,
             id_user_in_danger INT(6) NOT NULL,
             id_user_posting INT(6) NOT NULL,

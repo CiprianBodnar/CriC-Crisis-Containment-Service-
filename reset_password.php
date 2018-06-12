@@ -27,12 +27,12 @@ if(isset($_POST['submit'])){
 
     if(strlen($_POST['parola_noua']) >= 6 ){
         if($password === $verify_password){
-            $sql = "UPDATE Users SET password='".$password."' WHERE email='".$email."'";
+            $sql = "UPDATE users SET password='".$password."' WHERE email='".$email."'";
             if(!$conn->query($sql)){
                 echo "Eroare: ". $conn->error;
             }
 
-            $sql = "DELETE FROM Reset_Pwd WHERE email='".$email."'";
+            $sql = "DELETE FROM reset_pwd WHERE email='".$email."'";
             if(!$conn->query($sql)){
                 echo "Eroare: ". $conn->error;
             }

@@ -30,7 +30,7 @@ if(isset($_POST['submit']))
         $to = htmlspecialchars($to, ENT_QUOTES);
         $key = htmlspecialchars($key, ENT_QUOTES);
 
-        $sql = "INSERT INTO Reset_Pwd (email, ekey) VALUES ('".$to."','".$key."');";
+        $sql = "INSERT INTO reset_pwd (email, ekey) VALUES ('".$to."','".$key."');";
         if(!$conn->query($sql) == TRUE){
             echo "Error: " . $conn->error;
         }

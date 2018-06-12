@@ -56,7 +56,7 @@ let instances = [
 for(let instance of instances){
 	if(instance.source && instance.hiddenInput && instance.output){
 		instance.source.addEventListener('keydown', function(){
-			if(instance.source.value.length>=3)
+			if(/^(([A-z0-9]{3,}\ ?)+)/.test(instance.source.value))
 				loadUsers(instance.source, instance.hiddenInput, instance.output);
 			else{
 				instance.output.innerHTML = '';

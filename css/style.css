@@ -95,6 +95,7 @@ header{
 
 .col12{
     width: 100%;
+    position: relative;
     padding: 20px;
 }
 
@@ -258,6 +259,10 @@ section#content .gradient-bg{
 span.notification-count{
 	
 }
+.no-margin{
+	margin: 0 !important;
+}
+
 #map-preloader{
 	position: absolute;
 	width: 100%;

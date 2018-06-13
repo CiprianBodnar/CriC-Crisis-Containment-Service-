@@ -35,7 +35,7 @@
 
 }
 
-.contact-form input[type=text], .contact-form input[type="password"] {
+.contact-form input[type=text], .contact-form input[type="password"], .contact-form .input-label {
     width: calc(100% - 10px);
     padding: 0 20px;
     height: 40px;
@@ -49,9 +49,23 @@
     -webkit-transition: All .2s ease;
     -o-transition: All .2s ease;
     transition: All .2s ease;
-    
 }
 
+.input-label{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    background: #fff;
+    width: 100% !important;
+}
+input[type="file"]{
+    display: none;
+}
+.contact-form input[type="file"]{
+    text-align: left !important;
+    -webkit-appearance: none;
+}
 
 .col4,.col6,.col8{
     width: 100%;
@@ -84,24 +98,71 @@
     color: #fff;
     font-family: Calibri;
     font-size: 16px;
+    text-align: justify;
+    margin-bottom: 5px;
 }
 
+.contact-form .par:last-child{
+    margin-bottom: 0;
+}
 
+.format-description{
+    background: #fff;
+    padding: 5px;
+    display: inline-block;
+    color: #f4511e;
+    font-weight: bold;
+    font-size: 13px;
+    font-style: italic;
+}
+
+#shelter-preloader{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 50px);
+    height: 40px;
+    text-align: center;
+    opacity: 0;
+    z-index: -1;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
+    transition: All .2s ease;
+    line-height: 40px;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-size: 20px;
+}
+#shelter-preloader.visible{
+    opacity: 1;
+    z-index: 0;
+}
+#selected-file{
+    float: right;
+    border: 1px solid #f4511e;
+    height: 25px;
+    padding: 0 5px;
+    position: relative;
+    border-radius: 10px;
+    top: 6px;
+    display: inline-block;
+    line-height: 24px;
+}
 .settings-button{
     margin-top: 30px;
-	height: 40px;
-	padding: 0 20px;
-	line-height: 40px;
-	color: #fff;
-	border: 1px solid #fff;
-	font-family: Calibri;
-	font-size: 18px;
-	background: #5c2716;  
-	outline: none;
-	cursor: pointer;
-	-webkit-transition: All 0.2s ease;
-    	-o-transition: All 0.2s ease;
-    	transition: All 0.2s ease;	
+    height: 40px;
+    padding: 0 20px;
+    line-height: 40px;
+    color: #fff;
+    border: 1px solid #fff;
+    font-family: Calibri;
+    font-size: 18px;
+    background: #5c2716;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: All 0.2s ease;
+    -o-transition: All 0.2s ease;
+    transition: All 0.2s ease;
     border: none;
     display: inline-block;
     text-decoration: none;

@@ -84,6 +84,39 @@
                             </form>
                         </div>
                     </div>
+                    <div class="row" id="shelters-report-container">
+                        <form action="#" class="contact-form">
+                            <div class="col12">
+                                <h3 class="subtitle">
+                                    Înregistrați locații sigure
+                                </h3>
+                                <p class="par">Formatul acceptat pentru semnalarea adăposturilor este CSV. Fișierul selectat trebuie să aibă extensia .csv si o dimensiune mai mica de 1MB.</p>
+                                <p class="par">
+                                    Formatul unei înregistrări este următorul: <br>
+                                    <span class="format-description">"Descrierea adăpostului",&lt;&lt;latitudine&gt;&gt;,&lt;&lt;longitudine&gt;&gt;</span>
+                                </p>
+                            </div>
+                            <div class="col12" id="shelters-form-container">
+                                <div class="col10" id="shelters-row">
+                                    <input type="file" id="shelters-file" accept=".csv">   
+                                    <label for="shelters-file" class="input-label">
+                                        <i class="far fa-file-alt"></i>
+                                        Încărcați fișierul
+                                        <span id="selected-file">neselectat</span>
+                                    </label>
+
+                                </div>
+                                <div class="col2">
+                                    <div class='settings-button no-margin' id="shelters-submit">
+                                        Trimite
+                                    </div>
+                                </div>
+                                <div id="shelter-preloader"><i class="fas fa-spinner fa-spin"></i></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -103,6 +136,7 @@
     <script>
         let hiddenInput = document.getElementById("user-coordinates");
         let addressInput = document.getElementById("address-setting");
+
         for(let prop in containers){
             if(containers.hasOwnProperty(prop)){
                 let container = document.querySelector("#"+containers[prop]+" .input-wrapper");
@@ -113,14 +147,15 @@
             }
         }
          
-            prepareAddressAutocomplete(addressInput, hiddenInput);
-            loadUserInfo();
+        prepareAddressAutocomplete(addressInput, hiddenInput);
+        loadUserInfo();
     </script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/miscs.js"></script>
     <script src="js/selected-page.js"></script>
     <script src="js/fill-page.js"></script>
     <script src="js/modals.js"></script>
+    <script src="js/shelters-file.js"></script>
     <script src="js/notifications.js"></script>
     
 </body>

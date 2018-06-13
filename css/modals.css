@@ -8,7 +8,13 @@
     background: rgba(0, 0, 0, 0.5);
     display: none;
 }
-
+.safehouse-container #event-range-container, .safehouse-container #event-poster-container{
+	display: none;
+}
+.safehouse-container #event-votes-container{
+	float: right;
+	margin-bottom: -52px;
+}
 .modal {
 	pointer-events: none;
     position: absolute;

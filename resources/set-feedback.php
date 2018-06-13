@@ -71,7 +71,7 @@
         $down = 0;
     }
     if($up+$down>=10){
-    	if($down/($up+$down)>0.66 && $feedback === -1){
+    	if($down/($up+$down)>0.66){
     		$rmEvent = $conn->prepare("delete from events where id_event = ?");
     		$rmEvent->bind_param('i', $event_id);
     		$rmEvent->execute();

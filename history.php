@@ -26,6 +26,10 @@
 		</div>
 		<div id="map-container">
 		</div>
+        <div id="map-cover"></div>
+        <div id="map-preloader">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
 	</section>
 
 	<div class="tabs box-small no-padding">
@@ -96,10 +100,6 @@
                             <input id="person" class="filter-option" type="checkbox" checked  >
                             Persoane în pericol
                         </div>
-                        <div class="row">
-                            <input id="shelter" class="filter-option" type="checkbox" checked  >
-                            Adăposturi
-                        </div>
                     </div>
                     <div class="section">
                         <div class="row">
@@ -107,6 +107,8 @@
                             Raza de acoperire
                         </div>
                     </div>
+
+                    <input id="shelter" class="filter-option" type="hidden">
                 </div>
             </div>
         </div>
@@ -157,10 +159,6 @@
                     <p class="row">
                         <span class="icon"><img src="img/danger-icons/person.png" alt=""></span>
                         <span class="content">Persoană în pericol</span> 
-                    </p>
-                    <p class="row">
-                        <span class="icon"><img src="img/danger-icons/safehouse.png" alt=""></span>
-                        <span class="content">Adăpost</span>
                     </p>
                 </div>
             </div>

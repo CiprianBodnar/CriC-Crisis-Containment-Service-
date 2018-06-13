@@ -20,43 +20,47 @@ function convert  (min, max) {
 
 
 function getVals(){
-  	// Get slider values
-  	var parent = this.parentNode.parentNode;
-  	var slides = parent.getElementsByTagName("input");
-    var slide1 = parseFloat( slides[0].value );
-    var slide2 = parseFloat( slides[1].value );
+  eventManager.loadEvents(minDate, maxDate, {animation: false});
     
-  	// Neither slider will clip the other, so make sure we determine which is larger
-  	if( slide1 > slide2 ){
-      var tmp = slide2; 
-      slide2 = slide1; 
-      slide1 = tmp;
-    }
-  	var bounds = this.getBoundingClientRect();
-  	var startPos = Math.floor(bounds.width/DEFAULT_MAX*slide1+3);
-  	var width = Math.floor(bounds.width/DEFAULT_MAX*slide2 - startPos);
-  	var pretty = parent.getElementsByClassName('pretty')[0];
-  	pretty.style.left = startPos+'px';
-  	pretty.style.width=width+'px';
-  	var displayElement = parent.getElementsByClassName("amount")[0];
-  	convert(slide1, slide2);
-    eventManager.loadEvents(minDate, maxDate, {animation: false});
-    
-    displayElement.innerHTML=(months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear();
+}
+
+function updateSlider(){
+  // Get slider values
+  var parent = this.parentNode.parentNode;
+  var slides = parent.getElementsByTagName("input");
+  var slide1 = parseFloat( slides[0].value );
+  var slide2 = parseFloat( slides[1].value );
+  
+  // Neither slider will clip the other, so make sure we determine which is larger
+  if( slide1 > slide2 ){
+    var tmp = slide2; 
+    slide2 = slide1; 
+    slide1 = tmp;
+  }
+  convert(slide1, slide2);
+  var bounds = this.getBoundingClientRect();
+  var startPos = Math.floor(bounds.width/DEFAULT_MAX*slide1+3);
+  var width = Math.floor(bounds.width/DEFAULT_MAX*slide2 - startPos);
+  var pretty = parent.getElementsByClassName('pretty')[0];
+  pretty.style.left = startPos+'px';
+  pretty.style.width=width+'px';var displayElement = parent.getElementsByClassName("amount")[0];
+  displayElement.innerHTML=(months[minDate.getMonth()])+' '+minDate.getFullYear() + " - " +(months[maxDate.getMonth()]) +' '+maxDate.getFullYear();
   
 }
 
 window.onload = function(){
   // Initialize Sliders
   var sliderSections = document.getElementsByClassName("slider-range");
-      for( var x = 0; x < sliderSections.length; x++ ){
-        var sliders = sliderSections[x].getElementsByTagName("input");
-        for( var y = 0; y < sliders.length; y++ ){
-          if( sliders[y].type ==="range" ){
-            sliders[y].oninput = getVals;
-            // Manually trigger event first time to display values
-            sliders[y].oninput();
-          }
+    for( var x = 0; x < sliderSections.length; x++ ){
+      var sliders = sliderSections[x].getElementsByTagName("input");
+      for( var y = 0; y < sliders.length; y++ ){
+        if( sliders[y].type ==="range" ){
+          sliders[y].onmouseup = getVals;
+          sliders[y].oninput = updateSlider
+          // Manually trigger event first time to display values
+          sliders[y].oninput();
         }
       }
+    }
+    getVals();
 }

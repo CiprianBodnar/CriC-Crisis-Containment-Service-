@@ -30,6 +30,7 @@
          <div id="map-container">
         </div>
         <div id="map-cover"></div>
+        <div id="map-preloader"><i class="fas fa-spinner fa-spin"></i></div>
     </section>
     <div class="tabs box-small no-padding">
         <div class="tab" id="tab-about">

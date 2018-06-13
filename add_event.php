@@ -7,9 +7,10 @@ include_once('dbConnect.php');
 
 	$desc = htmlspecialchars($_POST['desc'], ENT_QUOTES);
 	$location = htmlspecialchars($_POST['location'], ENT_QUOTES);
+	$range = min(floatval(htmlspecialchars($_POST['range'])), 99999);
 	$type = htmlspecialchars($_POST['type'], ENT_QUOTES);
 	$stmt = $conn->prepare("INSERT INTO events (id_user, location, event_range, type, description, event_date) values(?, ?, ?, ?, ?, sysdate())");
-	$stmt ->bind_param("isiss", $id_user, $location, $_POST['range'], $type, $desc);
+	$stmt ->bind_param("isiss", $id_user, $location, $range, $type, $desc);
 	$stmt->execute();
 	$response = new \stdClass();
 	$response -> id_user = $id_user;

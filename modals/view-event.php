@@ -27,11 +27,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col6">
+            <div class="col6" id="event-range-container">
                 <p class="subtitle">Raza evenimentului</p>
                 <p class="event-content" id="event-range"><!-- Event range goes here --></p>
             </div>
-            <div class="col6">
+            <div class="col6" id="event-votes-container">
                 <div class="row feedback-votes">
                     <input type="hidden" name="feedback_val" id="feedback-val">
                      <!-- if user is logged in display upvote/downvote buttons -->
@@ -69,7 +69,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="row">
+        <div class="row" id="event-poster-container">
             <div class="col12">
                 <p class="subtitle">Adăugat de</p>
                 <div id="poster-container">

@@ -18,6 +18,9 @@
 	// args[0] = user_id
 	// args[1] = event type
 
+	//else if type === new_user
+	// args[0] = user_id
+
 
 
 	if($type === 'event' || $type === 'person'){
@@ -88,6 +91,50 @@
 		$stmt->bind_param('is', $userId, $message);
 		$stmt->execute();
 		$stmt->close();
+	}elseif($type === 'new_user'){
+		$userId = floatval($args[0]);
+		$locStmt = $conn->prepare("select address from users where id_user = ?");
+		$locStmt -> bind_param('i', $userId);
+		$locStmt->execute();
+		if(!$rs = $locStmt->get_result()->fetch_assoc()){
+			echo json_encode(array("error"=>"Utilizatorul nu prea exista"));
+			die();
+		}
+		$userLoc = $rs['address'];
+		$userLoc = explode(" ", $userLoc);
+		$userLatLng = new \stdClass();
+		$userLatLng -> lat = floatval($userLoc[0]);
+		$userLatLng -> lng = floatval($userLoc[1]);
+		$stmt = $conn->prepare("select id_event, location, event_range from events where event_date between sysdate()-3 and sysdate()+1");
+		$stmt->execute();
+		if($rs = $stmt->get_result()){
+			while($row = $stmt->fetch_assoc()){
+				$eventId = floatval($row['id_event']);
+				$range = floatval($row['event_range']);
+				$eventLatLng = new \stdClass();
+				$eventLatLng -> lat = floatval(explode(" ", $row['location'])[0]);
+				$eventLatLng -> lng = floatval(explode(" ", $row['location'])[1]);
+
+				$message = "Vă aflați pe raza unui <strong>eveniment</strong>. <a href='map.php?view="+$eventId+"'>Vedeți mai multe informații</a>";
+
+				$d = pow($userLatLng->lat-$eventLatLng->lat, 2)+ pow($userLatLng->lng-$eventLatLng->lng, 2);
+				$d = sqrt($d);
+			    $d = $d*100000;
+
+			    if($d < $range){
+			    	if(!$stmt = $conn->prepare("insert into notifications (user_id, infos, notification_date, unread) values(?, ?, sysdate(), -1)")){
+			    		echo json_encode(array("error"=>"unexpected error"));
+			    		die();
+			    	}
+			    	$stmt->bind_param('is', $userId, $message);
+			    	$stmt->execute();
+			    	$stmt->close();
+			    }
+
+			}
+		}
+
+		
 	}
 
 	echo json_encode(array("success"=>"done"));

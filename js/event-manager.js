@@ -3,7 +3,9 @@ class EventManager{
 		this.map = map;
 		this.geocoder = geocoder;
 		this.events = [];
+		this.shelters = [];
 		this.timeTable = [];
+		this.eventLoading = false;
 		this.directionsService = new google.maps.DirectionsService();
 	}
 
@@ -139,64 +141,39 @@ class EventManager{
 		}
 	}
 
+	existsEvent(eventId){
+		for(let event of this.events){
+			if(event.id === eventId)
+				return true;
+		}
+		return false;
+	}
 
 	loadEvents(lowerBound, upperBound, args, callback){
+
 		//lowerBound & upperBound are dates
 		this.timeTable = [];
 		this.timeTable.push(lowerBound);
 		this.timeTable.push(upperBound);
-
+		document.getElementById('map-preloader').classList.add('visible');
 		let request = new XMLHttpRequest();
 		request.open('POST', 'query_events.php', true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		request.onreadystatechange = (function(request, obj){
 			return function(){
 				if(request.readyState===4 && request.status===200){
-					obj.clearEvents();
-					let events = JSON.parse(request.responseText);
 
+					let events = JSON.parse(request.responseText);
+					let counter = 0;
 					for(let event of events){
-						let isNew = true;
-						for(let other of obj.events){
-							if(event.id === other.id){
-								isNew = false;
-								break;
-							}
+						if(!obj.existsEvent(event.id)){
+							counter++;
+							obj.processEvent(event, args);
 						}
-						if(!isNew)
-							continue;
-						event.date = new Date(event.date);
-						let markerStyle = obj.getMarkerStyle(event.type);
-						let animation = google.maps.Animation.DROP;
-						if(args && 'animation' in args){
-							animation = args.animation;
-						}
-						let marker = new google.maps.Marker({
-						  map: obj.map, 
-						  position: event.location,
-						  animation: animation,
-						  icon: markerStyle.icon
-						});
-						let circle = new google.maps.Circle({
-					        strokeColor: markerStyle.color,
-					        strokeOpacity: 0.6,
-					        strokeWeight: 2,
-					        fillColor: markerStyle.color,
-					        fillOpacity: 0.5,
-					        map: obj.map,
-					        center: event.location,
-					        radius:  event.range,
-					        clickable: false
-					    });
-					    event.marker = marker;
-					    event.circle = circle;
-					    google.maps.event.addDomListener(marker, 'click', function(){
-					    	obj.describeEvent(event);
-					    });
-					   	obj.events.push(event);
-					   	if(obj.hasOwnProperty('filterOptions'))
-					   		obj.filter(obj.filterOptions);
 					}
+					obj.clearEvents();
+					document.getElementById('map-preloader').classList.remove('visible')
+					obj.eventLoading = false;
 					if(callback){
 						callback(obj);
 					}
@@ -207,14 +184,55 @@ class EventManager{
 		request.send(postBody);
 	}
 
-	clearEvents(){
+
+
+	processEvent(event, args){
+		event.date = new Date(event.date);
+		let markerStyle = this.getMarkerStyle(event.type);
+		let animation = google.maps.Animation.DROP;
+		if(args && 'animation' in args){
+			animation = args.animation;
+		}
+		let marker = new google.maps.Marker({
+		  map: this.map, 
+		  position: event.location,
+		  animation: animation,
+		  icon: markerStyle.icon
+		});
+		let circle = new google.maps.Circle({
+	        strokeColor: markerStyle.color,
+	        strokeOpacity: 0.6,
+	        strokeWeight: 2,
+	        fillColor: markerStyle.color,
+	        fillOpacity: 0.5,
+	        map: this.map,
+	        center: event.location,
+	        radius:  event.range,
+	        clickable: false
+	    });
+	    event.marker = marker;
+	    event.circle = circle;
+	    let obj = this;
+	    google.maps.event.addDomListener(marker, 'click', function(){
+	    	obj.describeEvent(event);
+	    });
+	   	this.events.push(event);
+	   	if(this.hasOwnProperty('filterOptions'))
+	   		this.filter(this.filterOptions);
+	}
+
+	clearEvents(callback){
 		for (let i = 0; i < this.events.length; i++){
-			if(this.events[i].date < this.timeTable[0] || this.events[i].date > this.timeTable[1]){
+			let eventDate = this.events[i].date;
+			if(eventDate < this.timeTable[0] || eventDate > this.timeTable[1]){
 				this.events[i].marker.setMap(null);
 				this.events[i].circle.setMap(null);
 				this.events.splice(i, 1);
+				i--;
 			}
 		}
+		if(callback)
+			callback();
 	}
 
 	createEvent(args){
@@ -308,6 +326,12 @@ class EventManager{
 				negative: document.getElementsByClassName('down-bar')[0]
 			},
 			comments: document.getElementById('comments-container')
+		}
+		if(event.type==='safehouse'){
+			modal.body.classList.add('safehouse-container');
+		}
+		else{
+			modal.body.classList.remove('safehouse-container');
 		}
 		modal.cover.style.display='block';
 		modal.container.style.display='block';
@@ -522,6 +546,10 @@ class EventManager{
 				else{
 					if(response.hasOwnProperty('removed')){
 						window.location.reload();
+						let event  = obj.getEventFromId(eventId);
+						if(event != null){
+							obj.notify('event_removed', event.user.user.id+' '+obj.getEventTitle(event.type));
+						}
 					}
 					callback();
 				}
@@ -529,6 +557,15 @@ class EventManager{
 		}
 		let postBody = 'event_id='+encodeURIComponent(eventId)+'&feedback_val='+encodeURIComponent(feedback);
 		request.send(postBody);
+	}
+
+
+	getEventFromId(eventId){
+		for(let event of this.events){
+			if (event.id === eventId)
+				return event;
+		}
+		return null;
 	}
 
 	notify(type, args){
@@ -622,6 +659,8 @@ class EventManager{
 				return 'Alunecare de teren';
 			case 'psd':
 				return 'Miting PSD';
+			case 'safehouse':
+				return 'Adăpost';
 			default:
 				return 'Eveniment';
 		}

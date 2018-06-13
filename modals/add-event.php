@@ -39,7 +39,7 @@
                     <p>
                         Raza pericolului (m): 
                     </p>
-                    <input type="number" name="event-radius" id="event-radius" value="500">
+                    <input type="number" name="event-radius" id="event-radius" value="500" max="99999" min="10">
                     <input type="text" value="" id="lat-input" name="lat" style="display: none;">
                     <input type="text" value="" id="lng-input" name="lng" style="display: none;">
                     

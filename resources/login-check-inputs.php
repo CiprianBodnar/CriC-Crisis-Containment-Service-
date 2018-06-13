@@ -8,7 +8,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === TRUE){
 
 if(! (isset($_POST['password']) && isset($_POST['email']))){
     echo json_encode(array("error"=>"Probleme email+parola"));
-    die();
+     die();
 }
 else{    
      $searchResult = new \stdClass();

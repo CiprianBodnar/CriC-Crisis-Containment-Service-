@@ -298,10 +298,10 @@ input[type="file"]{
     font-size: 20px;
 }
 
-.contact-button{
-    margin-top: 30px;
+#contact-submit-button{
+    margin: 5px 0 5px 0;
 	height: 100px;
-	padding: 0 20px;
+	padding: 0 40px;
 	line-height: 50px;
 	color: #fff;
 	border: 1px solid #fff;
@@ -316,4 +316,20 @@ input[type="file"]{
     border: none;
     display: inline-block;
     text-decoration: none;
+}
+
+#submit-button{
+    border: none;
+    background: #5c2716;
+    text-align: center;
+    display: block;
+    margin: 5px 0 5px 0;
+    font-size: 18px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 20px;
+    transition: All .2s ease;
+    -webkit-transition: All .2s ease;
+    -o-transition: All .2s ease;
 }

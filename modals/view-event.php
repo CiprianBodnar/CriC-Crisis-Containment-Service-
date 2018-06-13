@@ -96,7 +96,10 @@
                     <div id="user-av-container" class="av-container">
                         <?php 
                             $words = explode(" ", $_SESSION['name']);
-                            echo $words[0][0].$words[1][0];
+                            if(count($words) === 2)
+                                echo $words[0][0].$words[1][0];
+                            else 
+                                echo $words[0][0];
                          ?>
                     </div>
                 </div>

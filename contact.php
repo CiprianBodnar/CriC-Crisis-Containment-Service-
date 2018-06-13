@@ -52,25 +52,25 @@
                         <form class="contact-form" action="#" method="POST">  
                             <div class="row">
                                 <div class="col6 no-padding" id="lastname-row">
-                                    <input type="text" name="nume" id="lastname-contact" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+                                    <input type="text" name="nume" id="lastname-contact" autocomplete="off" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
                                 </div>
                                 <div class="col6 no-padding" id="firstname-row">
-                                    <input type="text" name="prenume" id="firstname-contact" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
+                                    <input type="text" name="prenume" id="firstname-contact" autocomplete="off" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col6 no-padding" id="email-row">
-                                    <input type="text" name="email" id="email-contact" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                    <input type="text" name="email" id="email-contact" autocomplete="off" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                 </div>
                                 <div class="col6 no-padding" id="subject-row">
-                                    <input type="text" name="subject" id="subject-contact" value="Subiect" onfocus="if(this.value=='Subiect') this.value='';" onblur="if(this.value=='') this.value='Subiect';">
+                                    <input type="text" name="subject" id="subject-contact" autocomplete="off" value="Subiect" onfocus="if(this.value=='Subiect') this.value='';" onblur="if(this.value=='') this.value='Subiect';">
                                 </div>
                             </div>
                             <div class="row" id="message-row">
                                 <textarea name="mesaj" id = "message-contact" value="Mesaj" onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" ></textarea>
-                                <div id="contact-submit-button" class="settings-button" name = "submit">
+                                <button id="contact-submit-button" class="settings-button" name = "submit">
                                     <i class="fas fa-paper-plane"></i>
-                                </div>
+                                </button>
                                 <div class="clear"></div>
                             </div>
                         </form>

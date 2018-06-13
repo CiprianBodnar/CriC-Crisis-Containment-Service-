@@ -2,6 +2,7 @@ function addErrorMessage(idRow,type){
     if(document.getElementById(idRow+"-error")){
         return;
     }
+
     let newDiv = document.createElement("div");
     newDiv.classList.add("error");
     newDiv.setAttribute("id",idRow+"-error");
@@ -13,7 +14,6 @@ function addErrorMessage(idRow,type){
 }
 
 function removeErrorMessage(idRow){
-    
     if(document.getElementById(idRow+"-error")){
         var node = document.getElementById(idRow);
         node.removeChild(node.lastChild);

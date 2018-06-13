@@ -95,13 +95,20 @@ header{
 
 .col12{
     width: 100%;
-    position: relative;
     padding: 20px;
 }
-
+#shelters-form-container{
+	position: relative;
+}
 
 .logo img{
 	vertical-align: middle;
+}
+.contact-form-submit{
+	line-height: 100px !important;
+}
+.has-error textarea{
+	border: 3px solid #5c2716 !important;
 }
 .nav-menu ul.nav{
 	border-top: 10px solid #c8481f;

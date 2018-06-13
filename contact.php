@@ -68,9 +68,9 @@
                             </div>
                             <div class="row" id="message-row">
                                 <textarea name="mesaj" id = "message-contact" value="Mesaj" onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" ></textarea>
-                                <button id="contact-submit-button" class="settings-button" name = "submit">
+                                <div id="contact-submit-button" class="settings-button contact-form-submit">
                                     <i class="fas fa-paper-plane"></i>
-                                </button>
+                                </div>
                                 <div class="clear"></div>
                             </div>
                         </form>

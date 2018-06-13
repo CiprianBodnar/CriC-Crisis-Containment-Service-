@@ -361,6 +361,7 @@ class EventManager{
 		modal.range.innerHTML = eventRange;
 		if(!event.hasOwnProperty('route')){
 			modal.routeStatus.innerHTML = 'arată';
+			this.setRoute(event);
 		}
 		else if (event.route.getMap() === this.map){
 			modal.routeStatus.innerHTML = 'ascunde';

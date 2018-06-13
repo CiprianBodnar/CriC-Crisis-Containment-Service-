@@ -1,52 +1,3 @@
-<?php
-include_once('dbConnect.php');
-
-$error ="";
-if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true)
-    header("Location: home.php");
-if(isset($_POST['conectare'])){
-
-    $email = $_POST['email'];
-    $email = htmlspecialchars($email,ENT_QUOTES);    
-    $pass = hash("sha256",$_POST['parola']);
-    #$sql = "SELECT * FROM Users WHERE email='".$email."' AND password='".$pass."';";
-   
-    $id_user = '';
-    $firstname='';
-    $lastname='';
-    $stmt = $conn->prepare("Select id_user,firstname,lastname FROM users where email =? and password = ?");
-    $stmt -> bind_param("ss",$email,$pass);
-    $stmt -> execute();
-    $stmt -> bind_result($id_user,$firstname,$lastname);
-    $stmt -> fetch();
-    $stmt -> close();
-
-
-    if($id_user !='' and $lastname!='' and $firstname!=''){
-        $_SESSION ["name"] = $firstname . " " . $lastname;
-        $_SESSION["loggedIn"] = TRUE;
-        $_SESSION["id_user"] = $id_user;
-       #$sql = "UPDATE Users set conn_date=sysdate where email='".$email."';";
-        $stmt = $conn -> prepare("UPDATE users set conn_date=sysdate() where email = ?");
-        $stmt -> bind_param("s",$email);
-        $stmt -> execute();
-        $stmt -> close();
-    }
-    else
-        $error = "Email sau parolă greșită!";
-
-    $_SESSION["email"] = $email;
-
-    if(isset($_SESSION['loggedIn'])){
-        $loggedIn = $_SESSION['loggedIn'];
-        if($loggedIn ===TRUE)
-            header("Location: home.php");
-        }
-}
-    $conn->close();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,10 +10,8 @@ if(isset($_POST['conectare'])){
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
-<body id="login-page">
-	
+<body id="login-page">	
     <?php include "header.php" ?>
-	
     <section id="content">
         <div class="gradient-bg">
             <div class="container no-padding">
@@ -75,28 +24,19 @@ if(isset($_POST['conectare'])){
                             Cu adresa ta de email si parola.
                         </p>
                     </div>
-                    <div class="row2">
+                    <div class="row2" id = "inputs-row">
                         <form class="login-form" action="#" method="POST">
-                            <div class="row21">
-                                <input type="text" name="email" value="<?php  if(isset($_SESSION['email'])) echo $_SESSION['email']; else echo "your.email@yoursite.com"; ?>" 
-                                onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                            <div class="col12 no-padding">
+                                <input type="text" name="email" id="login-email"  value="<?php  if(isset($_SESSION['email'])) echo $_SESSION['email']; else echo "your.email@yoursite.com"; ?>"  >
                             </div>
-                            <div class="row21">
-                                <input type="password" name="parola">
-                                <button type="submit" id="conecteaza" name="conectare">Conectează-te</button>
+                            <div class="col12 no-padding">
+                                <input type="password" name="parola" id="login-password">
+                                <div  id="conecteaza" name="conectare">Conectează-te</div>
                                 <div class="clear"></div>
                             </div>
-                            <?php
-                                if($error != "") {
-                                    echo "<div class = 'error'>". $error . "</div>";
-                                 }
-                          ?>
                         </form>
                     </div>
-
-                    
                     <div class="row3">
-
                         <p class="information">
                             Nu ai încă un cont de utilizator? <a href="register.php">Înregistreaza-te!</a>
                         </p>
@@ -109,11 +49,13 @@ if(isset($_POST['conectare'])){
             </div>
         </div>
     </section>
-
-
 	<?php include "footer.php" ?>
-    
     <script  src="js/miscs.js"></script>
     <script  src="js/fill-page.js"></script>
+    <script src="js/form-errors.js"></script>
+    <script src="js/login-fields.js"></script>
+    <script>
+        checkLogin("","");
+    </script>
 </body>
 </html>

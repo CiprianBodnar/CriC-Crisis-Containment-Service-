@@ -97,6 +97,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Pcx6UnNfKrOjhDrcOgG3joJPpUSDEuA&libraries=places"></script>
     <script src="js/address-autocomplete.js"></script>
     <script src="js/event-manager.js"></script>
+    <script src="js/form-errors.js"></script>
     <script src="js/settings-get-value.js"></script>
     <script src="js/settings-set-value.js"></script>
     <script>

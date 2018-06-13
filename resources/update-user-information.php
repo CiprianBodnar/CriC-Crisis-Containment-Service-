@@ -51,6 +51,7 @@
             $update_stmt->execute();
             $update_stmt->close();
             $_SESSION ["name"] = $lastname.' '.$firsname;
+            $_SESSION['email'] = $email;
            
         }
         echo json_encode($errorHandler);

@@ -1,5 +1,4 @@
 <?php
-
 include_once('../dbConnect.php');
 
 function generateRandomString($length = 25) {
@@ -20,32 +19,45 @@ else{
 
     #echo json_encode(array("succ"=>" email"));
     $email = $_POST['email'];
-    $key = generateRandomString();
-    ini_set("SMTP","ssl://smtp.gmail.com");
-    ini_set("smtp_port","465");
-    if(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email)){
-        $to = $email;
-        $subject = "Trimitere cod de resetare parola cont CriC";
-        $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
-        $message .= $key;
-        $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
-        $header = "From: fiicriciasi@gmail.com";
+    $tryEmail = "";
+    $stmt = $conn ->prepare("SELECT count(email) FROM users WHERE email=?");
+    $stmt -> bind_param('s',$email);
+    $stmt -> execute();
+    $stmt -> bind_result($tryEmail);
+    $stmt -> fetch();
+    $stmt -> close();
 
-        mail($to, $subject, $message, $header);
-        $to = htmlspecialchars($to, ENT_QUOTES);
-        $key = htmlspecialchars($key, ENT_QUOTES);
+    if($tryEmail === 1){
+        $key = generateRandomString();
+        ini_set("SMTP","ssl://smtp.gmail.com");
+        ini_set("smtp_port","465");
+        if(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email)){
+            $to = $email;
+            $subject = "Trimitere cod de resetare parola cont CriC";
+            $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
+            $message .= $key;
+            $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
+            $header = "From: fiicriciasi@gmail.com";
 
-        $stmt = $conn->prepare( "insert into reset_pwd (email, ekey) VALUES (?,?);");
-        $stmt ->bind_param('ss',$email,$key);
-        $stmt->execute();
-        $stmt->close();
-        echo json_encode(array("succ"=>"Bravo"));
+            mail($to, $subject, $message, $header);
+            $to = htmlspecialchars($to, ENT_QUOTES);
+            $key = htmlspecialchars($key, ENT_QUOTES);
+
+            $stmt = $conn->prepare( "insert into reset_pwd (email, ekey) VALUES (?,?);");
+            $stmt ->bind_param('ss',$email,$key);
+            $stmt->execute();
+            $stmt->close();
+            echo json_encode(array("succ"=>"Bravo"));
+        }
+        else{
+            echo json_encode(array("error"=>"Introduceti o adresa valida de email"));
+            die();
+        }
     }
     else{
-        echo json_encode(array("error"=>"Introduceti o adresa valida de email"));
+        echo json_encode(array("error"=>"Adresa de email nu exista in baza de date"));
         die();
-    }
-        
+    }    
 }
 
 ?>

@@ -155,14 +155,15 @@ class EventManager{
 		this.timeTable = [];
 		this.timeTable.push(lowerBound);
 		this.timeTable.push(upperBound);
-		document.getElementById('map-preloader').classList.add('visible');
+		let preloader = document.getElementById('map-preloader');
+		this.clearEvents();
+		if(preloader) preloader.classList.add('visible');
 		let request = new XMLHttpRequest();
 		request.open('POST', 'query_events.php', true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		request.onreadystatechange = (function(request, obj){
 			return function(){
 				if(request.readyState===4 && request.status===200){
-
 					let events = JSON.parse(request.responseText);
 					let counter = 0;
 					for(let event of events){
@@ -171,8 +172,8 @@ class EventManager{
 							obj.processEvent(event, args);
 						}
 					}
-					obj.clearEvents();
-					document.getElementById('map-preloader').classList.remove('visible')
+					if(preloader)
+						preloader.classList.remove('visible');
 					obj.eventLoading = false;
 					if(callback){
 						callback(obj);

@@ -24,6 +24,8 @@ $dbname = "CricDB";
         }
     
     }
+    for($index = 1; $index <= 2; $index++){
+        ob_start();
         //drop users
         $sql = "DROP TABLE users;";
         if ($conn->query($sql) == TRUE){
@@ -178,7 +180,9 @@ $dbname = "CricDB";
         }else{
             echo "Error: " . $conn->error."<br>";
         }
-       
+        if($index === 1)
+            ob_end_clean();
+    }
 
     
     $conn->close();

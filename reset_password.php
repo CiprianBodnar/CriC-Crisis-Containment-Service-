@@ -1,53 +1,3 @@
-<?php
-include_once ("dbConnect.php");
-
-$key = "";
-$error = "";
-if(isset($_GET['key'])){
-    $key = $_GET['key'];
-}
-
-#$sql = "SELECT * FROM Reset_Pwd WHERE ekey='".$key."'";
-$email='';
-$ekey='';
-$stmt = $conn->prepare("Select email ekey from reset_pwd where ekey=? ");
-$stmt -> bind_param("s",$key);
-$stmt -> execute();
-$stmt -> bind_result($email,$ekey);
-$stmt -> fetch();
-$stmt -> close();
-
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$email = htmlspecialchars($row['email'],ENT_QUOTES);
-
-if(isset($_POST['submit'])){
-    $password = hash("sha256", $_POST['parola_noua']);
-    $verify_password = hash("sha256", $_POST['verificare_parola_noua']);
-
-    if(strlen($_POST['parola_noua']) >= 6 ){
-        if($password === $verify_password){
-            $sql = "UPDATE users SET password='".$password."' WHERE email='".$email."'";
-            if(!$conn->query($sql)){
-                echo "Eroare: ". $conn->error;
-            }
-
-            $sql = "DELETE FROM reset_pwd WHERE email='".$email."'";
-            if(!$conn->query($sql)){
-                echo "Eroare: ". $conn->error;
-            }
-
-            header("Location: login.php");
-        }
-        else
-            $error = "Parolele nu corespund!";
-    }
-    else 
-        $error = "Parola trebuie să conțină minim 6 caractere!";
-    $conn->close();    
-}
- 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,6 +9,7 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/register.css">
     <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/modals.css">
 </head>
 <body id="login-page">
 	<?php include "header.php" ?>
@@ -72,28 +23,23 @@ if(isset($_POST['submit'])){
                             Schimbarea parolei dvs
                         </h3>
                         <form class="contact-form" action="#" method="POST">
-                            <div class="row">
+                            <div class="row" id ="password-row">
                                 <div class="par">
                                     Parola noua
                                 </div>
-                                <input type="password" class="pwd" name="parola_noua">
+                                <input type="password" class="pwd" name="parola_noua" id="reset-password">
                             </div>
-                            <div class="row">
+                            <div class="row" id ="verify-password-row">
                                 <div class="par">
                                     Verificare parola noua
                                 </div>
-                                <input type="password" class="pwd" name="verificare_parola_noua">
+                                <input type="password" class="pwd" name="verificare_parola_noua" id="reset-verify-password">
                             </div>
 
-                            <button type="submit" name="submit" id="submit-button">
+                            <div class="settings-button" name="submit" id="reset-submit-button">
                                 Trimitere
-                            </button>
-                            <div class = "clear"></div>
-                            <?php
-                                if($error != ""){
-                                    echo "<div class ='error'>".$error."</div>";
-                                }  
-                            ?>   
+                            </div>
+                            <div class = "clear"></div>  
                         </form>
                     </div>
                 </div>
@@ -101,7 +47,16 @@ if(isset($_POST['submit'])){
         </div>
 	</section>
 
-	<?php include "footer.php" ?>
+    <?php include "footer.php" ?>
+
+    <div class="cover"></div>
+    <div class="modals-container">
+    <?php include "modals/notifications.php" ?>
+    </div>
+    
+    <script src="js/event-manager.js"></script>
+    <script src="js/form-errors.js"></script>
+    <script src="js/reset-password-fields.js"></script>
 	<script src="js/miscs.js"></script>
     <script src="js/fill-page.js"></script>
 </body>

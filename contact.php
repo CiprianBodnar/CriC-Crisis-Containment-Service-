@@ -1,3 +1,60 @@
+<?php
+    $error = "";
+    $last_name_error = "";
+    $first_name_error = "";
+    $email_error = "";
+    $subject_error = "";
+    $message_error = "";
+
+    $last_name = "";
+    $first_name = "";
+    $email = "";
+    $subject = "";
+    $message = "";
+
+    if(isset($_POST['submit'])){
+        $last_name = $_POST['nume'];
+        $first_name = $_POST['prenume'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $message= $_POST['mesaj'];
+
+        if(!(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email)) || $email === "your.email@yoursite.com"){
+            $email_error = "Eroare email!";
+        }
+
+        if(!(strlen($subject)>=5) || $subject === "Subiect"){
+            $subject_error = "Eroare subiect!";
+        }
+
+        if($message === 'Mesaj' || strlen($message) == 0) {
+            $message_error = "Eroare mesaj!";
+        }
+
+        if($last_name == 'Nume') {
+            $last_name_error = "Eroare prenume!";
+        }
+
+        if($first_name == 'Prenume') {
+            $first_name_error = "Eroare nume!";
+        }
+
+
+        if($last_name_error === "" && $first_name_error === "" && $email_error === "" && $subject_error === "" && $message_error === "") {
+            $to = "fiicriciasi@gmail.com";
+            $header = "From: fiicriciasi@gmail.com";
+            $mail_body = "Nume: ".$last_name;
+            $mail_body .= "\nPrenume: ".$first_name;
+            $mail_body .= "\nE-Mail: ".$email;
+            $mail_body .= "\n".$message;
+
+            mail($to, $subject, $mail_body, $header);
+        }
+        else {
+            $error = "Datele introduse în câmpurile marcate nu sunt valide!";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +65,7 @@
 	<link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/modals.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/media.css">
 </head>
 <body id="contact-page">
@@ -51,27 +108,36 @@
                         </h3>
                         <form class="contact-form" action="#" method="POST">  
                             <div class="row">
-                                <div class="col6 no-padding" id="lastname-row">
-                                    <input type="text" name="nume" id="lastname-contact" value="Nume" onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
+                                <div class="col6 no-padding">
+                                    <input type="text" name="nume" value="<?php if($error) echo $last_name; else 
+                                        echo 'Nume' ?>" <?php if($last_name_error) echo "class = 'error'"; ?> onfocus="if(this.value=='Nume') this.value='';" onblur="if(this.value=='') this.value='Nume';">
                                 </div>
-                                <div class="col6 no-padding" id="firstname-row">
-                                    <input type="text" name="prenume" id="firstname-contact" value="Prenume" onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
+                                <div class="col6 no-padding">
+                                    <input type="text" name="prenume" value="<?php if($error) echo $first_name; else 
+                                        echo 'Prenume'; ?>" <?php if($first_name_error) echo "class = 'error'"; ?> onfocus="if(this.value=='Prenume') this.value='';" onblur="if(this.value=='') this.value='Prenume';">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col6 no-padding" id="email-row">
-                                    <input type="text" name="email" id="email-contact" value="your.email@yoursite.com" onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
+                                <div class="col6 no-padding">
+                                    <input type="text" name="email" value="<?php if($error) echo $email; else 
+                                        echo 'your.email@yoursite.com'; ?>" <?php if($email_error) echo "class = 'error'"; ?> onfocus="if(this.value=='your.email@yoursite.com') this.value='';" onblur="if(this.value=='') this.value='your.email@yoursite.com';">
                                 </div>
-                                <div class="col6 no-padding" id="subject-row">
-                                    <input type="text" name="subject" id="subject-contact" value="Subiect" onfocus="if(this.value=='Subiect') this.value='';" onblur="if(this.value=='') this.value='Subiect';">
+                                <div class="col6 no-padding">
+                                    <input type="text" name="subject" value="<?php if($error) echo $subject; else 
+                                        echo 'Subiect'; ?>" <?php if($subject_error) echo "class = 'error'"; ?> onfocus="if(this.value=='Subiect') this.value='';" onblur="if(this.value=='') this.value='Subiect';">
                                 </div>
                             </div>
-                            <div class="row" id="message-row">
-                                <textarea name="mesaj" id = "message-contact" value="Mesaj" onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" ></textarea>
-                                <div id="contact-submit-button" class="settings-button" name = "submit">
+                            <div class="row">
+                                <textarea name="mesaj" <?php if($message_error) echo "class = 'error'"; ?> onfocus="if(this.value=='Mesaj') this.value='';" onblur="if(this.value=='') this.value='Mesaj';" ><?php if($error) echo $message; else echo 'Mesaj'?></textarea>
+                                <button type="submit" id="submit-button" name = "submit">
                                     <i class="fas fa-paper-plane"></i>
-                                </div>
+                                </button>
                                 <div class="clear"></div>
+                                <?php
+                                      if($error != ""){
+                                        echo "<div class = 'error'>" .$error ."</div>";
+                                      }
+                                ?>
                             </div>
                         </form>
                     </div>
@@ -93,10 +159,7 @@
     <div class="modals-container">
     <?php include "modals/notifications.php" ?>
     </div>
-
-    <script src="js/event-manager.js"></script>
-    <script src="js/form-errors.js"></script>
-    <script src="js/contact-fields.js"></script>
+    
 	<script src="js/miscs.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/modals.js"></script>

@@ -219,7 +219,6 @@
     border-radius: 3px;
     color: #5c2716;
 }
-
 .input-wrapper{
     position: relative;
 }
@@ -235,24 +234,4 @@
     text-align: left;
     color: #f4511e;
     font-size: 20px;
-}
-
-.contact-button{
-    margin-top: 30px;
-	height: 100px;
-	padding: 0 20px;
-	line-height: 50px;
-	color: #fff;
-	border: 1px solid #fff;
-	font-family: Calibri;
-	font-size: 18px;
-	background: #5c2716;  
-	outline: none;
-	cursor: pointer;
-	-webkit-transition: All 0.2s ease;
-    	-o-transition: All 0.2s ease;
-    	transition: All 0.2s ease;	
-    border: none;
-    display: inline-block;
-    text-decoration: none;
 }

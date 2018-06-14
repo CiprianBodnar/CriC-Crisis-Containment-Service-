@@ -6,3 +6,5 @@ Any logged user can add events, and they can be “judged” by other users with
 Also, if a specific person is in danger, he can show others his location, and a marker is added to the map. If you are looking for someone, he must be a registered user, and if he is in the database you will receive his/hers last know coordinates. It is possible for a user to add information about another user, with location and description if it is needed for those wanting to help.
 
 Our website integrates a notification system that notifies the users that are in emergency situation radius that they are in danger, and they can mark if they’re safe or not.
+
+# https://drive.google.com/open?id=1fJ33BHZHkUIcxaVb1jkaZQSYHcyQQdjw

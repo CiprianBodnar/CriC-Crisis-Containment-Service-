@@ -7,4 +7,6 @@ Also, if a specific person is in danger, he can show others his location, and a 
 
 Our website integrates a notification system that notifies the users that are in emergency situation radius that they are in danger, and they can mark if they’re safe or not.
 
+Thou shall run _resources/tables-create.php_ (optional _resources/data-generator.php_) to create the database and report thine events.
+
 # https://drive.google.com/open?id=1fJ33BHZHkUIcxaVb1jkaZQSYHcyQQdjw

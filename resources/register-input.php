@@ -1,5 +1,5 @@
 <?php
-include_once ("../dbConnect.php");
+include_once ("database-connect.php");
 
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
    echo json_encode(array("redirect"=> "Redirectare spre home"));
@@ -76,9 +76,9 @@ else {
     }
 
     if(strlen($password) < 6 ) {
-        $errorHandler -> password_error = 'Parola invalida';
+        $errorHandler -> password_error = 'Parola invalida!';
     } elseif ($password != $verify_password) {
-        $errorHandler -> password_error = 'Parolele nu coincid';
+        $errorHandler -> password_error = 'Parolele nu coincid!';
     }
 
     if($address === "") {

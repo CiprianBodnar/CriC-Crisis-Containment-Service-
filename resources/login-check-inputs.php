@@ -1,5 +1,5 @@
 <?php
-include_once('../dbConnect.php');
+include_once('database-connect.php');
 
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === TRUE){
     echo json_encode(array("redirect"=>"Sunteti deja autentificat"));

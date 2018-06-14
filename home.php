@@ -1,5 +1,5 @@
 <?php
- include_once("dbConnect.php");
+ include_once('resources/database-connect.php');
 ?>
 
 <!DOCTYPE html>
@@ -102,9 +102,7 @@
         var finalInput = document.getElementById('share-info-location');
         prepareAddressAutocomplete(shareAddressInput, finalInput, function(){
         	shareAddressInput.value='';
-        	console.log(shareAddressInput);
         	finalInput.value='';
-        	console.log(finalInput);
         });
         //autocomplete address for setting in-danger
         let dangerAddressInput = document.getElementById('address-input2');

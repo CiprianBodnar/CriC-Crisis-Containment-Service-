@@ -5,9 +5,9 @@ document.getElementById('send-code-submit-button').addEventListener('click',func
     request.open('POST', 'resources/send-code-input.php', true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onreadystatechange = (function() {
-        if(request.readyState === 4 && request.status === 200) {    
+        if(request.readyState === 4 && request.status === 200) {  
+        console.log(this.responseText);  
             let response = JSON.parse(request.responseText);
-            console.log(response);
             if(response.hasOwnProperty("error"))
                 addErrorMessage("email-row",response.error);
             else 

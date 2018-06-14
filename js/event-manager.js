@@ -159,7 +159,7 @@ class EventManager{
 		this.clearEvents();
 		if(preloader) preloader.classList.add('visible');
 		let request = new XMLHttpRequest();
-		request.open('POST', 'query_events.php', true);
+		request.open('POST', 'resources/query-events.php', true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		request.onreadystatechange = (function(request, obj){
 			return function(){
@@ -249,7 +249,7 @@ class EventManager{
 		let latLng = args.lat+' '+args.lng;
 		let req = new XMLHttpRequest();
 
-		req.open('POST', 'add_event.php', true);
+		req.open('POST', 'resources/add-event.php', true);
 		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 		let obj = this;
@@ -519,7 +519,7 @@ class EventManager{
 
 	loadEventFeedback(event, callback){
 		let request = new XMLHttpRequest();
-		request.open("POST", "query_event_feedback.php", true);
+		request.open("POST", "resources/query-event-feedback.php", true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		let obj = this;
 		request.onreadystatechange = function(){

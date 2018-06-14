@@ -12,7 +12,7 @@ function shareInfo(){
 		return;
 	}
 	let request = new XMLHttpRequest();
-	request.open('POST', 'resources/add_person_info.php', true);
+	request.open('POST', 'resources/add-person-info.php', true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function(){
 		if(request.readyState === 4 && request.status === 200){

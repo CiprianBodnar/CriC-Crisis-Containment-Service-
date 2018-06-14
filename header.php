@@ -1,5 +1,5 @@
 <?php 
-	include_once ("dbConnect.php");
+	include_once('resources/database-connect.php');
 	$loggedIn = false;
 	$username = "";
 	if(isset($_SESSION['loggedIn'])){

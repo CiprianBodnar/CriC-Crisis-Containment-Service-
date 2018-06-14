@@ -1,5 +1,5 @@
 <?php
-include_once('../dbConnect.php');
+include_once('database-connect.php');
 
 function generateRandomString($length = 25) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -34,7 +34,7 @@ else{
         if(preg_match('/^([a-zA-Z0-9]+[a-zA-Z0-9._%-]*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4})$/', $email)){
             $to = $email;
             $subject = "Trimitere cod de resetare parola cont CriC";
-            $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset_password.php?key=";
+            $message = "Buna, \n \nVa puteti reseta parola la urmatoarea adresa http://localhost/cric/reset-password.php?key=";
             $message .= $key;
             $message .= "\n Va multumim ca aveti incredere in noi,\nEchipa CriC";
             $header = "From: fiicriciasi@gmail.com";

@@ -1,5 +1,5 @@
 <?php 
-	include_once('../dbConnect.php');
+	include_once('database-connect.php');
 
 	$response = new \stdClass();
 	if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn']===false){

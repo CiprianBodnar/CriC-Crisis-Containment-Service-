@@ -1,5 +1,5 @@
 <?php
-include_once('../dbConnect.php');
+include_once('database-connect.php');
 $id_user = -1;
 if(isset($_SESSION['id_user']) && $_SESSION['loggedIn'] )
     $id_user = $_SESSION['id_user'];

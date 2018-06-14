@@ -1,27 +1,9 @@
 <?php 
-	include_once("../dbConnect.php");
+	include_once("database-connect.php");
 
 	$type = htmlspecialchars($_POST['type']);
 	$args = htmlspecialchars($_POST['args']);
 	$args = explode(" ", $args);
-	// if type === event | person
-	// args[0] = event_id
-	// args[1] = lat
-	// args[2] = lng
-	// args[3] = range
-
-	// else if type === posted_info
-	// args[0] = user_id
-	// args[1] = poster name
-
-	// else if type === event_removed
-	// args[0] = user_id
-	// args[1] = event type
-
-	//else if type === new_user
-	// args[0] = user_id
-
-
 
 	if($type === 'event' || $type === 'person'){
 		$eventId = floatval($args[0]);

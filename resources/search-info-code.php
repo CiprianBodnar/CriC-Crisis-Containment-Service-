@@ -1,5 +1,5 @@
 <?php 
-	include_once("../dbConnect.php");
+	include_once("database-connect.php");
 
 		$user_id = $_POST['Id'];
 		$searchResult = new \stdClass();

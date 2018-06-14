@@ -1,6 +1,6 @@
 function loadUsers(source, hiddenInput, output) {
 	let request = new XMLHttpRequest();
-	request.open('POST', 'query_users.php', true);
+	request.open('POST', 'resources/query-users.php', true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = (function() {
 		if(request.readyState === 4 && request.status === 200) {

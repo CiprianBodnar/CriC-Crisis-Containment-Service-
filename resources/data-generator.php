@@ -1,6 +1,6 @@
 <?php
 set_time_limit(240);
-include_once('../dbConnect.php');
+include_once('database-connect.php');
 
 $EVENT_MIN_RANGE = 5000;
 $EVENT_MAX_RANGE = 50000;
